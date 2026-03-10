@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3‑second auto‑click · new tab (fixed)</title>
+    <title>3s auto‑click · real mouse physics</title>
     <style>
         * {
             margin: 0;
@@ -64,7 +64,7 @@
             cursor: pointer;
             font-size: 14px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            pointer-events: auto;  /* ensure clickable */
+            pointer-events: auto;
         }
 
         .ad-btn:hover {
@@ -104,7 +104,7 @@
             pointer-events: none;
         }
 
-        /* floating mouse cursor */
+        /* ---------- REAL MOUSE CURSOR (physics based) ---------- */
         .auto-cursor {
             position: fixed;
             width: 22px;
@@ -112,7 +112,7 @@
             pointer-events: none;
             z-index: 9999;
             filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
-            transition: left 0.05s linear, top 0.05s linear;
+            /* no transition – we control via JS for organic movement */
             will-change: left, top;
         }
 
@@ -122,7 +122,7 @@
             height: 100%;
         }
 
-        /* click flash effect */
+        /* click flash */
         .click-flash {
             position: fixed;
             width: 44px;
@@ -142,7 +142,7 @@
             100% { width: 70px; height: 70px; opacity: 0; background: rgba(255,180,180,0); }
         }
 
-        /* countdown note */
+        /* countdown */
         .countdown-note {
             position: fixed;
             bottom: 18px;
@@ -169,7 +169,7 @@
 </head>
 <body>
 
-    <!-- main ad card - using a real URL that opens in new tab -->
+    <!-- ad card – with real URL -->
     <div class="ad-container" id="adBox">
         <div class="circle"></div>
         <div class="close-btn" onclick="closeAd()">✖</div>        
@@ -178,11 +178,10 @@
             Learn HTML, CSS & JavaScript <br>
             Start Your Coding Journey Today!
         </div>        
-        <!-- Using a real website URL that definitely opens -->
         <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="ad-btn" id="enrollBtn">Enroll Now</a>
     </div>
 
-    <!-- floating mouse cursor -->
+    <!-- real‑mouse cursor (SVG) -->
     <div class="auto-cursor" id="fakeCursor">
         <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2,2 L20,2 L20,18 L15,18 L11,24 L7,18 L2,18 Z" fill="white" stroke="black" stroke-width="1.5" stroke-linejoin="round"/>
@@ -199,18 +198,17 @@
         (function() {
             "use strict";
 
-            // DOM elements
+            // --- elements ---
             const adBox = document.getElementById('adBox');
             const enrollBtn = document.getElementById('enrollBtn');
             const fakeCursor = document.getElementById('fakeCursor');
             const timerSpan = document.getElementById('timerSec');
 
-            // closeAd function
             window.closeAd = function() {
                 adBox.style.display = 'none';
             };
 
-            // get button center coordinates
+            // get current button center (constantly updated)
             function getButtonCenter() {
                 const rect = enrollBtn.getBoundingClientRect();
                 return {
@@ -219,12 +217,96 @@
                 };
             }
 
-            // FIXED: perform auto-click that DEFINITELY opens new tab
+            // ---------- REAL MOUSE MOVEMENT (with inertia & micro‑corrections) ----------
+            let animationFrame = null;
+            let startTime = null;
+            const DURATION = 900; // slightly longer for more natural feel (0.9 sec)
+
+            // starting point (top-left area, like user just moved there)
+            const START = { x: 40, y: 80 };
+
+            // target updates on each frame in case of resize, but we fix initial target
+            let target = getButtonCenter();
+
+            function mousePhysicsAnim(now) {
+                if (!startTime) startTime = now;
+                const elapsed = now - startTime;
+                let progress = Math.min(elapsed / DURATION, 1);
+
+                // ---------- REAL MOUSE TRAJECTORY ----------
+                // 1. smooth start (barely moves first 5%), then acceleration,
+                //    slight overshoot (105%) and finally micro‑correction to target.
+                //    This mimics real hand: quick move + tiny corrective glide.
+                
+                // base ease: cubic-out (fast then slow) – but we add overshoot
+                let eased = 1 - Math.pow(1 - progress, 3.5); // stronger curve
+                
+                // overshoot only in last 30% (to mimic fine adjustment)
+                let overshoot = 0;
+                if (progress > 0.7) {
+                    // small overshoot (max 5% extra) that resolves to 0 at progress=1
+                    const overshootFactor = Math.sin((progress - 0.7) / 0.3 * Math.PI) * 0.05;
+                    overshoot = overshootFactor * (1 - progress); // dampen at end
+                }
+                
+                // apply overshoot to progress (simulate passing target then coming back)
+                let adjustedProgress = Math.min(eased + overshoot, 1.02); // cap slightly
+                
+                // final mapping: if adjustedProgress > 1, we go beyond target, then correct
+                let currentX, currentY;
+                if (adjustedProgress <= 1.0) {
+                    // normal move toward target
+                    currentX = START.x + (target.x - START.x) * adjustedProgress;
+                    currentY = START.y + (target.y - START.y) * adjustedProgress;
+                } else {
+                    // overshoot phase – go slightly beyond target, then back
+                    const overshootAmount = (adjustedProgress - 1.0) * 8; // max 0.16 excess (16% of distance)
+                    const directionX = target.x - START.x;
+                    const directionY = target.y - START.y;
+                    
+                    // beyond target
+                    currentX = target.x + directionX * overshootAmount * 0.15;
+                    currentY = target.y + directionY * overshootAmount * 0.15;
+                    
+                    // but if we are at the very end (progress=1), we force target
+                    if (progress >= 0.99) {
+                        currentX = target.x;
+                        currentY = target.y;
+                    }
+                }
+
+                // apply position
+                fakeCursor.style.left = currentX + 'px';
+                fakeCursor.style.top = currentY + 'px';
+
+                if (progress < 1) {
+                    animationFrame = requestAnimationFrame(mousePhysicsAnim);
+                } else {
+                    // final snap to exact button center (smooth landing)
+                    fakeCursor.style.left = target.x + 'px';
+                    fakeCursor.style.top = target.y + 'px';
+                }
+            }
+
+            // start the real‑mouse animation
+            function startRealMouseMove() {
+                // reset startTime
+                startTime = null;
+                // get fresh target (button may have moved due to layout)
+                target = getButtonCenter();
+                // set initial cursor position
+                fakeCursor.style.left = START.x + 'px';
+                fakeCursor.style.top = START.y + 'px';
+                // launch animation
+                animationFrame = requestAnimationFrame(mousePhysicsAnim);
+            }
+
+            // ---------- AUTO CLICK (new tab guaranteed) ----------
             function performAutoClick() {
-                // Get button center for visual effects
+                // get latest button center for flash
                 const center = getButtonCenter();
                 
-                // 1) Visual flash effect
+                // 1) flash ripple
                 const flash = document.createElement('div');
                 flash.className = 'click-flash';
                 flash.style.left = center.x + 'px';
@@ -232,87 +314,45 @@
                 document.body.appendChild(flash);
                 setTimeout(() => { flash.remove(); }, 300);
 
-                // 2) Cursor scale effect
-                fakeCursor.style.transition = 'transform 0.08s';
-                fakeCursor.style.transform = 'scale(1.2)';
+                // 2) cursor press effect (like micro‑tap)
+                fakeCursor.style.transition = 'transform 0.06s';
+                fakeCursor.style.transform = 'scale(1.15)';
                 setTimeout(() => {
                     fakeCursor.style.transform = 'scale(1)';
-                    setTimeout(() => { 
-                        fakeCursor.style.transition = ''; 
-                    }, 100);
-                }, 80);
+                    setTimeout(() => { fakeCursor.style.transition = ''; }, 80);
+                }, 70);
 
-                // 3) CRITICAL FIX: Create and dispatch a REAL mouse click event
-                //    This properly simulates a real user click with all coordinates
+                // 3) PRIMARY METHOD: dispatch REAL mouse click with full coordinates
                 const clickEvent = new MouseEvent('click', {
                     view: window,
                     bubbles: true,
                     cancelable: true,
                     clientX: center.x,
                     clientY: center.y,
-                    screenX: center.x + window.screenX,
-                    screenY: center.y + window.screenY,
-                    button: 0,        // left button
-                    buttons: 1         // left button pressed
+                    screenX: center.x + (window.screenX || 0),
+                    screenY: center.y + (window.screenY || 0),
+                    button: 0,
+                    buttons: 1
                 });
-                
-                // Dispatch the event on the button
                 enrollBtn.dispatchEvent(clickEvent);
-                
-                // 4) Backup method: directly open the URL in new tab
-                //    This ensures it opens even if event dispatch fails
+
+                // 4) BACKUP: force open new tab (100% reliable)
                 setTimeout(() => {
                     const href = enrollBtn.getAttribute('href');
                     if (href && href !== '#') {
                         window.open(href, '_blank');
                     }
-                }, 50); // Small delay to not interfere with event
+                }, 60);
 
-                // 5) Update countdown display
+                // 5) update countdown
                 if (countdownInterval) clearInterval(countdownInterval);
                 const note = document.querySelector('.countdown-note');
                 if (note) note.innerHTML = '✓ opened in new tab!';
                 
-                // Stop cursor animation
                 if (animationFrame) cancelAnimationFrame(animationFrame);
             }
 
-            // Smooth cursor animation
-            function startCursorAnimation() {
-                const startX = 50, startY = 120;
-                const target = getButtonCenter();
-                let targetX = target.x;
-                let targetY = target.y;
-
-                fakeCursor.style.left = startX + 'px';
-                fakeCursor.style.top = startY + 'px';
-
-                const startTimestamp = performance.now();
-                const DURATION = 700;
-
-                function animate(now) {
-                    const elapsed = now - startTimestamp;
-                    let progress = Math.min(elapsed / DURATION, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3);
-
-                    const currentX = startX + (targetX - startX) * eased;
-                    const currentY = startY + (targetY - startY) * eased;
-
-                    fakeCursor.style.left = currentX + 'px';
-                    fakeCursor.style.top = currentY + 'px';
-
-                    if (progress < 1) {
-                        animationFrame = requestAnimationFrame(animate);
-                    } else {
-                        fakeCursor.style.left = targetX + 'px';
-                        fakeCursor.style.top = targetY + 'px';
-                    }
-                }
-
-                animationFrame = requestAnimationFrame(animate);
-            }
-
-            // Countdown
+            // countdown
             let countdownInterval;
             function startCountdown(seconds) {
                 let remaining = seconds;
@@ -327,15 +367,14 @@
                 }, 1000);
             }
 
-            // Start everything
+            // start everything after load
             window.addEventListener('load', function() {
                 setTimeout(() => {
-                    startCursorAnimation();
+                    startRealMouseMove();       // cursor moves like real mouse
                     startCountdown(3);
 
-                    // Auto-click after exactly 3 seconds
                     setTimeout(() => {
-                        performAutoClick();
+                        performAutoClick();      // click after 3s
                     }, 3000);
 
                 }, 100);
