@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3‑second auto‑click · mouse‑like cursor</title>
+    <title>3‑second auto‑click · new tab</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: default; /* will be overridden only on the moving dot */
+            cursor: default;
         }
 
         body {
@@ -20,10 +20,10 @@
             align-items: center;
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
             position: relative;
-            overflow: hidden; /* no scroll from the fake cursor */
+            overflow: hidden;
         }
 
-        /* main ad card – exactly as given, with a tiny z-index tweak */
+        /* main ad card – exactly as given, with target="_blank" added later */
         .ad-container {
             width: 250px;
             height: 250px;
@@ -36,7 +36,7 @@
             box-sizing: border-box;
             position: relative;
             overflow: hidden;
-            z-index: 10;          /* above background, below the floating cursor */
+            z-index: 10;
             transition: box-shadow 0.2s;
         }
 
@@ -64,7 +64,7 @@
             text-decoration: none;
             transition: 0.2s;
             border: none;
-            cursor: pointer;       /* show pointer on hover (real cursor) */
+            cursor: pointer;
             font-size: 14px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
@@ -106,15 +106,15 @@
             pointer-events: none;
         }
 
-        /* ---------- FAKE MOUSE CURSOR (real‑mouse like) ---------- */
+        /* floating mouse cursor (realistic) */
         .auto-cursor {
             position: fixed;
             width: 22px;
             height: 22px;
-            pointer-events: none;    /* so it never blocks clicks on real elements */
+            pointer-events: none;
             z-index: 9999;
             filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
-            transition: left 0.05s linear, top 0.05s linear; /* super smooth, 20fps-like movement */
+            transition: left 0.05s linear, top 0.05s linear;
             will-change: left, top;
         }
 
@@ -124,7 +124,7 @@
             height: 100%;
         }
 
-        /* small click flash effect – looks like a real click tap */
+        /* click flash effect */
         .click-flash {
             position: fixed;
             width: 44px;
@@ -144,7 +144,7 @@
             100% { width: 70px; height: 70px; opacity: 0; background: rgba(255,180,180,0); }
         }
 
-        /* optional small text to show countdown (non‑intrusive) */
+        /* countdown note */
         .countdown-note {
             position: fixed;
             bottom: 18px;
@@ -172,7 +172,7 @@
 </head>
 <body>
 
-    <!-- main ad card (exactly the provided HTML, only href updated to #0 to avoid page jump) -->
+    <!-- main ad card - BUTTON LINK now includes target="_blank" and a real URL (example) -->
     <div class="ad-container" id="adBox">
         <div class="circle"></div>
         <div class="close-btn" onclick="closeAd()">✖</div>        
@@ -181,10 +181,12 @@
             Learn HTML, CSS & JavaScript <br>
             Start Your Coding Journey Today!
         </div>        
-        <a href="#" class="ad-btn" id="enrollBtn">Enroll Now</a>
+        <!-- added target="_blank" and a real dummy link (opens in new tab) 
+             also rel="noopener" for security -->
+        <a href="https://www.example.com/course-offer" target="_blank" rel="noopener" class="ad-btn" id="enrollBtn">Enroll Now</a>
     </div>
 
-    <!-- floating mouse cursor (SVG – looks like a real macOS/win pointer) -->
+    <!-- floating mouse cursor -->
     <div class="auto-cursor" id="fakeCursor">
         <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2,2 L20,2 L20,18 L15,18 L11,24 L7,18 L2,18 Z" fill="white" stroke="black" stroke-width="1.5" stroke-linejoin="round"/>
@@ -192,7 +194,7 @@
         </svg>
     </div>
 
-    <!-- tiny countdown display (optional but informative) -->
+    <!-- countdown display -->
     <div class="countdown-note" id="countdownDisplay">
         ⏳ auto‑click in <span id="timerSec">3</span>s
     </div>
@@ -201,33 +203,22 @@
         (function() {
             "use strict";
 
-            // ---------- DOM elements ----------
+            // DOM elements
             const adBox = document.getElementById('adBox');
             const enrollBtn = document.getElementById('enrollBtn');
             const fakeCursor = document.getElementById('fakeCursor');
             const timerSpan = document.getElementById('timerSec');
 
-            // closeAd function (global for onclick attribute)
+            // closeAd function (global)
             window.closeAd = function() {
                 adBox.style.display = 'none';
-                // optionally hide cursor / stop countdown if ad is closed early
-                // we keep cursor moving but timer continues – it's fine.
-                // if you want full stop you can add logic, but not required.
+                // (optional) stop countdown if you want, but it's fine
             };
 
-            // ---------- geometry & timing ----------
-            let startTime = null;                // will be set after first positioning
-            const AUTO_CLICK_DELAY = 3000;        // 3 seconds
-            let countdownInterval = null;
-            let animationFrame = null;
-            let targetX = 0, targetY = 0;         // target = center of button
-
-            // step 1: get final button center coordinates (relative to viewport)
+            // get button center (relative to viewport)
             function getButtonCenter() {
                 const rect = enrollBtn.getBoundingClientRect();
-                // if button is hidden (display none), rect will be empty
                 if (rect.width === 0 || rect.height === 0) {
-                    // fallback – approximate (should not happen)
                     return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
                 }
                 return {
@@ -236,18 +227,9 @@
                 };
             }
 
-            // step 2: smooth cursor movement (real mouse like)
-            function moveCursorSmoothly() {
-                if (!fakeCursor) return;
-
-                // start position: just above the button (so it flies into it)
-                // we set initial position in the setup, but we need to be sure it's above/left.
-                // we'll set inside beginAnimation.
-            }
-
-            // step 3: perform a "real mouse click" with visual flash and actual DOM click
+            // perform auto-click that opens in NEW TAB
             function performAutoClick() {
-                // 1) flash ripple effect at click position (button center)
+                // 1) flash ripple effect at button center
                 const center = getButtonCenter();
                 const flash = document.createElement('div');
                 flash.className = 'click-flash';
@@ -256,56 +238,52 @@
                 document.body.appendChild(flash);
                 setTimeout(() => { flash.remove(); }, 300);
 
-                // 2) tiny extra "click" on cursor – optional tiny scale
+                // 2) cursor scale effect
                 fakeCursor.style.transition = 'transform 0.08s';
                 fakeCursor.style.transform = 'scale(1.1)';
                 setTimeout(() => {
                     fakeCursor.style.transform = 'scale(1)';
-                    // revert transition after
                     setTimeout(() => { fakeCursor.style.transition = ''; }, 100);
                 }, 80);
 
-                // 3) PROGRAMMATIC CLICK on the button (simulates real mouse click)
-                //    this will trigger any href, plus any onclick behaviour.
-                enrollBtn.click();   // triggers link follow (href="#") and any listeners
+                // 3) open the link in a NEW TAB exactly as if user clicked with target="_blank"
+                //    we can simulate by calling window.open() with the button's href
+                const href = enrollBtn.getAttribute('href');  // "https://www.example.com/course-offer"
+                if (href) {
+                    window.open(href, '_blank', 'noopener,noreferrer');
+                }
 
-                // 4) also dispatch a genuine MouseEvent for good measure (makes it super real)
-                const mouseClickEvent = new MouseEvent('click', {
-                    view: window,
-                    bubbles: true,
-                    cancelable: true,
-                    clientX: center.x,
-                    clientY: center.y
-                });
-                enrollBtn.dispatchEvent(mouseClickEvent);
+                // 4) also dispatch a genuine MouseEvent on the anchor for good measure,
+                //    but that would often open in the same tab because of how event is set up.
+                //    However, anchor has target="_blank", so a programmatic click WILL open new tab.
+                //    This is actually even better: using .click() on the anchor respects target="_blank"
+                enrollBtn.click();   // <-- this will open new tab because anchor has target="_blank"
 
-                // optional: stop countdown, hide note
+                // 5) stop countdown, update message
                 if (countdownInterval) clearInterval(countdownInterval);
                 const note = document.querySelector('.countdown-note');
-                if (note) note.innerHTML = '✓ clicked!';
-                // stop animation
+                if (note) note.innerHTML = '✓ opened in new tab!';
+                
+                // stop animation (cursor movement already finished)
                 if (animationFrame) cancelAnimationFrame(animationFrame);
             }
 
-            // step 4: animation loop that moves cursor from start point to target.
+            // smooth cursor animation from top-left to button center
             function startCursorAnimation() {
-                const startX = 50, startY = 120;   // top-left corner of viewport (safe zone)
+                const startX = 50, startY = 120;   // starting point
                 const target = getButtonCenter();
-                targetX = target.x;
-                targetY = target.y;
+                let targetX = target.x;
+                let targetY = target.y;
 
-                // set cursor initial position immediately
                 fakeCursor.style.left = startX + 'px';
                 fakeCursor.style.top = startY + 'px';
 
                 const startTimestamp = performance.now();
-                const DURATION = 700; // ms – smooth flight to button (feels natural)
+                const DURATION = 700; // ms
 
                 function animate(now) {
                     const elapsed = now - startTimestamp;
                     let progress = Math.min(elapsed / DURATION, 1);
-                    // easing: ease-out quad for natural slowdown
-                    // (real mouse often eases, but we keep it smooth)
                     const eased = 1 - Math.pow(1 - progress, 3); // cubic-out
 
                     const currentX = startX + (targetX - startX) * eased;
@@ -317,11 +295,9 @@
                     if (progress < 1) {
                         animationFrame = requestAnimationFrame(animate);
                     } else {
-                        // final snap to exact center (avoid off-by-one)
+                        // final snap
                         fakeCursor.style.left = targetX + 'px';
                         fakeCursor.style.top = targetY + 'px';
-                        // after reaching button, wait for the 3-second timer to fire.
-                        // no further movement (cursor rests exactly on button)
                     }
                 }
 
@@ -329,6 +305,7 @@
             }
 
             // countdown updater
+            let countdownInterval;
             function startCountdown(seconds) {
                 let remaining = seconds;
                 timerSpan.innerText = remaining;
@@ -342,37 +319,20 @@
                 }, 1000);
             }
 
-            // main init: slight delay before everything to ensure layout stable
+            // start everything after page load
             window.addEventListener('load', function() {
-                // small delay so the button is definitely rendered
                 setTimeout(() => {
-                    // start moving cursor toward button
                     startCursorAnimation();
-
-                    // start countdown display
                     startCountdown(3);
 
-                    // schedule the auto-click exactly 3 seconds after start
                     setTimeout(() => {
                         performAutoClick();
-                    }, AUTO_CLICK_DELAY);
+                    }, 3000); // exactly 3s after start
 
-                    // also update cursor position if window resizes (optional, but nice)
-                    window.addEventListener('resize', () => {
-                        // recenter target but we don't want to interrupt animation harshly
-                        // for simplicity, we update target for any subsequent animation,
-                        // but our animation is finite. Could be improved. Not necessary for demo.
-                        // We just recalc if needed later. ignore.
-                    });
-
-                }, 100); // tiny 100ms buffer
+                }, 100); // small buffer
             });
 
-            // optional: hide countdown after click
-            // also if user manually closes ad, we could stop everything, but not needed.
         })();
     </script>
-
-    <!-- small note: no extra styles, everything works -->
 </body>
 </html>
