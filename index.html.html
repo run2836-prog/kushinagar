@@ -3,15 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio Data Maker - Apna Bio Data Banayein</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- html2pdf for PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title>AI Humanizer & Plagiarism Checker</title>
     <style>
         * {
             margin: 0;
@@ -20,28 +12,30 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
 
-        /* Main Container */
-        .main-container {
-            max-width: 1400px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
         }
 
-        /* Header */
         .header {
-            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            margin-bottom: 30px;
+            padding: 30px;
+            text-align: center;
         }
 
         .header h1 {
             font-size: 2.5em;
-            font-weight: 700;
             margin-bottom: 10px;
         }
 
@@ -50,304 +44,68 @@
             opacity: 0.9;
         }
 
-        /* Form and Preview Grid */
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
+        .main-content {
+            padding: 30px;
         }
 
-        /* Form Section */
-        .form-section {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            height: fit-content;
-            max-height: 90vh;
-            overflow-y: auto;
+        .input-section {
+            margin-bottom: 30px;
         }
 
-        .form-section::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .form-section::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        .form-section::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 5px;
-        }
-
-        /* Form Tabs */
-        .form-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            background: #f0f0f0;
-            color: #333;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .tab-btn i {
-            margin-right: 8px;
-        }
-
-        /* Form Groups */
-        .form-tab {
-            display: none;
-        }
-
-        .form-tab.active {
-            display: block;
-        }
-
-        .form-group {
+        .textarea-container {
+            position: relative;
             margin-bottom: 20px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .form-group label i {
-            margin-right: 8px;
-            color: #667eea;
-        }
-
-        .form-control {
+        textarea {
             width: 100%;
-            padding: 12px 15px;
+            height: 200px;
+            padding: 15px;
+            font-size: 16px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
-            font-size: 14px;
-            transition: all 0.3s;
+            resize: vertical;
+            transition: border-color 0.3s;
         }
 
-        .form-control:focus {
-            border-color: #667eea;
+        textarea:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
         }
 
-        /* Photo Upload */
-        .photo-upload {
-            text-align: center;
-        }
-
-        .photo-preview {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 15px;
-            border-radius: 50%;
-            border: 3px dashed #667eea;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f8f9fa;
-        }
-
-        .photo-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .photo-preview i {
-            font-size: 50px;
-            color: #ccc;
-        }
-
-        .photo-upload input[type="file"] {
-            display: none;
-        }
-
-        .photo-upload-btn {
-            display: inline-block;
-            padding: 10px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .photo-upload-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Dynamic Sections */
-        .dynamic-section {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        .dynamic-item {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-            position: relative;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .remove-item {
+        .word-count {
             position: absolute;
-            top: 10px;
+            bottom: 10px;
             right: 10px;
-            color: #ff4444;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .add-item-btn {
-            padding: 10px 20px;
-            background: #28a745;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .add-item-btn i {
-            margin-right: 5px;
-        }
-
-        .add-item-btn:hover {
-            background: #218838;
-        }
-
-        /* Skills and Languages */
-        .tag-input-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 10px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            min-height: 50px;
-        }
-
-        .tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 5px 15px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 5px 10px;
             border-radius: 20px;
             font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+            color: #666;
         }
 
-        .tag i {
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .tag-input {
-            border: none;
-            outline: none;
-            flex: 1;
-            min-width: 100px;
-            padding: 5px;
-        }
-
-        /* Template Selector */
-        .template-selector {
+        .button-group {
             display: flex;
             gap: 15px;
-            margin: 20px 0;
             flex-wrap: wrap;
-        }
-
-        .template-option {
-            flex: 1;
-            min-width: 150px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .template-option.active {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .template-option i {
-            font-size: 30px;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        .template-option h4 {
-            font-size: 16px;
-            margin: 0;
-        }
-
-        /* Preview Section */
-        .preview-section {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            height: fit-content;
-            position: sticky;
-            top: 20px;
-        }
-
-        .preview-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 20px;
-        }
-
-        .preview-header h3 {
-            font-size: 1.5em;
-            color: #333;
-        }
-
-        .preview-actions {
-            display: flex;
-            gap: 10px;
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 12px 30px;
             border: none;
-            border-radius: 10px;
-            font-weight: 500;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .btn-primary {
@@ -355,824 +113,522 @@
             color: white;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
         }
 
-        .btn-success {
+        .btn-check {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .options-panel {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .option-group {
+            margin-bottom: 15px;
+        }
+
+        .option-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        select, input[type="range"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .result-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .result-header h3 {
+            color: #333;
+        }
+
+        .plagiarism-result {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .plagiarism-low {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .plagiarism-medium {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .plagiarism-high {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .copy-btn {
             background: #28a745;
             color: white;
-        }
-
-        .btn-success:hover {
-            background: #218838;
-            transform: translateY(-2px);
-        }
-
-        /* Bio Data Preview */
-        .bio-data-preview {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Template 1 - Modern */
-        .template-1 .preview-header-custom {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            margin: -30px -30px 30px -30px;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .template-1 .preview-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid white;
-            overflow: hidden;
-        }
-
-        .template-1 .preview-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .template-1 .preview-name {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .template-1 .preview-title {
-            font-size: 18px;
-            opacity: 0.9;
-        }
-
-        /* Template 2 - Classic */
-        .template-2 {
-            border: 2px solid #333;
-        }
-
-        .template-2 .preview-header-custom {
-            background: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .template-2 .preview-photo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            border: 3px solid white;
-            overflow: hidden;
-        }
-
-        /* Template 3 - Minimal */
-        .template-3 {
             border: none;
-            box-shadow: none;
-        }
-
-        .template-3 .preview-header-custom {
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        /* Preview Sections */
-        .preview-section-custom {
-            margin-bottom: 25px;
-        }
-
-        .preview-section-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid #667eea;
-        }
-
-        .preview-section-title i {
-            margin-right: 10px;
-            color: #667eea;
-        }
-
-        .preview-info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .preview-info-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .preview-info-item i {
-            width: 20px;
-            color: #667eea;
-        }
-
-        .preview-experience-item,
-        .preview-education-item {
-            margin-bottom: 15px;
-        }
-
-        .preview-item-title {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .preview-item-subtitle {
-            color: #666;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 14px;
         }
 
-        .preview-item-date {
-            color: #999;
-            font-size: 12px;
+        .copy-btn:hover {
+            background: #218838;
         }
 
-        .preview-item-description {
-            margin-top: 5px;
-            font-size: 14px;
+        .alert {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
             color: #666;
         }
 
-        .preview-skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .preview-skill {
-            background: #f0f0f0;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .grid-container {
-                grid-template-columns: 1fr;
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
             }
             
-            .preview-section {
-                position: static;
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                min-width: auto;
             }
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <!-- Header -->
+    <div class="container">
         <div class="header">
-            <h1><i class="fas fa-id-card"></i> Bio Data Maker</h1>
-            <p>Professional Bio Data Banayein - Aasaan aur Tez</p>
+            <h1>🤖 AI Humanizer & Plagiarism Checker</h1>
+            <p>Transform AI-generated text into natural human-like content with plagiarism detection</p>
         </div>
 
-        <!-- Main Grid -->
-        <div class="grid-container">
-            <!-- Form Section -->
-            <div class="form-section">
-                <!-- Form Tabs -->
-                <div class="form-tabs">
-                    <button class="tab-btn active" onclick="showTab('personal')"><i class="fas fa-user"></i> Personal</button>
-                    <button class="tab-btn" onclick="showTab('education')"><i class="fas fa-graduation-cap"></i> Education</button>
-                    <button class="tab-btn" onclick="showTab('experience')"><i class="fas fa-briefcase"></i> Experience</button>
-                    <button class="tab-btn" onclick="showTab('skills')"><i class="fas fa-code"></i> Skills</button>
+        <div class="main-content">
+            <div class="input-section">
+                <div class="textarea-container">
+                    <textarea id="inputText" placeholder="Yahan apna AI-generated text paste karein..."></textarea>
+                    <div class="word-count" id="wordCount">0 words</div>
                 </div>
 
-                <!-- Personal Info Tab -->
-                <div id="personal-tab" class="form-tab active">
-                    <h3 class="mb-4">Personal Information</h3>
+                <div class="options-panel">
+                    <h3 style="margin-bottom: 15px;">⚙️ Humanize Options</h3>
                     
-                    <!-- Photo Upload -->
-                    <div class="form-group photo-upload">
-                        <div class="photo-preview" id="photoPreview">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                        <input type="file" id="photoInput" accept="image/*" onchange="previewPhoto(this)">
-                        <label for="photoInput" class="photo-upload-btn">
-                            <i class="fas fa-upload"></i> Photo Upload Karein
-                        </label>
+                    <div class="option-group">
+                        <label for="humanizeLevel">Humanization Level:</label>
+                        <select id="humanizeLevel">
+                            <option value="low">Low - Minimal Changes</option>
+                            <option value="medium" selected>Medium - Balanced</option>
+                            <option value="high">High - Maximum Human-like</option>
+                        </select>
                     </div>
 
-                    <!-- Basic Info -->
-                    <div class="form-group">
-                        <label><i class="fas fa-user"></i> Poora Naam *</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Apna pooranaam likhein" oninput="updatePreview()">
+                    <div class="option-group">
+                        <label for="creativity">Creativity Level: <span id="creativityValue">50%</span></label>
+                        <input type="range" id="creativity" min="0" max="100" value="50">
                     </div>
 
-                    <div class="form-group">
-                        <label><i class="fas fa-briefcase"></i> Profession *</label>
-                        <input type="text" class="form-control" id="profession" placeholder="e.g., Software Engineer" oninput="updatePreview()">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label><i class="fas fa-phone"></i> Mobile Number *</label>
-                                <input type="tel" class="form-control" id="phone" placeholder="+91 9876543210" oninput="updatePreview()">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label><i class="fas fa-envelope"></i> Email *</label>
-                                <input type="email" class="form-control" id="email" placeholder="example@email.com" oninput="updatePreview()">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label><i class="fas fa-calendar"></i> Date of Birth</label>
-                                <input type="date" class="form-control" id="dob" onchange="updatePreview()">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label><i class="fas fa-venus-mars"></i> Gender</label>
-                                <select class="form-control" id="gender" onchange="updatePreview()">
-                                    <option value="">Select</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-map-marker-alt"></i> Address</label>
-                        <textarea class="form-control" id="address" rows="2" placeholder="Apna address likhein" oninput="updatePreview()"></textarea>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label><i class="fas fa-city"></i> City</label>
-                                <input type="text" class="form-control" id="city" placeholder="City" oninput="updatePreview()">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label><i class="fas fa-flag"></i> State</label>
-                                <input type="text" class="form-control" id="state" placeholder="State" oninput="updatePreview()">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-globe"></i> Nationality</label>
-                        <input type="text" class="form-control" id="nationality" value="Indian" oninput="updatePreview()">
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-language"></i> Languages</label>
-                        <div class="tag-input-container" id="languageTags">
-                            <div class="tag">Hindi <i class="fas fa-times" onclick="removeTag(this, 'languages')"></i></div>
-                            <div class="tag">English <i class="fas fa-times" onclick="removeTag(this, 'languages')"></i></div>
-                            <input type="text" class="tag-input" id="languageInput" placeholder="Add language and press Enter" onkeypress="addTag(event, 'languages')">
-                        </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="preserveKeywords" checked>
+                        <label for="preserveKeywords">Preserve Important Keywords</label>
                     </div>
                 </div>
 
-                <!-- Education Tab -->
-                <div id="education-tab" class="form-tab">
-                    <h3 class="mb-4">Education Details</h3>
-                    <div id="educationContainer">
-                        <!-- Dynamic education items will be added here -->
-                    </div>
-                    <button class="add-item-btn" onclick="addEducation()">
-                        <i class="fas fa-plus"></i> Add Education
-                    </button>
-                </div>
-
-                <!-- Experience Tab -->
-                <div id="experience-tab" class="form-tab">
-                    <h3 class="mb-4">Work Experience</h3>
-                    <div id="experienceContainer">
-                        <!-- Dynamic experience items will be added here -->
-                    </div>
-                    <button class="add-item-btn" onclick="addExperience()">
-                        <i class="fas fa-plus"></i> Add Experience
-                    </button>
-                </div>
-
-                <!-- Skills Tab -->
-                <div id="skills-tab" class="form-tab">
-                    <h3 class="mb-4">Skills</h3>
-                    <div class="form-group">
-                        <label>Technical Skills</label>
-                        <div class="tag-input-container" id="skillsTags">
-                            <input type="text" class="tag-input" id="skillInput" placeholder="Add skill and press Enter" onkeypress="addTag(event, 'skills')">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Template Selector -->
-                <div class="mt-4">
-                    <h4><i class="fas fa-paint-brush"></i> Template Choose Karein</h4>
-                    <div class="template-selector">
-                        <div class="template-option active" onclick="selectTemplate(1)">
-                            <i class="fas fa-id-card"></i>
-                            <h4>Modern</h4>
-                        </div>
-                        <div class="template-option" onclick="selectTemplate(2)">
-                            <i class="fas fa-id-card-alt"></i>
-                            <h4>Classic</h4>
-                        </div>
-                        <div class="template-option" onclick="selectTemplate(3)">
-                            <i class="fas fa-id-badge"></i>
-                            <h4>Minimal</h4>
-                        </div>
-                    </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="humanizeText()">✨ Humanize Text</button>
+                    <button class="btn btn-check" onclick="checkPlagiarism()">🔍 Check Plagiarism</button>
+                    <button class="btn btn-secondary" onclick="clearText()">🗑️ Clear All</button>
                 </div>
             </div>
 
-            <!-- Preview Section -->
-            <div class="preview-section">
-                <div class="preview-header">
-                    <h3><i class="fas fa-eye"></i> Live Preview</h3>
-                    <div class="preview-actions">
-                        <button class="btn btn-success" onclick="downloadPDF()">
-                            <i class="fas fa-download"></i> PDF Download
-                        </button>
-                    </div>
+            <div class="result-section">
+                <div class="result-header">
+                    <h3>📝 Result</h3>
+                    <button class="copy-btn" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                </div>
+                
+                <div class="textarea-container">
+                    <textarea id="outputText" placeholder="Humanized text yah plagiarism result yahaan aayega..." readonly></textarea>
+                    <div class="word-count" id="outputWordCount">0 words</div>
                 </div>
 
-                <!-- Bio Data Preview -->
-                <div id="bioDataPreview" class="bio-data-preview template-1">
-                    <!-- Preview content will be dynamically generated here -->
+                <div id="plagiarismResult" style="display: none;">
+                    <h4>🔍 Plagiarism Analysis</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="plagiarismProgress" style="width: 0%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                    </div>
+                    <div id="plagiarismDetails" class="plagiarism-result"></div>
                 </div>
+
+                <div id="alert" class="alert"></div>
             </div>
+        </div>
+
+        <div class="footer">
+            <p>Made with ❤️ for better content creation | Humanize AI text & check plagiarism</p>
         </div>
     </div>
 
     <script>
-        // Global variables
-        let currentTemplate = 1;
-        let profilePhoto = null;
-        let educationData = [];
-        let experienceData = [];
-        let skillsData = [];
-        let languagesData = ['Hindi', 'English'];
+        // Word count functionality
+        document.getElementById('inputText').addEventListener('input', updateWordCount);
+        document.getElementById('creativity').addEventListener('input', function() {
+            document.getElementById('creativityValue').textContent = this.value + '%';
+        });
 
-        // Initialize on page load
-        window.onload = function() {
-            // Add default education
-            addEducation();
-            
-            // Add default experience
-            addExperience();
-            
-            // Add default skills
-            addDefaultSkills();
-            
-            // Update preview
-            updatePreview();
-        };
-
-        // Add default skills
-        function addDefaultSkills() {
-            const defaultSkills = ['JavaScript', 'Python', 'HTML/CSS'];
-            defaultSkills.forEach(skill => {
-                addTagFromInput('skills', skill);
-            });
+        function updateWordCount() {
+            const text = document.getElementById('inputText').value;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('wordCount').textContent = words + ' words';
         }
 
-        // Tab switching
-        function showTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.form-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName + '-tab').classList.add('active');
-            
-            // Update tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
+        function updateOutputWordCount() {
+            const text = document.getElementById('outputText').value;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('outputWordCount').textContent = words + ' words';
         }
 
-        // Photo preview
-        function previewPhoto(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('photoPreview');
-                    preview.innerHTML = `<img src="${e.target.result}" alt="Profile Photo">`;
-                    profilePhoto = e.target.result;
-                    updatePreview();
-                };
-                reader.readAsDataURL(input.files[0]);
+        // Humanize function
+        function humanizeText() {
+            const inputText = document.getElementById('inputText').value;
+            
+            if (!inputText.trim()) {
+                showAlert('Please enter some text to humanize!', 'error');
+                return;
             }
-        }
 
-        // Add education
-        function addEducation() {
-            const container = document.getElementById('educationContainer');
-            const id = Date.now();
-            const html = `
-                <div class="dynamic-item" id="edu-${id}">
-                    <i class="fas fa-times remove-item" onclick="removeEducation(${id})"></i>
-                    <div class="form-group">
-                        <label>Degree/Course</label>
-                        <input type="text" class="form-control" placeholder="e.g., B.Tech Computer Science" oninput="updateEducation(${id}, 'degree', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>Institution</label>
-                        <input type="text" class="form-control" placeholder="College/University name" oninput="updateEducation(${id}, 'institution', this.value)">
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Start Year</label>
-                                <input type="text" class="form-control" placeholder="2020" oninput="updateEducation(${id}, 'startYear', this.value)">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>End Year</label>
-                                <input type="text" class="form-control" placeholder="2024" oninput="updateEducation(${id}, 'endYear', this.value)">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Percentage/CGPA</label>
-                        <input type="text" class="form-control" placeholder="8.5 CGPA" oninput="updateEducation(${id}, 'percentage', this.value)">
-                    </div>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', html);
-            
-            // Add to data array
-            educationData.push({
-                id: id,
-                degree: '',
-                institution: '',
-                startYear: '',
-                endYear: '',
-                percentage: ''
-            });
-        }
+            const level = document.getElementById('humanizeLevel').value;
+            const creativity = document.getElementById('creativity').value;
+            const preserveKeywords = document.getElementById('preserveKeywords').checked;
 
-        // Remove education
-        function removeEducation(id) {
-            document.getElementById(`edu-${id}`).remove();
-            educationData = educationData.filter(item => item.id !== id);
-            updatePreview();
-        }
+            // Humanization algorithm
+            let humanizedText = inputText;
 
-        // Update education
-        function updateEducation(id, field, value) {
-            const edu = educationData.find(item => item.id === id);
-            if (edu) {
-                edu[field] = value;
-                updatePreview();
-            }
-        }
-
-        // Add experience
-        function addExperience() {
-            const container = document.getElementById('experienceContainer');
-            const id = Date.now();
-            const html = `
-                <div class="dynamic-item" id="exp-${id}">
-                    <i class="fas fa-times remove-item" onclick="removeExperience(${id})"></i>
-                    <div class="form-group">
-                        <label>Job Title</label>
-                        <input type="text" class="form-control" placeholder="e.g., Software Developer" oninput="updateExperience(${id}, 'title', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>Company</label>
-                        <input type="text" class="form-control" placeholder="Company name" oninput="updateExperience(${id}, 'company', this.value)">
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Start Date</label>
-                                <input type="text" class="form-control" placeholder="Jan 2022" oninput="updateExperience(${id}, 'startDate', this.value)">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>End Date</label>
-                                <input type="text" class="form-control" placeholder="Present" oninput="updateExperience(${id}, 'endDate', this.value)">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="form-control" rows="2" placeholder="Job responsibilities..." oninput="updateExperience(${id}, 'description', this.value)"></textarea>
-                    </div>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', html);
-            
-            // Add to data array
-            experienceData.push({
-                id: id,
-                title: '',
-                company: '',
-                startDate: '',
-                endDate: '',
-                description: ''
-            });
-        }
-
-        // Remove experience
-        function removeExperience(id) {
-            document.getElementById(`exp-${id}`).remove();
-            experienceData = experienceData.filter(item => item.id !== id);
-            updatePreview();
-        }
-
-        // Update experience
-        function updateExperience(id, field, value) {
-            const exp = experienceData.find(item => item.id === id);
-            if (exp) {
-                exp[field] = value;
-                updatePreview();
-            }
-        }
-
-        // Add tag (skills/languages)
-        function addTag(event, type) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                const input = event.target;
-                const value = input.value.trim();
-                
-                if (value) {
-                    addTagFromInput(type, value);
-                    input.value = '';
-                }
-            }
-        }
-
-        function addTagFromInput(type, value) {
-            const container = document.getElementById(type + 'Tags');
-            const tag = document.createElement('span');
-            tag.className = 'tag';
-            tag.innerHTML = `${value} <i class="fas fa-times" onclick="removeTag(this, '${type}')"></i>`;
-            
-            // Insert before the input
-            container.insertBefore(tag, container.lastElementChild);
-            
-            // Add to data
-            if (type === 'skills') {
-                skillsData.push(value);
-            } else if (type === 'languages') {
-                languagesData.push(value);
-            }
-            
-            updatePreview();
-        }
-
-        function removeTag(element, type) {
-            const tag = element.parentElement;
-            const value = tag.childNodes[0].nodeValue.trim();
-            tag.remove();
-            
-            // Remove from data
-            if (type === 'skills') {
-                skillsData = skillsData.filter(item => item !== value);
-            } else if (type === 'languages') {
-                languagesData = languagesData.filter(item => item !== value);
-            }
-            
-            updatePreview();
-        }
-
-        // Select template
-        function selectTemplate(templateNumber) {
-            currentTemplate = templateNumber;
-            
-            // Update active class
-            document.querySelectorAll('.template-option').forEach(opt => {
-                opt.classList.remove('active');
-            });
-            event.target.closest('.template-option').classList.add('active');
-            
-            // Update preview
-            updatePreview();
-        }
-
-        // Update preview
-        function updatePreview() {
-            const preview = document.getElementById('bioDataPreview');
-            const templateClass = `template-${currentTemplate}`;
-            
-            // Get form values
-            const fullName = document.getElementById('fullName').value || 'Aapka Naam';
-            const profession = document.getElementById('profession').value || 'Profession';
-            const phone = document.getElementById('phone').value || 'Mobile Number';
-            const email = document.getElementById('email').value || 'Email Address';
-            const dob = document.getElementById('dob').value ? new Date(document.getElementById('dob').value).toLocaleDateString('hi-IN') : 'DD/MM/YYYY';
-            const gender = document.getElementById('gender').value || 'Gender';
-            const address = document.getElementById('address').value || 'Address';
-            const city = document.getElementById('city').value || 'City';
-            const state = document.getElementById('state').value || 'State';
-            const nationality = document.getElementById('nationality').value || 'Nationality';
-            
-            // Generate preview HTML
-            let html = `<div class="${templateClass}">`;
-            
-            // Header based on template
-            if (currentTemplate === 1) {
-                html += `
-                    <div class="preview-header-custom">
-                        <div class="preview-photo">
-                            ${profilePhoto ? `<img src="${profilePhoto}" alt="Profile">` : '<i class="fas fa-user-circle fa-4x"></i>'}
-                        </div>
-                        <div>
-                            <div class="preview-name">${fullName}</div>
-                            <div class="preview-title">${profession}</div>
-                        </div>
-                    </div>
-                `;
-            } else if (currentTemplate === 2) {
-                html += `
-                    <div class="preview-header-custom">
-                        <div class="preview-photo">
-                            ${profilePhoto ? `<img src="${profilePhoto}" alt="Profile">` : '<i class="fas fa-user-circle fa-4x"></i>'}
-                        </div>
-                        <div class="preview-name">${fullName}</div>
-                        <div class="preview-title">${profession}</div>
-                    </div>
-                `;
+            // Apply different humanization techniques based on level
+            if (level === 'low') {
+                humanizedText = lowHumanization(humanizedText);
+            } else if (level === 'medium') {
+                humanizedText = mediumHumanization(humanizedText);
             } else {
-                html += `
-                    <div class="preview-header-custom">
-                        <div class="preview-photo">
-                            ${profilePhoto ? `<img src="${profilePhoto}" alt="Profile">` : '<i class="fas fa-user-circle fa-4x"></i>'}
-                        </div>
-                        <div>
-                            <div class="preview-name">${fullName}</div>
-                            <div class="preview-title">${profession}</div>
-                        </div>
-                    </div>
-                `;
+                humanizedText = highHumanization(humanizedText);
             }
-            
-            // Personal Details Section
-            html += `
-                <div class="preview-section-custom">
-                    <div class="preview-section-title">
-                        <i class="fas fa-user"></i> Personal Details
-                    </div>
-                    <div class="preview-info-grid">
-                        <div class="preview-info-item"><i class="fas fa-phone"></i> ${phone}</div>
-                        <div class="preview-info-item"><i class="fas fa-envelope"></i> ${email}</div>
-                        <div class="preview-info-item"><i class="fas fa-calendar"></i> ${dob}</div>
-                        <div class="preview-info-item"><i class="fas fa-venus-mars"></i> ${gender}</div>
-                        <div class="preview-info-item"><i class="fas fa-map-marker-alt"></i> ${address}, ${city}, ${state}</div>
-                        <div class="preview-info-item"><i class="fas fa-globe"></i> ${nationality}</div>
-                    </div>
-                </div>
-            `;
-            
-            // Languages
-            if (languagesData.length > 0) {
-                html += `
-                    <div class="preview-section-custom">
-                        <div class="preview-section-title">
-                            <i class="fas fa-language"></i> Languages
-                        </div>
-                        <div class="preview-skills">
-                            ${languagesData.map(lang => `<span class="preview-skill">${lang}</span>`).join('')}
-                        </div>
-                    </div>
-                `;
+
+            // Apply creativity level
+            humanizedText = applyCreativity(humanizedText, creativity);
+
+            // Preserve keywords if checked
+            if (preserveKeywords) {
+                humanizedText = preserveImportantKeywords(inputText, humanizedText);
             }
+
+            document.getElementById('outputText').value = humanizedText;
+            updateOutputWordCount();
             
-            // Education Section
-            if (educationData.length > 0) {
-                html += `
-                    <div class="preview-section-custom">
-                        <div class="preview-section-title">
-                            <i class="fas fa-graduation-cap"></i> Education
-                        </div>
-                `;
-                
-                educationData.forEach(edu => {
-                    if (edu.degree || edu.institution) {
-                        html += `
-                            <div class="preview-education-item">
-                                <div class="preview-item-title">${edu.degree || 'Degree'}</div>
-                                <div class="preview-item-subtitle">${edu.institution || 'Institution'}</div>
-                                <div class="preview-item-date">${edu.startYear || 'Start'} - ${edu.endYear || 'End'}</div>
-                                ${edu.percentage ? `<div class="preview-item-description">Percentage: ${edu.percentage}</div>` : ''}
-                            </div>
-                        `;
-                    }
-                });
-                
-                html += `</div>`;
-            }
+            // Hide plagiarism result if visible
+            document.getElementById('plagiarismResult').style.display = 'none';
             
-            // Experience Section
-            if (experienceData.length > 0) {
-                html += `
-                    <div class="preview-section-custom">
-                        <div class="preview-section-title">
-                            <i class="fas fa-briefcase"></i> Work Experience
-                        </div>
-                `;
-                
-                experienceData.forEach(exp => {
-                    if (exp.title || exp.company) {
-                        html += `
-                            <div class="preview-experience-item">
-                                <div class="preview-item-title">${exp.title || 'Position'}</div>
-                                <div class="preview-item-subtitle">${exp.company || 'Company'}</div>
-                                <div class="preview-item-date">${exp.startDate || 'Start'} - ${exp.endDate || 'Present'}</div>
-                                ${exp.description ? `<div class="preview-item-description">${exp.description}</div>` : ''}
-                            </div>
-                        `;
-                    }
-                });
-                
-                html += `</div>`;
-            }
-            
-            // Skills Section
-            if (skillsData.length > 0) {
-                html += `
-                    <div class="preview-section-custom">
-                        <div class="preview-section-title">
-                            <i class="fas fa-code"></i> Skills
-                        </div>
-                        <div class="preview-skills">
-                            ${skillsData.map(skill => `<span class="preview-skill">${skill}</span>`).join('')}
-                        </div>
-                    </div>
-                `;
-            }
-            
-            html += `</div>`;
-            preview.innerHTML = html;
+            showAlert('Text humanized successfully!', 'success');
         }
 
-        // Download as PDF
-        function downloadPDF() {
-            const element = document.getElementById('bioDataPreview');
-            const opt = {
-                margin:       0.5,
-                filename:     'biodata.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        // Humanization algorithms
+        function lowHumanization(text) {
+            // Basic changes: replace common AI phrases
+            let replacements = {
+                'additionally': 'also',
+                'furthermore': 'plus',
+                'moreover': 'besides',
+                'consequently': 'so',
+                'nevertheless': 'but',
+                'in conclusion': 'to sum up',
+                'utilize': 'use',
+                'implement': 'do',
+                'facilitate': 'help'
             };
             
-            // PDF download
-            html2pdf().set(opt).from(element).save();
+            return replaceWords(text, replacements);
         }
 
-        // Add CSS for responsive design
-        const style = document.createElement('style');
-        style.textContent = `
-            @media print {
-                body * {
-                    visibility: hidden;
-                }
-                #bioDataPreview, #bioDataPreview * {
-                    visibility: visible;
-                }
-                #bioDataPreview {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    width: 100%;
+        function mediumHumanization(text) {
+            // More natural changes
+            let text_low = lowHumanization(text);
+            
+            // Add some natural connectors and variations
+            let sentences = text_low.split(/[.!?]+/);
+            let connectors = ['Actually', 'You know', 'The thing is', 'Basically', 'Honestly'];
+            
+            for (let i = 1; i < sentences.length; i += 2) {
+                if (sentences[i].trim().length > 0) {
+                    let randomConnector = connectors[Math.floor(Math.random() * connectors.length)];
+                    sentences[i] = ' ' + randomConnector + ', ' + sentences[i].toLowerCase();
                 }
             }
-        `;
-        document.head.appendChild(style);
-    </script>
+            
+            return sentences.join('.');
+        }
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        function highHumanization(text) {
+            // Maximum human-like changes
+            let text_medium = mediumHumanization(text);
+            
+            // Add colloquial expressions, contractions, and varied sentence structures
+            let contractions = {
+                'is not': 'isn\'t',
+                'are not': 'aren\'t',
+                'cannot': 'can\'t',
+                'will not': 'won\'t',
+                'have not': 'haven\'t',
+                'has not': 'hasn\'t',
+                'it is': 'it\'s',
+                'that is': 'that\'s',
+                'there is': 'there\'s',
+                'I am': 'I\'m'
+            };
+            
+            text_medium = replaceWords(text_medium, contractions);
+            
+            // Add some filler words naturally
+            let fillers = ['just', 'actually', 'basically', 'literally', 'pretty'];
+            let words = text_medium.split(' ');
+            
+            for (let i = 2; i < words.length; i += 4) {
+                if (words[i].length > 3) {
+                    let randomFiller = fillers[Math.floor(Math.random() * fillers.length)];
+                    words.splice(i, 0, randomFiller);
+                }
+            }
+            
+            return words.join(' ');
+        }
+
+        function applyCreativity(text, creativityLevel) {
+            // Apply creativity based on percentage
+            let creativity = parseInt(creativityLevel) / 100;
+            
+            if (creativity > 0.3) {
+                // Add some synonyms for common words
+                let synonyms = {
+                    'good': ['great', 'awesome', 'fantastic', 'wonderful'],
+                    'bad': ['terrible', 'awful', 'horrible', 'not great'],
+                    'important': ['crucial', 'vital', 'essential', 'key'],
+                    'big': ['large', 'huge', 'enormous', 'massive'],
+                    'small': ['tiny', 'little', 'miniature', 'compact']
+                };
+                
+                let words = text.split(' ');
+                for (let i = 0; i < words.length; i++) {
+                    let word = words[i].toLowerCase().replace(/[.,!?;:]/, '');
+                    if (synonyms[word] && Math.random() < creativity * 0.3) {
+                        let synonym = synonyms[word][Math.floor(Math.random() * synonyms[word].length)];
+                        words[i] = words[i].replace(word, synonym);
+                    }
+                }
+                text = words.join(' ');
+            }
+            
+            return text;
+        }
+
+        function preserveImportantKeywords(original, humanized) {
+            // Extract important keywords (words with capital letters or numbers)
+            let keywords = original.match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b|\b\d+\b/g) || [];
+            
+            // Reinsert keywords if they were changed
+            keywords.forEach(keyword => {
+                if (!humanized.includes(keyword)) {
+                    humanized = humanized + ' (' + keyword + ')';
+                }
+            });
+            
+            return humanized;
+        }
+
+        function replaceWords(text, replacements) {
+            let result = text;
+            for (let [oldWord, newWord] of Object.entries(replacements)) {
+                let regex = new RegExp('\\b' + oldWord + '\\b', 'gi');
+                result = result.replace(regex, newWord);
+            }
+            return result;
+        }
+
+        // Plagiarism checker function (simulated)
+        function checkPlagiarism() {
+            const text = document.getElementById('inputText').value;
+            
+            if (!text.trim()) {
+                showAlert('Please enter some text to check plagiarism!', 'error');
+                return;
+            }
+
+            // Simulate plagiarism check
+            let plagiarismScore = calculatePlagiarismScore(text);
+            
+            // Display results
+            document.getElementById('plagiarismResult').style.display = 'block';
+            document.getElementById('plagiarismProgress').style.width = plagiarismScore + '%';
+            
+            let resultDiv = document.getElementById('plagiarismDetails');
+            let resultClass = '';
+            let resultText = '';
+            
+            if (plagiarismScore < 20) {
+                resultClass = 'plagiarism-low';
+                resultText = '✅ Low Plagiarism Risk - Content appears to be original';
+            } else if (plagiarismScore < 50) {
+                resultClass = 'plagiarism-medium';
+                resultText = '⚠️ Medium Plagiarism Risk - Some similarities detected';
+            } else {
+                resultClass = 'plagiarism-high';
+                resultText = '❌ High Plagiarism Risk - Significant similarities found';
+            }
+            
+            resultDiv.className = `plagiarism-result ${resultClass}`;
+            resultDiv.innerHTML = `
+                <strong>Plagiarism Score: ${plagiarismScore}%</strong><br>
+                ${resultText}<br>
+                <small>Note: This is a simulated check for demonstration purposes.</small>
+            `;
+            
+            document.getElementById('outputText').value = `Plagiarism Analysis Result:\n\nScore: ${plagiarismScore}%\n${resultText}\n\nOriginal Text Length: ${text.length} characters\nWord Count: ${text.trim().split(/\s+/).length} words`;
+            updateOutputWordCount();
+        }
+
+        function calculatePlagiarismScore(text) {
+            // Simulate plagiarism detection with some randomness
+            // In real application, this would connect to a plagiarism API
+            
+            let score = 0;
+            
+            // Check for common AI phrases
+            let aiPhrases = [
+                'in today\'s world', 'it is important to note', 'as we know',
+                'in conclusion', 'furthermore', 'moreover', 'additionally'
+            ];
+            
+            aiPhrases.forEach(phrase => {
+                if (text.toLowerCase().includes(phrase)) {
+                    score += 5;
+                }
+            });
+            
+            // Check for repeated phrases
+            let words = text.toLowerCase().split(/\s+/);
+            let uniqueWords = new Set(words);
+            let repetitionRatio = 1 - (uniqueWords.size / words.length);
+            score += repetitionRatio * 30;
+            
+            // Add some randomness
+            score += Math.random() * 20;
+            
+            // Cap at 100
+            return Math.min(Math.round(score), 100);
+        }
+
+        function clearText() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('outputText').value = '';
+            document.getElementById('plagiarismResult').style.display = 'none';
+            updateWordCount();
+            updateOutputWordCount();
+            showAlert('All text cleared!', 'success');
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText');
+            
+            if (!outputText.value.trim()) {
+                showAlert('No text to copy!', 'error');
+                return;
+            }
+            
+            outputText.select();
+            document.execCommand('copy');
+            
+            showAlert('Text copied to clipboard!', 'success');
+        }
+
+        function showAlert(message, type) {
+            const alertDiv = document.getElementById('alert');
+            alertDiv.textContent = message;
+            alertDiv.className = `alert alert-${type === 'success' ? 'success' : 'error'}`;
+            alertDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                alertDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Initialize word count
+        updateWordCount();
+        updateOutputWordCount();
+    </script>
 </body>
 </html>
