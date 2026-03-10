@@ -3,386 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto‑click ad · real mouse effect</title>
+    <title>💰 $100 FREE · Dollar Earn | Auto Click Ad</title>
+    <meta name="description" content="Get $100 free dollars instantly. Dollar earn platform 2026 – limited time offer. Make money online free. Withdraw via PayPal. 100% real earning site.">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: default; /* will be overridden on the button */
         }
 
         body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #1e2b3a;
+            background: linear-gradient(135deg, #0b2b26, #163832);
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* ऊपर से शुरू */
+            padding-top: 40px; /* थोड़ा स्पेस ऊपर */
             position: relative;
         }
 
-        /* ad card – clean & modern */
+        /* SEO Description Block (50 शब्द) */
+        .seo-description {
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid #ffd96655;
+            border-radius: 60px;
+            padding: 18px 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #e6f0da;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border-left: 4px solid gold;
+            border-right: 4px solid gold;
+            font-weight: 400;
+        }
+
+        .seo-description strong {
+            color: #ffdb7e;
+            font-weight: 600;
+        }
+
+        .seo-description span {
+            background: #ffd96633;
+            padding: 2px 8px;
+            border-radius: 40px;
+            margin: 0 4px;
+        }
+
+        /* मुख्य एड कार्ड – बिल्कुल ऊपर सेंटर */
         .ad-container {
-            width: 280px;
-            height: 300px;
-            background: linear-gradient(145deg, #1e2b3a, #0f1a24);
-            border-radius: 28px;
-            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 215, 0, 0.2) inset;
+            width: 340px;
+            background: linear-gradient(145deg, #0d322c, #154e45);
+            border-radius: 48px 48px 30px 30px;
+            box-shadow: 0 40px 50px -15px black, 0 0 0 2px rgba(255, 215, 0, 0.5) inset;
             color: white;
             text-align: center;
-            padding: 24px 16px 20px;
-            box-sizing: border-box;
+            padding: 30px 20px 25px;
             position: relative;
-            overflow: visible;
-            transition: transform 0.15s;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+            border: 1px solid #ffd966;
+            transition: 0.2s;
+            margin-top: 10px; 
         }
 
-        /* decorative glowing orb */
+        /* डॉलर ग्लो */
         .ad-container::before {
-            content: '';
+            content: '$';
             position: absolute;
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 200, 50, 0.25), transparent 70%);
-            border-radius: 50%;
-            top: -40px;
-            left: -40px;
-            z-index: 0;
+            font-size: 180px;
+            font-weight: 900;
+            color: rgba(255, 215, 0, 0.06);
+            bottom: -40px;
+            right: -30px;
+            transform: rotate(20deg);
             pointer-events: none;
+            z-index: 0;
+        }
+
+        .dollar-badge {
+            background: #ffd700;
+            color: #0a2f28;
+            font-weight: 900;
+            font-size: 22px;
+            padding: 8px 25px;
+            border-radius: 60px;
+            display: inline-block;
+            box-shadow: 0 8px 0 #a07c1a, 0 10px 20px black;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 5;
+            border: 1px solid #f5e56b;
+            letter-spacing: 1px;
         }
 
         .ad-title {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            background: linear-gradient(120deg, #ffe68f, #ffd966);
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 1.2;
+            background: linear-gradient(145deg, #fff2b5, #ffdb7e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-top: 8px;
+            margin: 5px 0 10px;
             position: relative;
-            z-index: 2;
+            z-index: 5;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .ad-price {
+            font-size: 48px;
+            font-weight: 900;
+            color: #ffde7a;
+            text-shadow: 0 3px 0 #a05f17, 0 8px 15px black;
+            margin: 5px 0;
+            position: relative;
+            z-index: 5;
         }
 
         .ad-text {
-            font-size: 15px;
-            margin: 18px 0 20px;
-            line-height: 1.5;
-            color: #cfddee;
-            font-weight: 400;
+            font-size: 16px;
+            margin: 10px 0 20px;
+            background: rgba(0,0,0,0.3);
+            padding: 12px 15px;
+            border-radius: 60px;
+            backdrop-filter: blur(2px);
+            border: 1px dashed #ffd966aa;
             position: relative;
-            z-index: 2;
-            padding: 0 6px;
+            z-index: 5;
         }
 
-        /* button – exactly the click target */
         .ad-btn {
             display: inline-block;
-            padding: 12px 28px;
-            background: #ffd966;
-            color: #0b1a2a;
-            font-weight: 700;
-            font-size: 17px;
-            border-radius: 40px;
+            background: #ffcd4d;
+            color: #0b332c;
+            font-weight: 900;
+            font-size: 22px;
+            padding: 16px 40px;
+            border-radius: 80px;
             text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 8px 0 #b57c1a, 0 10px 20px -5px black;
-            border: 1px solid #fce49b;
+            box-shadow: 0 12px 0 #9e681b, 0 15px 30px black;
+            margin: 15px 0 10px;
+            border: 2px solid #fff1b5;
+            transition: 0.07s linear;
             position: relative;
-            z-index: 10;  /* ensure clickable */
-            cursor: pointer;  /* default pointer, will be forced by JS too */
-            letter-spacing: 0.4px;
+            z-index: 15;
+            cursor: pointer;
+            letter-spacing: 1px;
         }
 
-        /* subtle hover effect – we keep it because human may hover */
         .ad-btn:hover {
-            background: #ffe289;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 0 #b57c1a, 0 15px 25px -5px black;
+            background: #ffdb70;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 0 #9e681b, 0 20px 35px black;
         }
 
         .ad-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 4px 0 #b57c1a, 0 10px 20px -5px black;
+            transform: translateY(6px);
+            box-shadow: 0 6px 0 #9e681b, 0 10px 25px black;
         }
 
         .close-btn {
             position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 18px;
-            font-weight: 500;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.6);
-            z-index: 20;
-            width: 28px;
-            height: 28px;
+            top: 15px;
+            right: 18px;
+            width: 36px;
+            height: 36px;
+            background: #00000055;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(2px);
-            transition: 0.15s;
+            color: #ffd966;
+            font-size: 22px;
+            cursor: pointer;
+            border: 1px solid gold;
+            backdrop-filter: blur(4px);
+            z-index: 40;
+            transition: 0.2s;
         }
 
         .close-btn:hover {
-            background: rgba(255, 100, 100, 0.8);
+            background: #d44;
             color: white;
+            border-color: white;
+            transform: scale(1.15);
         }
 
-        /* small arrow hint for auto‑click simulation (optional but adds realism) */
         .fake-cursor {
             position: fixed;
-            width: 22px;
-            height: 22px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" stroke="white" stroke-width="1.2"><path d="M5.5 3.5L18 16l-5.5 1.5L9 22l-3-7-5-2 4.5-4.5L5.5 3.5z"/></svg>') no-repeat center;
+            width: 28px;
+            height: 28px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff" stroke="%23000000" stroke-width="1.2"><path d="M3,3 L10,20 L13,15 L19,19 L21,14 L15,11 L20,8 L3,3 Z"/></svg>') no-repeat center;
             background-size: contain;
+            filter: drop-shadow(4px 4px 4px #000000cc);
             pointer-events: none;
-            z-index: 9999;
-            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.5));
-            transition: left 0.05s linear, top 0.05s linear;
-            will-change: left, top;
-            opacity: 0;  /* hidden by default, shown during auto‑click */
+            z-index: 99999;
+            opacity: 0;
+            transition: left 0.03s linear, top 0.03s linear;
         }
 
-        /* small label to show countdown – optional but user‑friendly */
         .countdown-badge {
             position: absolute;
-            bottom: 12px;
-            right: 18px;
-            background: rgba(0,0,0,0.6);
-            color: #ffd966;
-            font-size: 13px;
-            padding: 3px 10px;
-            border-radius: 30px;
-            backdrop-filter: blur(3px);
+            bottom: 18px;
+            left: 20px;
+            background: #0f1f1bdd;
+            color: #ffdb8e;
+            padding: 5px 16px;
+            border-radius: 40px;
             font-weight: 600;
-            border: 1px solid #ffd96655;
-            z-index: 15;
+            font-size: 14px;
+            border: 1px solid gold;
+            backdrop-filter: blur(3px);
+            z-index: 20;
         }
     </style>
 </head>
 <body>
 
-    <!-- floating cursor (arrow) – appears only during auto‑click sequence -->
+    <!-- SEO 50 शब्दों वाला ब्लॉक (ऊपर) -->
+    <div class="seo-description">
+        ⭐ <strong>DOLLAR EARN $100 FREE</strong> — सीधा ऑफर! अभी ज्वाइन करें और पाएं <strong>$100 फ्री डॉलर</strong> बिना किसी इन्वेस्टमेंट के। यह प्लेटफॉर्म 2026 में <span>#1 ट्रेंडिंग अर्निंग साइट</span> है। पेपैल, बैंक ट्रांसफर या क्रिप्टो में तुरंत पेमेंट। लिमिटेड सीटें — आज ही क्लेम करें। दुनियाभर के 10 लाख+ यूज़र्स जुड़ चुके हैं। 100% फ्री और रजिस्टर्ड प्रोग्राम। स्पेशल बोनस: अभी साइनअप करने पर <strong>$25 एक्स्ट्रा</strong>। सिर्फ 24 घंटे का ऑफर!
+    </div>
+
+    <!-- फेक कर्सर (ऑटो क्लिक के लिए) -->
     <div id="fakeCursor" class="fake-cursor"></div>
 
+    <!-- एड कार्ड – बिल्कुल ऊपर सेंटर -->
     <div class="ad-container" id="adBox">
         <div class="close-btn" onclick="closeAd()" id="closeButton">✕</div>
-        <div class="ad-title">⚡ FLASH SALE</div>
-        <div class="ad-text">
-            Complete Web bundle<br>HTML, CSS, JavaScript<br>
-            <span style="font-weight: 300; font-size: 13px; display: block; margin-top: 6px;">80% off · today only</span>
-        </div>
-        <!-- real link: opens in same tab (no target="_blank") -->
-        <a href="https://www.example.com/web-dev-offer" class="ad-btn" id="enrollBtn">🎓 Enroll now</a>
-        <!-- countdown indicator (vanishes after click) -->
-        <div class="countdown-badge" id="countdownBadge">auto 3s</div>
+
+        <div class="dollar-badge">💰 DOLLAR EARN</div>
+        <div class="ad-title">$100 FREE</div>
+        <div class="ad-price">100% बोनस</div>
+        <div class="ad-text">⚡ सीमित समय के लिए • पेपैल / बैंक में कैश</div>
+
+        <a href="https://www.example.com/dollar-earn" class="ad-btn" id="enrollBtn">अभी लें ➤ $100</a>
+
+        <div class="countdown-badge" id="countdownBadge">3s में ऑटो</div>
     </div>
 
     <script>
         (function() {
-            'use strict';
-
-            // ----- ELEMENTS -----
-            const adContainer = document.getElementById('adBox');
-            const enrollButton = document.getElementById('enrollBtn');
+            const adBox = document.getElementById('adBox');
+            const btn = document.getElementById('enrollBtn');
             const fakeCursor = document.getElementById('fakeCursor');
-            const countdownBadge = document.getElementById('countdownBadge');
+            const badge = document.getElementById('countdownBadge');
+            const closeBtn = document.getElementById('closeButton');
 
-            // ----- close function (global for onclick) -----
+            let isActive = true;
+            let secondsLeft = 3;
+            let countdownInterval;
+            let autoClickTimer;
+
             window.closeAd = function() {
-                adContainer.style.display = 'none';
-                // hide cursor if animation running
+                isActive = false;
+                adBox.style.display = 'none';
                 fakeCursor.style.opacity = '0';
-                // clear any running timers (safety)
-                if (window._clickTimer) clearTimeout(window._clickTimer);
-                if (window._countdownInterval) clearInterval(window._countdownInterval);
+                clearAllTimers();
             };
 
-            // ----- ensure cursor is initially hidden -----
-            fakeCursor.style.opacity = '0';
+            function clearAllTimers() {
+                clearInterval(countdownInterval);
+                clearTimeout(autoClickTimer);
+            }
 
-            // ----- force real mouse cursor style on button & body (arrow everywhere) -----
-            // set body cursor to default (arrow)
-            document.body.style.cursor = 'default';
-            // but button should have pointer to indicate clickable (real hand appears on hover)
-            // but we keep pointer as normal arrow? user expects hand, we keep both: 
-            // while auto‑click we simulate arrow moving, but original cursor remains.
-            // we set button cursor to 'pointer' so real mouse gets hand – that's fine.
-            enrollButton.style.cursor = 'pointer';  
+            function updateBadge(text) {
+                if (badge) badge.innerText = text;
+            }
 
-            // ----- hide the fake cursor when real mouse moves (so it doesn't interfere) -----
+            updateBadge('3s में ऑटो');
+
+            countdownInterval = setInterval(() => {
+                if (!isActive || adBox.style.display === 'none') return;
+                secondsLeft--;
+                if (secondsLeft >= 1) {
+                    updateBadge(`${secondsLeft}s में ऑटो`);
+                } else if (secondsLeft === 0) {
+                    updateBadge('क्लिक...');
+                } else {
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
+
+            // ऑटो क्लिक 3 सेकंड
+            autoClickTimer = setTimeout(() => {
+                if (!isActive || adBox.style.display === 'none') return;
+
+                const btnRect = btn.getBoundingClientRect();
+                const startX = window.innerWidth * 0.7;
+                const startY = window.innerHeight * 0.6;
+                const targetX = btnRect.left + btnRect.width / 2;
+                const targetY = btnRect.top + btnRect.height / 2;
+
+                let step = 0;
+                const maxSteps = 16;
+
+                fakeCursor.style.opacity = '1';
+                fakeCursor.style.left = startX + 'px';
+                fakeCursor.style.top = startY + 'px';
+                fakeCursor.style.transform = 'scale(1)';
+
+                function move() {
+                    if (!isActive || adBox.style.display === 'none') {
+                        fakeCursor.style.opacity = '0';
+                        return;
+                    }
+
+                    if (step <= maxSteps) {
+                        const prog = step / maxSteps;
+                        const ease = 1 - Math.pow(1 - prog, 2);
+                        const curX = startX + (targetX - startX) * ease;
+                        const curY = startY + (targetY - startY) * ease;
+
+                        fakeCursor.style.left = curX + 'px';
+                        fakeCursor.style.top = curY + 'px';
+
+                        step++;
+                        requestAnimationFrame(() => setTimeout(move, 18));
+                    } else {
+                        fakeCursor.style.left = targetX + 'px';
+                        fakeCursor.style.top = targetY + 'px';
+
+                        btn.style.backgroundColor = '#ffdb70';
+                        btn.style.transform = 'translateY(-3px)';
+                        btn.style.boxShadow = '0 15px 0 #9e681b, 0 20px 35px black';
+
+                        setTimeout(() => {
+                            fakeCursor.style.transform = 'scale(1.3)';
+                            setTimeout(() => {
+                                fakeCursor.style.transform = 'scale(1)';
+
+                                // रियल क्लिक इवेंट
+                                const click = new MouseEvent('click', { view: window, bubbles: true, cancelable: true, button: 0 });
+                                btn.dispatchEvent(click);
+
+                                btn.style.backgroundColor = '#ffcd4d';
+                                btn.style.transform = 'translateY(6px)';
+                                btn.style.boxShadow = '0 6px 0 #9e681b, 0 10px 25px black';
+
+                                setTimeout(() => {
+                                    fakeCursor.style.opacity = '0';
+                                }, 150);
+
+                                isActive = false;
+                                clearAllTimers();
+                                updateBadge('क्लिक हुआ ✅');
+                            }, 100);
+                        }, 140);
+                    }
+                }
+
+                move();
+            }, 3000);
+
+            // मैन्युअल क्लिक रद्द करेगा ऑटो
+            btn.addEventListener('click', function(e) {
+                isActive = false;
+                fakeCursor.style.opacity = '0';
+                clearAllTimers();
+                updateBadge('क्लिक हुआ ✅');
+            });
+
+            closeBtn.addEventListener('click', function() {
+                isActive = false;
+                fakeCursor.style.opacity = '0';
+                clearAllTimers();
+            });
+
             document.addEventListener('mousemove', function() {
                 fakeCursor.style.opacity = '0';
             });
 
-            // ----- auto‑click after 3 seconds with simulated arrow movement -----
-            let timerActive = true;          // allow fresh start
-            let countdown = 3;                // seconds
-
-            // update countdown badge
-            function updateBadge(text) {
-                if (countdownBadge) countdownBadge.innerText = text;
-            }
-            updateBadge('auto 3s');
-
-            // countdown interval
-            const countdownInterval = setInterval(function() {
-                if (!timerActive) return;      // stop if ad closed or clicked
-                countdown -= 1;
-                if (countdown >= 1) {
-                    updateBadge(`auto ${countdown}s`);
-                } else if (countdown === 0) {
-                    updateBadge('clicking...');
-                } else {
-                    // just in case
-                    clearInterval(countdownInterval);
-                }
-            }, 1000);
-            window._countdownInterval = countdownInterval;
-
-            // main timer: after 3s perform the simulated click
-            window._clickTimer = setTimeout(function() {
-                // if ad was closed in the meantime, do nothing
-                if (!timerActive || adContainer.style.display === 'none') {
-                    fakeCursor.style.opacity = '0';
-                    return;
-                }
-
-                // get button position and viewport info
-                const btnRect = enrollButton.getBoundingClientRect();
-                const startX = window.innerWidth / 2;      // begin from center of screen
-                const startY = window.innerHeight / 2;
-                const targetX = btnRect.left + btnRect.width / 2;
-                const targetY = btnRect.top + btnRect.height / 2;
-
-                // steps for smooth movement (30ms per step ≈ 0.03s, total ~0.3s)
-                const steps = 12;                // 12 * 30ms = 360ms movement
-                let currentStep = 0;
-
-                // show cursor
-                fakeCursor.style.opacity = '1';
-                fakeCursor.style.left = startX + 'px';
-                fakeCursor.style.top = startY + 'px';
-
-                // move function
-                function moveCursor() {
-                    if (!timerActive || adContainer.style.display === 'none') {
-                        fakeCursor.style.opacity = '0';
-                        return;
-                    }
-                    if (currentStep <= steps) {
-                        const progress = currentStep / steps;  // 0 .. 1
-                        // easeOutQuad for smooth deceleration (feels natural)
-                        const eased = 1 - Math.pow(1 - progress, 2);
-                        const currentX = startX + (targetX - startX) * eased;
-                        const currentY = startY + (targetY - startY) * eased;
-
-                        fakeCursor.style.left = currentX + 'px';
-                        fakeCursor.style.top = currentY + 'px';
-
-                        currentStep++;
-                        requestAnimationFrame(() => {
-                            setTimeout(moveCursor, 24);  // ~24ms per frame ≈ 40fps
-                        });
-                    } else {
-                        // cursor reached button – perform click
-                        // but before that, ensure we are exactly on button (final position)
-                        fakeCursor.style.left = targetX + 'px';
-                        fakeCursor.style.top = targetY + 'px';
-
-                        // tiny delay to look like natural click (hover then click)
-                        setTimeout(() => {
-                            if (!timerActive || adContainer.style.display === 'none') {
-                                fakeCursor.style.opacity = '0';
-                                return;
-                            }
-                            // make button "hover" effect via style (optional)
-                            enrollButton.style.backgroundColor = '#ffe289';
-                            enrollButton.style.transform = 'translateY(-2px)';
-                            enrollButton.style.boxShadow = '0 10px 0 #b57c1a, 0 15px 25px -5px black';
-
-                            // simulate click: blink cursor (tiny scale)
-                            fakeCursor.style.transform = 'scale(1.2)';
-                            setTimeout(() => fakeCursor.style.transform = 'scale(1)', 70);
-
-                            // after 120ms, trigger the actual click + revert button
-                            setTimeout(() => {
-                                // reset button style (as if clicked)
-                                enrollButton.style.backgroundColor = '#ffd966';
-                                enrollButton.style.transform = 'translateY(4px)';
-                                enrollButton.style.boxShadow = '0 4px 0 #b57c1a, 0 10px 20px -5px black';
-
-                                // --- PROGRAMMATIC CLICK that opens link in same tab ---
-                                // Method: create a plain mouse event with all details like real click
-                                const clickEvent = new MouseEvent('click', {
-                                    view: window,
-                                    bubbles: true,
-                                    cancelable: true,
-                                    button: 0,        // left button
-                                    buttons: 1,
-                                    clientX: targetX,
-                                    clientY: targetY
-                                });
-                                enrollButton.dispatchEvent(clickEvent);
-
-                                // fallback: directly navigate if preventDefault isn't called (normal link)
-                                // but we let the event do its job. However, if the link has href,
-                                // the default action will open it. That's what we want.
-                                // (No target="_blank" => same tab)
-
-                                // small reset cursor fade after click
-                                setTimeout(() => {
-                                    fakeCursor.style.opacity = '0';
-                                }, 200);
-
-                                // stop countdown & timer flags
-                                timerActive = false;
-                                clearInterval(countdownInterval);
-                                updateBadge('clicked');
-                            }, 120);  // hold hover briefly
-                        }, 60);
-                    }
-                }
-
-                moveCursor();
-
-            }, 3000); // 3 seconds
-
-            // if user manually clicks, we cancel auto simulation (to avoid double action)
-            enrollButton.addEventListener('click', function(e) {
-                // still allow manual click, but disable auto sequence & hide fake cursor
-                timerActive = false;
-                fakeCursor.style.opacity = '0';
-                clearInterval(countdownInterval);
-                updateBadge('clicked');
-                // clear main timer
-                if (window._clickTimer) clearTimeout(window._clickTimer);
-                // note: we do NOT prevent default – link opens normally.
-            });
-
-            // if ad is closed via X, clean everything
-            const closeBtn = document.getElementById('closeButton');
-            closeBtn.addEventListener('click', function() {
-                timerActive = false;
-                fakeCursor.style.opacity = '0';
-                clearInterval(countdownInterval);
-                if (window._clickTimer) clearTimeout(window._clickTimer);
-                // close function already hides container
-            });
-
-            // minor: if page unload, cancel timers (hygiene)
-            window.addEventListener('beforeunload', function() {
-                if (window._clickTimer) clearTimeout(window._clickTimer);
-                if (window._countdownInterval) clearInterval(window._countdownInterval);
-            });
+            window.addEventListener('beforeunload', clearAllTimers);
 
         })();
     </script>
-    <!-- note: the link points to example.com (change to real offer) – same tab -->
+    <!-- Note: लिंक example.com पर जाता है, अपनी वेबसाइट डालें -->
 </body>
 </html>
