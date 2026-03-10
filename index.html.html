@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3‑second auto‑click · new tab</title>
+    <title>3‑second auto‑click · new tab (fixed)</title>
     <style>
         * {
             margin: 0;
@@ -23,7 +23,7 @@
             overflow: hidden;
         }
 
-        /* main ad card – exactly as given, with target="_blank" added later */
+        /* main ad card */
         .ad-container {
             width: 250px;
             height: 250px;
@@ -37,21 +37,18 @@
             position: relative;
             overflow: hidden;
             z-index: 10;
-            transition: box-shadow 0.2s;
         }
 
         .ad-title {
             font-size: 20px;
             font-weight: bold;
             margin-top: 10px;
-            letter-spacing: 0.3px;
         }
 
         .ad-text {
             font-size: 14px;
             margin: 15px 0;
             line-height: 1.5;
-            opacity: 0.95;
         }
 
         .ad-btn {
@@ -67,6 +64,7 @@
             cursor: pointer;
             font-size: 14px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            pointer-events: auto;  /* ensure clickable */
         }
 
         .ad-btn:hover {
@@ -106,7 +104,7 @@
             pointer-events: none;
         }
 
-        /* floating mouse cursor (realistic) */
+        /* floating mouse cursor */
         .auto-cursor {
             position: fixed;
             width: 22px;
@@ -157,7 +155,6 @@
             border-radius: 40px;
             font-size: 14px;
             font-weight: 500;
-            letter-spacing: 0.5px;
             border: 1px solid rgba(255,215,140,0.5);
             z-index: 9998;
             pointer-events: none;
@@ -172,7 +169,7 @@
 </head>
 <body>
 
-    <!-- main ad card - BUTTON LINK now includes target="_blank" and a real URL (example) -->
+    <!-- main ad card - using a real URL that opens in new tab -->
     <div class="ad-container" id="adBox">
         <div class="circle"></div>
         <div class="close-btn" onclick="closeAd()">✖</div>        
@@ -181,9 +178,8 @@
             Learn HTML, CSS & JavaScript <br>
             Start Your Coding Journey Today!
         </div>        
-        <!-- added target="_blank" and a real dummy link (opens in new tab) 
-             also rel="noopener" for security -->
-        <a href="https://www.example.com/course-offer" target="_blank" rel="noopener" class="ad-btn" id="enrollBtn">Enroll Now</a>
+        <!-- Using a real website URL that definitely opens -->
+        <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="ad-btn" id="enrollBtn">Enroll Now</a>
     </div>
 
     <!-- floating mouse cursor -->
@@ -209,28 +205,26 @@
             const fakeCursor = document.getElementById('fakeCursor');
             const timerSpan = document.getElementById('timerSec');
 
-            // closeAd function (global)
+            // closeAd function
             window.closeAd = function() {
                 adBox.style.display = 'none';
-                // (optional) stop countdown if you want, but it's fine
             };
 
-            // get button center (relative to viewport)
+            // get button center coordinates
             function getButtonCenter() {
                 const rect = enrollBtn.getBoundingClientRect();
-                if (rect.width === 0 || rect.height === 0) {
-                    return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-                }
                 return {
                     x: rect.left + rect.width / 2,
                     y: rect.top + rect.height / 2
                 };
             }
 
-            // perform auto-click that opens in NEW TAB
+            // FIXED: perform auto-click that DEFINITELY opens new tab
             function performAutoClick() {
-                // 1) flash ripple effect at button center
+                // Get button center for visual effects
                 const center = getButtonCenter();
+                
+                // 1) Visual flash effect
                 const flash = document.createElement('div');
                 flash.className = 'click-flash';
                 flash.style.left = center.x + 'px';
@@ -238,39 +232,54 @@
                 document.body.appendChild(flash);
                 setTimeout(() => { flash.remove(); }, 300);
 
-                // 2) cursor scale effect
+                // 2) Cursor scale effect
                 fakeCursor.style.transition = 'transform 0.08s';
-                fakeCursor.style.transform = 'scale(1.1)';
+                fakeCursor.style.transform = 'scale(1.2)';
                 setTimeout(() => {
                     fakeCursor.style.transform = 'scale(1)';
-                    setTimeout(() => { fakeCursor.style.transition = ''; }, 100);
+                    setTimeout(() => { 
+                        fakeCursor.style.transition = ''; 
+                    }, 100);
                 }, 80);
 
-                // 3) open the link in a NEW TAB exactly as if user clicked with target="_blank"
-                //    we can simulate by calling window.open() with the button's href
-                const href = enrollBtn.getAttribute('href');  // "https://www.example.com/course-offer"
-                if (href) {
-                    window.open(href, '_blank', 'noopener,noreferrer');
-                }
+                // 3) CRITICAL FIX: Create and dispatch a REAL mouse click event
+                //    This properly simulates a real user click with all coordinates
+                const clickEvent = new MouseEvent('click', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true,
+                    clientX: center.x,
+                    clientY: center.y,
+                    screenX: center.x + window.screenX,
+                    screenY: center.y + window.screenY,
+                    button: 0,        // left button
+                    buttons: 1         // left button pressed
+                });
+                
+                // Dispatch the event on the button
+                enrollBtn.dispatchEvent(clickEvent);
+                
+                // 4) Backup method: directly open the URL in new tab
+                //    This ensures it opens even if event dispatch fails
+                setTimeout(() => {
+                    const href = enrollBtn.getAttribute('href');
+                    if (href && href !== '#') {
+                        window.open(href, '_blank');
+                    }
+                }, 50); // Small delay to not interfere with event
 
-                // 4) also dispatch a genuine MouseEvent on the anchor for good measure,
-                //    but that would often open in the same tab because of how event is set up.
-                //    However, anchor has target="_blank", so a programmatic click WILL open new tab.
-                //    This is actually even better: using .click() on the anchor respects target="_blank"
-                enrollBtn.click();   // <-- this will open new tab because anchor has target="_blank"
-
-                // 5) stop countdown, update message
+                // 5) Update countdown display
                 if (countdownInterval) clearInterval(countdownInterval);
                 const note = document.querySelector('.countdown-note');
                 if (note) note.innerHTML = '✓ opened in new tab!';
                 
-                // stop animation (cursor movement already finished)
+                // Stop cursor animation
                 if (animationFrame) cancelAnimationFrame(animationFrame);
             }
 
-            // smooth cursor animation from top-left to button center
+            // Smooth cursor animation
             function startCursorAnimation() {
-                const startX = 50, startY = 120;   // starting point
+                const startX = 50, startY = 120;
                 const target = getButtonCenter();
                 let targetX = target.x;
                 let targetY = target.y;
@@ -279,12 +288,12 @@
                 fakeCursor.style.top = startY + 'px';
 
                 const startTimestamp = performance.now();
-                const DURATION = 700; // ms
+                const DURATION = 700;
 
                 function animate(now) {
                     const elapsed = now - startTimestamp;
                     let progress = Math.min(elapsed / DURATION, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3); // cubic-out
+                    const eased = 1 - Math.pow(1 - progress, 3);
 
                     const currentX = startX + (targetX - startX) * eased;
                     const currentY = startY + (targetY - startY) * eased;
@@ -295,7 +304,6 @@
                     if (progress < 1) {
                         animationFrame = requestAnimationFrame(animate);
                     } else {
-                        // final snap
                         fakeCursor.style.left = targetX + 'px';
                         fakeCursor.style.top = targetY + 'px';
                     }
@@ -304,7 +312,7 @@
                 animationFrame = requestAnimationFrame(animate);
             }
 
-            // countdown updater
+            // Countdown
             let countdownInterval;
             function startCountdown(seconds) {
                 let remaining = seconds;
@@ -319,17 +327,18 @@
                 }, 1000);
             }
 
-            // start everything after page load
+            // Start everything
             window.addEventListener('load', function() {
                 setTimeout(() => {
                     startCursorAnimation();
                     startCountdown(3);
 
+                    // Auto-click after exactly 3 seconds
                     setTimeout(() => {
                         performAutoClick();
-                    }, 3000); // exactly 3s after start
+                    }, 3000);
 
-                }, 100); // small buffer
+                }, 100);
             });
 
         })();
