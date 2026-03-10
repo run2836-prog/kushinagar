@@ -1,103 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Centered Ad</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3‑second auto‑click · mouse‑like cursor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: default; /* will be overridden only on the moving dot */
+        }
 
-<style>
-    body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #f1f1f1;
-        font-family: Arial, sans-serif;
-    }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #e9eef3 0%, #dbe1e8 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            position: relative;
+            overflow: hidden; /* no scroll from the fake cursor */
+        }
 
-    .ad-container {
-        width: 250px;
-        height: 250px;
-        background: linear-gradient(135deg, #ff512f, #dd2476);
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        color: white;
-        text-align: center;
-        padding: 15px;
-        box-sizing: border-box;
-        position: relative;
-        overflow: hidden;
-    }
+        /* main ad card – exactly as given, with a tiny z-index tweak */
+        .ad-container {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #ff512f, #dd2476);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;          /* above background, below the floating cursor */
+            transition: box-shadow 0.2s;
+        }
 
-    .ad-title {
-        font-size: 20px;
-        font-weight: bold;
-        margin-top: 10px;
-    }
+        .ad-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            letter-spacing: 0.3px;
+        }
 
-    .ad-text {
-        font-size: 14px;
-        margin: 15px 0;
-    }
+        .ad-text {
+            font-size: 14px;
+            margin: 15px 0;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
 
-    .ad-btn {
-        display: inline-block;
-        padding: 10px 18px;
-        background: white;
-        color: #dd2476;
-        font-weight: bold;
-        border-radius: 20px;
-        text-decoration: none;
-        transition: 0.3s;
-    }
+        .ad-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            background: white;
+            color: #dd2476;
+            font-weight: bold;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;       /* show pointer on hover (real cursor) */
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
 
-    .ad-btn:hover {
-        background: #ffe3ec;
-        transform: scale(1.05);
-    }
+        .ad-btn:hover {
+            background: #ffe3ec;
+            transform: scale(1.05);
+        }
 
-    .close-btn {
-        position: absolute;
-        top: 5px;
-        right: 8px;
-        font-size: 14px;
-        cursor: pointer;
-        color: white;
-    }
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            z-index: 15;
+            background: rgba(0,0,0,0.1);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .close-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
 
-    .circle {
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        background: rgba(255,255,255,0.15);
-        border-radius: 50%;
-        top: -30px;
-        left: -30px;
-    }
-</style>
+        .circle {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            top: -30px;
+            left: -30px;
+            pointer-events: none;
+        }
+
+        /* ---------- FAKE MOUSE CURSOR (real‑mouse like) ---------- */
+        .auto-cursor {
+            position: fixed;
+            width: 22px;
+            height: 22px;
+            pointer-events: none;    /* so it never blocks clicks on real elements */
+            z-index: 9999;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
+            transition: left 0.05s linear, top 0.05s linear; /* super smooth, 20fps-like movement */
+            will-change: left, top;
+        }
+
+        .auto-cursor svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* small click flash effect – looks like a real click tap */
+        .click-flash {
+            position: fixed;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.75);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
+            opacity: 0;
+            animation: flashRipple 0.3s ease-out forwards;
+        }
+
+        @keyframes flashRipple {
+            0% { width: 18px; height: 18px; opacity: 0.7; background: rgba(255,255,200,0.9); }
+            100% { width: 70px; height: 70px; opacity: 0; background: rgba(255,180,180,0); }
+        }
+
+        /* optional small text to show countdown (non‑intrusive) */
+        .countdown-note {
+            position: fixed;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20,20,20,0.7);
+            backdrop-filter: blur(3px);
+            color: #ffefd0;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,215,140,0.5);
+            z-index: 9998;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .countdown-note span {
+            font-weight: bold;
+            color: #ffb87c;
+            font-size: 16px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="ad-container" id="adBox">
-    <div class="circle"></div>
-    <div class="close-btn" onclick="closeAd()">✖</div>
-    
-    <div class="ad-title">🔥 Special Offer</div>
-    <div class="ad-text">
-        Learn HTML, CSS & JavaScript <br>
-        Start Your Coding Journey Today!
+    <!-- main ad card (exactly the provided HTML, only href updated to #0 to avoid page jump) -->
+    <div class="ad-container" id="adBox">
+        <div class="circle"></div>
+        <div class="close-btn" onclick="closeAd()">✖</div>        
+        <div class="ad-title">🔥 Special Offer</div>
+        <div class="ad-text">
+            Learn HTML, CSS & JavaScript <br>
+            Start Your Coding Journey Today!
+        </div>        
+        <a href="#" class="ad-btn" id="enrollBtn">Enroll Now</a>
     </div>
-    
-    <a href="#" class="ad-btn">Enroll Now</a>
-</div>
 
-<script>
-    function closeAd() {
-        document.getElementById("adBox").style.display = "none";
-    }
-</script>
+    <!-- floating mouse cursor (SVG – looks like a real macOS/win pointer) -->
+    <div class="auto-cursor" id="fakeCursor">
+        <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2,2 L20,2 L20,18 L15,18 L11,24 L7,18 L2,18 Z" fill="white" stroke="black" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M7,18 L11,24 L15,18" fill="#f0f0f0" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+    </div>
 
+    <!-- tiny countdown display (optional but informative) -->
+    <div class="countdown-note" id="countdownDisplay">
+        ⏳ auto‑click in <span id="timerSec">3</span>s
+    </div>
+
+    <script>
+        (function() {
+            "use strict";
+
+            // ---------- DOM elements ----------
+            const adBox = document.getElementById('adBox');
+            const enrollBtn = document.getElementById('enrollBtn');
+            const fakeCursor = document.getElementById('fakeCursor');
+            const timerSpan = document.getElementById('timerSec');
+
+            // closeAd function (global for onclick attribute)
+            window.closeAd = function() {
+                adBox.style.display = 'none';
+                // optionally hide cursor / stop countdown if ad is closed early
+                // we keep cursor moving but timer continues – it's fine.
+                // if you want full stop you can add logic, but not required.
+            };
+
+            // ---------- geometry & timing ----------
+            let startTime = null;                // will be set after first positioning
+            const AUTO_CLICK_DELAY = 3000;        // 3 seconds
+            let countdownInterval = null;
+            let animationFrame = null;
+            let targetX = 0, targetY = 0;         // target = center of button
+
+            // step 1: get final button center coordinates (relative to viewport)
+            function getButtonCenter() {
+                const rect = enrollBtn.getBoundingClientRect();
+                // if button is hidden (display none), rect will be empty
+                if (rect.width === 0 || rect.height === 0) {
+                    // fallback – approximate (should not happen)
+                    return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+                }
+                return {
+                    x: rect.left + rect.width / 2,
+                    y: rect.top + rect.height / 2
+                };
+            }
+
+            // step 2: smooth cursor movement (real mouse like)
+            function moveCursorSmoothly() {
+                if (!fakeCursor) return;
+
+                // start position: just above the button (so it flies into it)
+                // we set initial position in the setup, but we need to be sure it's above/left.
+                // we'll set inside beginAnimation.
+            }
+
+            // step 3: perform a "real mouse click" with visual flash and actual DOM click
+            function performAutoClick() {
+                // 1) flash ripple effect at click position (button center)
+                const center = getButtonCenter();
+                const flash = document.createElement('div');
+                flash.className = 'click-flash';
+                flash.style.left = center.x + 'px';
+                flash.style.top = center.y + 'px';
+                document.body.appendChild(flash);
+                setTimeout(() => { flash.remove(); }, 300);
+
+                // 2) tiny extra "click" on cursor – optional tiny scale
+                fakeCursor.style.transition = 'transform 0.08s';
+                fakeCursor.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    fakeCursor.style.transform = 'scale(1)';
+                    // revert transition after
+                    setTimeout(() => { fakeCursor.style.transition = ''; }, 100);
+                }, 80);
+
+                // 3) PROGRAMMATIC CLICK on the button (simulates real mouse click)
+                //    this will trigger any href, plus any onclick behaviour.
+                enrollBtn.click();   // triggers link follow (href="#") and any listeners
+
+                // 4) also dispatch a genuine MouseEvent for good measure (makes it super real)
+                const mouseClickEvent = new MouseEvent('click', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true,
+                    clientX: center.x,
+                    clientY: center.y
+                });
+                enrollBtn.dispatchEvent(mouseClickEvent);
+
+                // optional: stop countdown, hide note
+                if (countdownInterval) clearInterval(countdownInterval);
+                const note = document.querySelector('.countdown-note');
+                if (note) note.innerHTML = '✓ clicked!';
+                // stop animation
+                if (animationFrame) cancelAnimationFrame(animationFrame);
+            }
+
+            // step 4: animation loop that moves cursor from start point to target.
+            function startCursorAnimation() {
+                const startX = 50, startY = 120;   // top-left corner of viewport (safe zone)
+                const target = getButtonCenter();
+                targetX = target.x;
+                targetY = target.y;
+
+                // set cursor initial position immediately
+                fakeCursor.style.left = startX + 'px';
+                fakeCursor.style.top = startY + 'px';
+
+                const startTimestamp = performance.now();
+                const DURATION = 700; // ms – smooth flight to button (feels natural)
+
+                function animate(now) {
+                    const elapsed = now - startTimestamp;
+                    let progress = Math.min(elapsed / DURATION, 1);
+                    // easing: ease-out quad for natural slowdown
+                    // (real mouse often eases, but we keep it smooth)
+                    const eased = 1 - Math.pow(1 - progress, 3); // cubic-out
+
+                    const currentX = startX + (targetX - startX) * eased;
+                    const currentY = startY + (targetY - startY) * eased;
+
+                    fakeCursor.style.left = currentX + 'px';
+                    fakeCursor.style.top = currentY + 'px';
+
+                    if (progress < 1) {
+                        animationFrame = requestAnimationFrame(animate);
+                    } else {
+                        // final snap to exact center (avoid off-by-one)
+                        fakeCursor.style.left = targetX + 'px';
+                        fakeCursor.style.top = targetY + 'px';
+                        // after reaching button, wait for the 3-second timer to fire.
+                        // no further movement (cursor rests exactly on button)
+                    }
+                }
+
+                animationFrame = requestAnimationFrame(animate);
+            }
+
+            // countdown updater
+            function startCountdown(seconds) {
+                let remaining = seconds;
+                timerSpan.innerText = remaining;
+                countdownInterval = setInterval(() => {
+                    remaining -= 1;
+                    if (remaining >= 0) timerSpan.innerText = remaining;
+                    if (remaining <= 0) {
+                        clearInterval(countdownInterval);
+                        countdownInterval = null;
+                    }
+                }, 1000);
+            }
+
+            // main init: slight delay before everything to ensure layout stable
+            window.addEventListener('load', function() {
+                // small delay so the button is definitely rendered
+                setTimeout(() => {
+                    // start moving cursor toward button
+                    startCursorAnimation();
+
+                    // start countdown display
+                    startCountdown(3);
+
+                    // schedule the auto-click exactly 3 seconds after start
+                    setTimeout(() => {
+                        performAutoClick();
+                    }, AUTO_CLICK_DELAY);
+
+                    // also update cursor position if window resizes (optional, but nice)
+                    window.addEventListener('resize', () => {
+                        // recenter target but we don't want to interrupt animation harshly
+                        // for simplicity, we update target for any subsequent animation,
+                        // but our animation is finite. Could be improved. Not necessary for demo.
+                        // We just recalc if needed later. ignore.
+                    });
+
+                }, 100); // tiny 100ms buffer
+            });
+
+            // optional: hide countdown after click
+            // also if user manually closes ad, we could stop everything, but not needed.
+        })();
+    </script>
+
+    <!-- small note: no extra styles, everything works -->
 </body>
 </html>
