@@ -1,634 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Humanizer & Plagiarism Checker</title>
+    <title>मेरा कैलकुलेटर ऐप</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        
+        .app-container {
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             padding: 30px;
+            width: 350px;
+        }
+        
+        h1 {
             text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .main-content {
-            padding: 30px;
-        }
-
-        .input-section {
-            margin-bottom: 30px;
-        }
-
-        .textarea-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 200px;
-            padding: 15px;
-            font-size: 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            resize: vertical;
-            transition: border-color 0.3s;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .word-count {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(102, 126, 234, 0.1);
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-
-        .btn-check {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-        }
-
-        .options-panel {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .option-group {
-            margin-bottom: 15px;
-        }
-
-        .option-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
             color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
         }
-
-        select, input[type="range"] {
+        
+        .display {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            height: 60px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 24px;
+            text-align: right;
+            background: #f8f9fa;
         }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
         }
-
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-        }
-
-        .result-section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        .result-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .result-header h3 {
-            color: #333;
-        }
-
-        .plagiarism-result {
+        
+        button {
             padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
-
-        .plagiarism-low {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .plagiarism-medium {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeeba;
-        }
-
-        .plagiarism-high {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            transition: width 0.3s;
-        }
-
-        .copy-btn {
-            background: #28a745;
-            color: white;
+            font-size: 18px;
             border: none;
-            padding: 8px 20px;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 14px;
+            transition: all 0.3s ease;
         }
-
-        .copy-btn:hover {
-            background: #218838;
+        
+        button:hover {
+            transform: scale(1.05);
         }
-
-        .alert {
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            display: none;
+        
+        .number {
+            background: #e3f2fd;
+            color: #1976d2;
         }
-
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            display: block;
+        
+        .number:hover {
+            background: #bbdefb;
         }
-
+        
+        .operator {
+            background: #ffeb3b;
+            color: #f57c00;
+        }
+        
+        .operator:hover {
+            background: #ffe082;
+        }
+        
+        .equals {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .equals:hover {
+            background: #66bb6a;
+        }
+        
+        .clear {
+            background: #f44336;
+            color: white;
+        }
+        
+        .clear:hover {
+            background: #ef5350;
+        }
+        
         .footer {
+            margin-top: 20px;
             text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-top: 1px solid #e0e0e0;
             color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .button-group {
-                flex-direction: column;
-            }
-            
-            .btn {
-                min-width: auto;
-            }
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🤖 AI Humanizer & Plagiarism Checker</h1>
-            <p>Transform AI-generated text into natural human-like content with plagiarism detection</p>
+    <div class="app-container">
+        <h1>📱 मेरा कैलकुलेटर</h1>
+        
+        <input type="text" class="display" id="display" readonly>
+        
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="operator" onclick="appendToDisplay('/')">÷</button>
+            <button class="operator" onclick="appendToDisplay('*')">×</button>
+            <button class="operator" onclick="appendToDisplay('-')">-</button>
+            
+            <button class="number" onclick="appendToDisplay('7')">7</button>
+            <button class="number" onclick="appendToDisplay('8')">8</button>
+            <button class="number" onclick="appendToDisplay('9')">9</button>
+            <button class="operator" onclick="appendToDisplay('+')">+</button>
+            
+            <button class="number" onclick="appendToDisplay('4')">4</button>
+            <button class="number" onclick="appendToDisplay('5')">5</button>
+            <button class="number" onclick="appendToDisplay('6')">6</button>
+            <button class="equals" onclick="calculate()">=</button>
+            
+            <button class="number" onclick="appendToDisplay('1')">1</button>
+            <button class="number" onclick="appendToDisplay('2')">2</button>
+            <button class="number" onclick="appendToDisplay('3')">3</button>
+            <button class="number" onclick="appendToDisplay('0')">0</button>
+            
+            <button class="number" onclick="appendToDisplay('.')">.</button>
         </div>
-
-        <div class="main-content">
-            <div class="input-section">
-                <div class="textarea-container">
-                    <textarea id="inputText" placeholder="Yahan apna AI-generated text paste karein..."></textarea>
-                    <div class="word-count" id="wordCount">0 words</div>
-                </div>
-
-                <div class="options-panel">
-                    <h3 style="margin-bottom: 15px;">⚙️ Humanize Options</h3>
-                    
-                    <div class="option-group">
-                        <label for="humanizeLevel">Humanization Level:</label>
-                        <select id="humanizeLevel">
-                            <option value="low">Low - Minimal Changes</option>
-                            <option value="medium" selected>Medium - Balanced</option>
-                            <option value="high">High - Maximum Human-like</option>
-                        </select>
-                    </div>
-
-                    <div class="option-group">
-                        <label for="creativity">Creativity Level: <span id="creativityValue">50%</span></label>
-                        <input type="range" id="creativity" min="0" max="100" value="50">
-                    </div>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="preserveKeywords" checked>
-                        <label for="preserveKeywords">Preserve Important Keywords</label>
-                    </div>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-primary" onclick="humanizeText()">✨ Humanize Text</button>
-                    <button class="btn btn-check" onclick="checkPlagiarism()">🔍 Check Plagiarism</button>
-                    <button class="btn btn-secondary" onclick="clearText()">🗑️ Clear All</button>
-                </div>
-            </div>
-
-            <div class="result-section">
-                <div class="result-header">
-                    <h3>📝 Result</h3>
-                    <button class="copy-btn" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
-                </div>
-                
-                <div class="textarea-container">
-                    <textarea id="outputText" placeholder="Humanized text yah plagiarism result yahaan aayega..." readonly></textarea>
-                    <div class="word-count" id="outputWordCount">0 words</div>
-                </div>
-
-                <div id="plagiarismResult" style="display: none;">
-                    <h4>🔍 Plagiarism Analysis</h4>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="plagiarismProgress" style="width: 0%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
-                    </div>
-                    <div id="plagiarismDetails" class="plagiarism-result"></div>
-                </div>
-
-                <div id="alert" class="alert"></div>
-            </div>
-        </div>
-
+        
         <div class="footer">
-            <p>Made with ❤️ for better content creation | Humanize AI text & check plagiarism</p>
+            <p>बनाया गया ❤️ के साथ</p>
         </div>
     </div>
 
     <script>
-        // Word count functionality
-        document.getElementById('inputText').addEventListener('input', updateWordCount);
-        document.getElementById('creativity').addEventListener('input', function() {
-            document.getElementById('creativityValue').textContent = this.value + '%';
-        });
-
-        function updateWordCount() {
-            const text = document.getElementById('inputText').value;
-            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-            document.getElementById('wordCount').textContent = words + ' words';
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
         }
-
-        function updateOutputWordCount() {
-            const text = document.getElementById('outputText').value;
-            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-            document.getElementById('outputWordCount').textContent = words + ' words';
+        
+        function clearDisplay() {
+            document.getElementById('display').value = '';
         }
-
-        // Humanize function
-        function humanizeText() {
-            const inputText = document.getElementById('inputText').value;
-            
-            if (!inputText.trim()) {
-                showAlert('Please enter some text to humanize!', 'error');
-                return;
+        
+        function calculate() {
+            try {
+                let result = eval(document.getElementById('display').value);
+                document.getElementById('display').value = result;
+            } catch(error) {
+                document.getElementById('display').value = 'Error';
             }
-
-            const level = document.getElementById('humanizeLevel').value;
-            const creativity = document.getElementById('creativity').value;
-            const preserveKeywords = document.getElementById('preserveKeywords').checked;
-
-            // Humanization algorithm
-            let humanizedText = inputText;
-
-            // Apply different humanization techniques based on level
-            if (level === 'low') {
-                humanizedText = lowHumanization(humanizedText);
-            } else if (level === 'medium') {
-                humanizedText = mediumHumanization(humanizedText);
-            } else {
-                humanizedText = highHumanization(humanizedText);
-            }
-
-            // Apply creativity level
-            humanizedText = applyCreativity(humanizedText, creativity);
-
-            // Preserve keywords if checked
-            if (preserveKeywords) {
-                humanizedText = preserveImportantKeywords(inputText, humanizedText);
-            }
-
-            document.getElementById('outputText').value = humanizedText;
-            updateOutputWordCount();
-            
-            // Hide plagiarism result if visible
-            document.getElementById('plagiarismResult').style.display = 'none';
-            
-            showAlert('Text humanized successfully!', 'success');
         }
-
-        // Humanization algorithms
-        function lowHumanization(text) {
-            // Basic changes: replace common AI phrases
-            let replacements = {
-                'additionally': 'also',
-                'furthermore': 'plus',
-                'moreover': 'besides',
-                'consequently': 'so',
-                'nevertheless': 'but',
-                'in conclusion': 'to sum up',
-                'utilize': 'use',
-                'implement': 'do',
-                'facilitate': 'help'
-            };
-            
-            return replaceWords(text, replacements);
-        }
-
-        function mediumHumanization(text) {
-            // More natural changes
-            let text_low = lowHumanization(text);
-            
-            // Add some natural connectors and variations
-            let sentences = text_low.split(/[.!?]+/);
-            let connectors = ['Actually', 'You know', 'The thing is', 'Basically', 'Honestly'];
-            
-            for (let i = 1; i < sentences.length; i += 2) {
-                if (sentences[i].trim().length > 0) {
-                    let randomConnector = connectors[Math.floor(Math.random() * connectors.length)];
-                    sentences[i] = ' ' + randomConnector + ', ' + sentences[i].toLowerCase();
-                }
-            }
-            
-            return sentences.join('.');
-        }
-
-        function highHumanization(text) {
-            // Maximum human-like changes
-            let text_medium = mediumHumanization(text);
-            
-            // Add colloquial expressions, contractions, and varied sentence structures
-            let contractions = {
-                'is not': 'isn\'t',
-                'are not': 'aren\'t',
-                'cannot': 'can\'t',
-                'will not': 'won\'t',
-                'have not': 'haven\'t',
-                'has not': 'hasn\'t',
-                'it is': 'it\'s',
-                'that is': 'that\'s',
-                'there is': 'there\'s',
-                'I am': 'I\'m'
-            };
-            
-            text_medium = replaceWords(text_medium, contractions);
-            
-            // Add some filler words naturally
-            let fillers = ['just', 'actually', 'basically', 'literally', 'pretty'];
-            let words = text_medium.split(' ');
-            
-            for (let i = 2; i < words.length; i += 4) {
-                if (words[i].length > 3) {
-                    let randomFiller = fillers[Math.floor(Math.random() * fillers.length)];
-                    words.splice(i, 0, randomFiller);
-                }
-            }
-            
-            return words.join(' ');
-        }
-
-        function applyCreativity(text, creativityLevel) {
-            // Apply creativity based on percentage
-            let creativity = parseInt(creativityLevel) / 100;
-            
-            if (creativity > 0.3) {
-                // Add some synonyms for common words
-                let synonyms = {
-                    'good': ['great', 'awesome', 'fantastic', 'wonderful'],
-                    'bad': ['terrible', 'awful', 'horrible', 'not great'],
-                    'important': ['crucial', 'vital', 'essential', 'key'],
-                    'big': ['large', 'huge', 'enormous', 'massive'],
-                    'small': ['tiny', 'little', 'miniature', 'compact']
-                };
-                
-                let words = text.split(' ');
-                for (let i = 0; i < words.length; i++) {
-                    let word = words[i].toLowerCase().replace(/[.,!?;:]/, '');
-                    if (synonyms[word] && Math.random() < creativity * 0.3) {
-                        let synonym = synonyms[word][Math.floor(Math.random() * synonyms[word].length)];
-                        words[i] = words[i].replace(word, synonym);
-                    }
-                }
-                text = words.join(' ');
-            }
-            
-            return text;
-        }
-
-        function preserveImportantKeywords(original, humanized) {
-            // Extract important keywords (words with capital letters or numbers)
-            let keywords = original.match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b|\b\d+\b/g) || [];
-            
-            // Reinsert keywords if they were changed
-            keywords.forEach(keyword => {
-                if (!humanized.includes(keyword)) {
-                    humanized = humanized + ' (' + keyword + ')';
-                }
-            });
-            
-            return humanized;
-        }
-
-        function replaceWords(text, replacements) {
-            let result = text;
-            for (let [oldWord, newWord] of Object.entries(replacements)) {
-                let regex = new RegExp('\\b' + oldWord + '\\b', 'gi');
-                result = result.replace(regex, newWord);
-            }
-            return result;
-        }
-
-        // Plagiarism checker function (simulated)
-        function checkPlagiarism() {
-            const text = document.getElementById('inputText').value;
-            
-            if (!text.trim()) {
-                showAlert('Please enter some text to check plagiarism!', 'error');
-                return;
-            }
-
-            // Simulate plagiarism check
-            let plagiarismScore = calculatePlagiarismScore(text);
-            
-            // Display results
-            document.getElementById('plagiarismResult').style.display = 'block';
-            document.getElementById('plagiarismProgress').style.width = plagiarismScore + '%';
-            
-            let resultDiv = document.getElementById('plagiarismDetails');
-            let resultClass = '';
-            let resultText = '';
-            
-            if (plagiarismScore < 20) {
-                resultClass = 'plagiarism-low';
-                resultText = '✅ Low Plagiarism Risk - Content appears to be original';
-            } else if (plagiarismScore < 50) {
-                resultClass = 'plagiarism-medium';
-                resultText = '⚠️ Medium Plagiarism Risk - Some similarities detected';
-            } else {
-                resultClass = 'plagiarism-high';
-                resultText = '❌ High Plagiarism Risk - Significant similarities found';
-            }
-            
-            resultDiv.className = `plagiarism-result ${resultClass}`;
-            resultDiv.innerHTML = `
-                <strong>Plagiarism Score: ${plagiarismScore}%</strong><br>
-                ${resultText}<br>
-                <small>Note: This is a simulated check for demonstration purposes.</small>
-            `;
-            
-            document.getElementById('outputText').value = `Plagiarism Analysis Result:\n\nScore: ${plagiarismScore}%\n${resultText}\n\nOriginal Text Length: ${text.length} characters\nWord Count: ${text.trim().split(/\s+/).length} words`;
-            updateOutputWordCount();
-        }
-
-        function calculatePlagiarismScore(text) {
-            // Simulate plagiarism detection with some randomness
-            // In real application, this would connect to a plagiarism API
-            
-            let score = 0;
-            
-            // Check for common AI phrases
-            let aiPhrases = [
-                'in today\'s world', 'it is important to note', 'as we know',
-                'in conclusion', 'furthermore', 'moreover', 'additionally'
-            ];
-            
-            aiPhrases.forEach(phrase => {
-                if (text.toLowerCase().includes(phrase)) {
-                    score += 5;
-                }
-            });
-            
-            // Check for repeated phrases
-            let words = text.toLowerCase().split(/\s+/);
-            let uniqueWords = new Set(words);
-            let repetitionRatio = 1 - (uniqueWords.size / words.length);
-            score += repetitionRatio * 30;
-            
-            // Add some randomness
-            score += Math.random() * 20;
-            
-            // Cap at 100
-            return Math.min(Math.round(score), 100);
-        }
-
-        function clearText() {
-            document.getElementById('inputText').value = '';
-            document.getElementById('outputText').value = '';
-            document.getElementById('plagiarismResult').style.display = 'none';
-            updateWordCount();
-            updateOutputWordCount();
-            showAlert('All text cleared!', 'success');
-        }
-
-        function copyToClipboard() {
-            const outputText = document.getElementById('outputText');
-            
-            if (!outputText.value.trim()) {
-                showAlert('No text to copy!', 'error');
-                return;
-            }
-            
-            outputText.select();
-            document.execCommand('copy');
-            
-            showAlert('Text copied to clipboard!', 'success');
-        }
-
-        function showAlert(message, type) {
-            const alertDiv = document.getElementById('alert');
-            alertDiv.textContent = message;
-            alertDiv.className = `alert alert-${type === 'success' ? 'success' : 'error'}`;
-            alertDiv.style.display = 'block';
-            
-            setTimeout(() => {
-                alertDiv.style.display = 'none';
-            }, 3000);
-        }
-
-        // Initialize word count
-        updateWordCount();
-        updateOutputWordCount();
     </script>
 </body>
 </html>
