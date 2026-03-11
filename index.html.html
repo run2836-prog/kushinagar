@@ -1,704 +1,451 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Real Ads App - Start.io & AdMob</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-        }
-        
-        .app-container {
-            width: 100%;
-            max-width: 400px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
-        
-        .app-header {
-            background: #1a73e8;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
-        }
-        
-        .app-content {
-            padding: 20px;
-            min-height: 500px;
-        }
-        
-        /* Real Ad Units */
-        .ad-unit {
-            margin: 20px 0;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #fafafa;
-        }
-        
-        .ad-label {
-            background: #ff5722;
-            color: white;
-            font-size: 10px;
-            padding: 2px 8px;
-            display: inline-block;
-            border-radius: 0 0 5px 0;
-        }
-        
-        /* Banner Ad */
-        .banner-container {
-            width: 100%;
-            min-height: 60px;
-            background: linear-gradient(90deg, #4285f4, #34a853);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        /* Native Ad */
-        .native-ad {
-            display: flex;
-            padding: 15px;
-            background: white;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .native-icon {
-            width: 60px;
-            height: 60px;
-            background: #1a73e8;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 30px;
-        }
-        
-        .native-text {
-            flex: 1;
-        }
-        
-        .native-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
-        }
-        
-        .native-desc {
-            font-size: 12px;
-            color: #666;
-        }
-        
-        .native-button {
-            background: #1a73e8;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        /* Interstitial Ad (Popup) */
-        .interstitial {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .interstitial-content {
-            width: 90%;
-            max-width: 350px;
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-        }
-        
-        .interstitial-image {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 15px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 50px;
-        }
-        
-        .interstitial-button {
-            background: #1a73e8;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 30px;
-            width: 100%;
-            font-size: 16px;
-            font-weight: bold;
-            margin: 10px 0;
-            cursor: pointer;
-        }
-        
-        .close-btn {
-            background: #e0e0e0;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 20px;
-            cursor: pointer;
-        }
-        
-        /* Rewarded Video Button */
-        .rewarded-btn {
-            background: linear-gradient(45deg, #34a853, #1a73e8);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 30px;
-            width: 100%;
-            font-size: 16px;
-            font-weight: bold;
-            margin: 15px 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        /* App Features */
-        .feature-card {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        
-        .ad-network-list {
-            background: #f5f5f5;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 11px;
-            max-height: 150px;
-            overflow-y: auto;
-            margin: 10px 0;
-        }
-        
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14px;
-            z-index: 2000;
-            animation: slideUp 0.3s;
-        }
-        
-        @keyframes slideUp {
-            from { transform: translate(-50%, 100%); opacity: 0; }
-            to { transform: translate(-50%, 0); opacity: 1; }
-        }
-        
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #1a73e8;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-    
-    <!-- Google AdMob SDK (Real Ads) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-112468453"
-            crossorigin="anonymous"></script>
-    
-    <!-- Start.io SDK -->
-    <script src="https://ads.start.io/latest/startio-ads.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>iPhone वाला App स्टोर – सभी मोबाइल एप्लिकेशन</title>
+  <!-- Font Awesome 6 (iPhone style icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ===== GLOBAL RESET & APPLE-INSPIRED STYLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #f5f5f7;  /* light grey like Apple */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 0 0 30px 0;
+    }
+
+    /* iPhone mock container — gives that rounded, glossy iPhone feel */
+    .iphone-mock {
+      max-width: 390px;        /* iPhone 13/14 width */
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 44px;      /* iPhone bezel curve */
+      box-shadow: 0 30px 50px -20px rgba(0,0,0,0.3), 0 0 0 8px #e3e3e8, 0 0 0 12px #f8f8fa;
+      overflow: hidden;
+      margin: 30px auto 15px auto;
+      transition: transform 0.2s ease;
+    }
+
+    .iphone-mock:hover {
+      transform: scale(1.01);
+    }
+
+    /* dynamic island / top speaker (optional) */
+    .dynamic-island {
+      background: #1c1c1e;
+      width: 120px;
+      height: 30px;
+      margin: 12px auto 8px auto;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 10px;
+      opacity: 0.9;
+    }
+
+    .dynamic-island i {
+      color: #f5f5f7;
+      font-size: 12px;
+    }
+
+    .dynamic-island span {
+      color: #ddd;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* header / status bar (time, battery) */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 24px 4px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1c1c1e;
+      background: white;
+    }
+
+    /* === MAIN APPS SECTION (सभी एप्लिकेशन यहाँ होंगे) === */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);  /* iPhone home screen style */
+      gap: 18px 8px;
+      padding: 20px 18px 30px 18px;
+      background: white;
+    }
+
+    /* individual app tile */
+    .app-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #1c1c1e;
+      transition: 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .app-tile:active {
+      opacity: 0.7;
+      transform: scale(0.96);
+    }
+
+    .app-icon {
+      width: 62px;
+      height: 62px;
+      background: linear-gradient(145deg, #f9f9fc, #eaeef5);
+      border-radius: 17.5px;    /* iOS app icon rounded */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      box-shadow: 0 5px 10px -3px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.05);
+      transition: box-shadow 0.2s;
+      color: white;
+      font-size: 32px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* each icon gets its own iOS-like gradient */
+    .app-tile:nth-child(1) .app-icon { background: linear-gradient(145deg, #ff6b4a, #f53838); } /* phone */
+    .app-tile:nth-child(2) .app-icon { background: linear-gradient(145deg, #4cd964, #2eaa4a); } /* messages */
+    .app-tile:nth-child(3) .app-icon { background: linear-gradient(145deg, #5ac8fa, #1e93d3); } /* safari */
+    .app-tile:nth-child(4) .app-icon { background: linear-gradient(145deg, #ff9500, #e67e22); } /* mail */
+    .app-tile:nth-child(5) .app-icon { background: linear-gradient(145deg, #9475ff, #6a4be0); } /* music */
+    .app-tile:nth-child(6) .app-icon { background: linear-gradient(145deg, #ff2d55, #da1e42); } /* photos */
+    .app-tile:nth-child(7) .app-icon { background: linear-gradient(145deg, #8e8e93, #636366); } /* calculator */
+    .app-tile:nth-child(8) .app-icon { background: linear-gradient(145deg, #34c759, #248a3d); } /* calendar */
+    .app-tile:nth-child(9) .app-icon { background: linear-gradient(145deg, #007aff, #0055b3); } /* maps */
+    .app-tile:nth-child(10) .app-icon { background: linear-gradient(145deg, #5856d6, #3634a3); } /* weather */
+    .app-tile:nth-child(11) .app-icon { background: linear-gradient(145deg, #ff3b30, #c62828); } /* clock */
+    .app-tile:nth-child(12) .app-icon { background: linear-gradient(145deg, #af52de, #7b2fa3); } /* camera */
+    .app-tile:nth-child(13) .app-icon { background: linear-gradient(145deg, #5e5ce0, #3a38b0); } /* wallet */
+    .app-tile:nth-child(14) .app-icon { background: linear-gradient(145deg, #ff9f0a, #d97c00); } /* settings */
+    .app-tile:nth-child(15) .app-icon { background: linear-gradient(145deg, #64d2ff, #1e9ad8); } /* facetime */
+    .app-tile:nth-child(16) .app-icon { background: linear-gradient(145deg, #f69f9f, #d35f5f); } /* health */
+    .app-tile:nth-child(17) .app-icon { background: linear-gradient(145deg, #bfafb1, #8e787c); } /* books */
+    .app-tile:nth-child(18) .app-icon { background: linear-gradient(145deg, #a2845e, #7b623f); } /* podcast */
+    .app-tile:nth-child(19) .app-icon { background: linear-gradient(145deg, #009688, #00695c); } /* files */
+    .app-tile:nth-child(20) .app-icon { background: linear-gradient(145deg, #ef5f9f, #c64b7b); } /* fitness */
+    .app-tile:nth-child(21) .app-icon { background: linear-gradient(145deg, #ffcc00, #e6b800); } /* reminders */
+    .app-tile:nth-child(22) .app-icon { background: linear-gradient(145deg, #99d9ff, #56abf2); } /* notes */
+    .app-tile:nth-child(23) .app-icon { background: linear-gradient(145deg, #111111, #333333); } /* voice memos */
+    .app-tile:nth-child(24) .app-icon { background: linear-gradient(145deg, #6c7a89, #4a5562); } /* contacts */
+
+    .app-name {
+      font-size: 10px;
+      font-weight: 500;
+      text-align: center;
+      max-width: 68px;
+      line-height: 1.3;
+      color: #1c1c1e;
+      letter-spacing: -0.2px;
+    }
+
+    /* small dot for new / notification (iOS style) */
+    .app-tile {
+      position: relative;
+    }
+    .app-tile::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      right: 18px;
+      width: 8px;
+      height: 8px;
+      background: #ff3b30;
+      border-radius: 10px;
+      border: 1.5px solid white;
+      display: none; /* only show for some apps */
+    }
+    /* add red dot on messages, phone, mail to look lively */
+    .app-tile:nth-child(1)::after,
+    .app-tile:nth-child(2)::after,
+    .app-tile:nth-child(4)::after,
+    .app-tile:nth-child(8)::after {
+      display: block;
+    }
+
+    /* bottom dock (favorite apps) */
+    .dock {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid #e3e3e8;
+      display: flex;
+      justify-content: space-around;
+      padding: 14px 24px 18px 24px;
+      border-radius: 0 0 44px 44px;
+    }
+
+    .dock-app {
+      width: 58px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dock-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: #e9e9ed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    }
+
+    .dock .app-name {
+      font-size: 9px;
+      margin-top: 4px;
+      opacity: 0.8;
+    }
+
+    /* footer text */
+    .page-tagline {
+      color: #6c6c70;
+      text-align: center;
+      font-size: 14px;
+      letter-spacing: -0.2px;
+      font-weight: 400;
+      margin-top: 8px;
+      padding: 0 16px;
+    }
+
+    .page-tagline i {
+      color: #007aff;
+    }
+
+    /* small hint */
+    .attribution {
+      color: #8e8e93;
+      font-size: 11px;
+      text-align: center;
+      margin-top: 20px;
+      border-top: 1px solid #d8d8dd;
+      padding-top: 14px;
+      width: 100%;
+      max-width: 390px;
+    }
+
+    /* responsive fix for very small */
+    @media (max-width: 400px) {
+      .app-icon {
+        width: 58px;
+        height: 58px;
+        font-size: 28px;
+      }
+      .apps-grid {
+        gap: 12px 4px;
+        padding: 16px 10px;
+      }
+    }
+
+    /* extra hindi text iPhon wala */
+    .hindi-badge {
+      background: #f2f2f7;
+      color: #3a3a3c;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 500;
+      margin: 8px 0 5px;
+      display: inline-block;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+  </style>
 </head>
 <body>
-    <div class="app-container">
-        <div class="app-header">
-            📱 REAL ADS APP
-        </div>
-        
-        <div class="app-content">
-            <!-- App Info Card -->
-            <div class="feature-card">
-                <h3>📊 App Status</h3>
-                <p><strong>App ID:</strong> 202711281</p>
-                <p><strong>Publisher:</strong> 112468453</p>
-                <p><strong>Status:</strong> <span style="color: green;">● Active</span></p>
-                <p><strong>Ad Networks:</strong> 100+ Configured</p>
-            </div>
-            
-            <!-- BANNER AD - REAL -->
-            <div class="ad-unit">
-                <div class="ad-label">ADVERTISEMENT - BANNER</div>
-                <div id="banner-ad" class="banner-container" onclick="handleAdClick('banner')">
-                    <span class="loading"></span>
-                    <span style="margin-left: 10px;">Loading Real Ad...</span>
-                </div>
-                <div style="padding: 5px; font-size: 10px; color: #666;">
-                    start.io, 112468453, DIRECT
-                </div>
-            </div>
-            
-            <!-- NATIVE AD - REAL -->
-            <div class="ad-unit">
-                <div class="ad-label">SPONSORED - NATIVE</div>
-                <div id="native-ad" class="native-ad">
-                    <div class="native-icon">📱</div>
-                    <div class="native-text">
-                        <div class="native-title">Start.io App</div>
-                        <div class="native-desc">Download now and get 100 coins!</div>
-                    </div>
-                    <button class="native-button" onclick="handleAdClick('native')">Install</button>
-                </div>
-                <div style="padding: 5px; font-size: 10px; color: #666;">
-                    pubnative.net, 1007349, RESELLER
-                </div>
-            </div>
-            
-            <!-- REWARDED VIDEO AD -->
-            <button class="rewarded-btn" onclick="showRewardedVideo()">
-                <span>🎥</span>
-                Watch Video & Earn Coins
-                <span>💰</span>
-            </button>
-            
-            <!-- INTERSTITIAL AD BUTTON -->
-            <button class="rewarded-btn" style="background: #ff5722;" onclick="showInterstitial()">
-                <span>📺</span>
-                Show Full Screen Ad
-            </button>
-            
-            <!-- Ad Networks List -->
-            <div class="feature-card">
-                <h3>📋 Configured Ad Networks</h3>
-                <div class="ad-network-list" id="adNetworkList">
-                    <!-- Will be populated by JavaScript -->
-                </div>
-            </div>
-            
-            <!-- Sample App Content -->
-            <div class="feature-card">
-                <h3>🎮 App Features</h3>
-                <p>✅ Real Ads from Start.io & AdMob</p>
-                <p>✅ Banner, Native, Interstitial, Rewarded</p>
-                <p>✅ 100+ Ad Networks Configured</p>
-                <p>✅ app-ads.txt Ready</p>
-            </div>
-        </div>
+  <!-- iPhone style top badge (हिंदी में टैगलाइन) -->
+  <div class="hindi-badge">
+    <i class="fas fa-mobile-alt" style="margin-right: 6px;"></i> iPhone वाला ऐप स्टोर – सारे मोबाइल एप्लिकेशन
+  </div>
+
+  <!-- iPhone mock container -->
+  <div class="iphone-mock">
+    <!-- dynamic island (just for look) -->
+    <div class="dynamic-island">
+      <i class="fas fa-wifi"></i>
+      <span>iPhone वाला</span>
+      <i class="fas fa-battery-three-quarters"></i>
     </div>
-    
-    <!-- Interstitial Ad Modal -->
-    <div id="interstitialAd" class="interstitial">
-        <div class="interstitial-content">
-            <div class="interstitial-image">
-                🎯 SPECIAL OFFER
-            </div>
-            <h3>Get 50% Discount!</h3>
-            <p>Limited time offer for our app users</p>
-            <button class="interstitial-button" onclick="claimOffer()">CLAIM NOW</button>
-            <button class="close-btn" onclick="closeInterstitial()">Close</button>
-            <div style="margin-top: 10px; font-size: 10px; color: #999;">
-                pubmatic.com, 161162, RESELLER
-            </div>
-        </div>
+
+    <!-- status bar -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-full"></i></span>
     </div>
-    
-    <script>
-        // Configuration
-        const APP_ID = '202711281';
-        const PUBLISHER_ID = '112468453';
-        
-        // All ad networks from your list
-        const adNetworks = [
-            "start.io, 112468453, DIRECT",
-            "pubnative.net, 1007349, RESELLER, d641df8625486a7b",
-            "pubnative.net, 1008289, RESELLER, d641df8625486a7b",
-            "pubmatic.com, 161162, RESELLER, 5d62403b186f2ace",
-            "conversantmedia.com, 100339, RESELLER, 03113cd04947736d",
-            "appnexus.com, 4052, RESELLER",
-            "opera.com, pub5925993551616, RESELLER, 55a0c5fd61378de3",
-            "rubiconproject.com, 24400, DIRECT, 0bfd66d529a55807",
-            "target.my.com, 13033031, RESELLER",
-            "acexchange.co.kr, 1746357004, RESELLER",
-            "outbrain.com, 0023749a2264ea0429a71b54ac9ca0de9a, RESELLER",
-            "appnexus.com, 7597, RESELLER, f5ab79cb980f11d1",
-            "zmaticoo.com, 114122, RESELLER",
-            "pubmatic.com, 156517, RESELLER, 5d62403b186f2ace",
-            "webeyemob.com, 80067, RESELLER",
-            "uis.mobfox.com, 2290, RESELLER, 5529a3d1f59865be",
-            "pubmatic.com, 158060, RESELLER, 5d62403b186f2ace",
-            "outbrain.com, 00dbc7a68d0cd51d55ac0aa9e1918c9a34, RESELLER",
-            "pubmatic.com, 163476, RESELLER, 5d62403b186f2ace",
-            "gitberry.com, 405100012, RESELLER",
-            "rubiconproject.com, 24400, RESELLER, 0bfd66d529a55807",
-            "rubiconproject.com, 15278, RESELLER, 0bfd66d529a55807",
-            "openx.com, 559912325, RESELLER, 6a698e2ec38604c6",
-            "lijit.com, 488437, RESELLER, fafdf38b16bf6b2b",
-            "openx.com, 538959099, RESELLER, 6a698e2ec38604c6",
-            "pubmatic.com, 164079, RESELLER, 5d62403b186f2ace",
-            "rubiconproject.com, 17960, RESELLER, 0bfd66d529a55807",
-            "appnexus.com, 1019, RESELLER, f5ab79cb980f11d1",
-            "triplelift.com, 14127, RESELLER, 6c33edb13117fd86",
-            "sharethrough.com, 5EQ7ZF1q, RESELLER, d53b998a7bd4ecd2",
-            "openx.com, 540274407, RESELLER, 6a698e2ec38604c6",
-            "smaato.com, 1100047713, RESELLER, 07bcf65f187117b4",
-            "rubiconproject.com, 15044, RESELLER, 0bfd66d529a55807",
-            "loopme.com, 11318, RESELLER, 6c8d5f95897a5a3b",
-            "smartadserver.com, 4342, RESELLER, 060d053dcf45cbf3",
-            "advlion.com, 3144, RESELLER",
-            "trustedstack.com, TS677PGY3, RESELLER",
-            "openx.com, 559911747, RESELLER, 6a698e2ec38604c6",
-            "pubmatic.com, 164187, RESELLER, 5d62403b186f2ace",
-            "rubiconproject.com, 27130, RESELLER, 0bfd66d529a55807",
-            "themediagrid.com, FWN84J, DIRECT, 35d5010d7789b49d",
-            "bidedge.io, 12427296, RESELLER",
-            "conversantmedia.com, 100792, RESELLER, 03113cd04947736d",
-            "bidedge.io, 12500436, RESELLER",
-            "copper6.com, 764121, RESELLER",
-            "nativo.com, 5958, RESELLER, 59521ca7cc5e9fee",
-            "pubmatic.com, 156500, RESELLER, 5d62403b186f2ace",
-            "openx.com, 540709535, RESELLER, 6a698e2ec38604c6",
-            "zetaglobal.net, 989, RESELLER",
-            "152media.info, 152M698, RESELLER",
-            "admanmedia.com, 2050, RESELLER",
-            "rubiconproject.com, 27052, RESELLER, 0bfd66d529a55807",
-            "Pubmatic.com, 163120, RESELLER, 5d62403b186f2ace",
-            "Pubmatic.com, 165611, RESELLER, 5d62403b186f2ace",
-            "playdigo.com, 2048, RESELLER, 92011346d63d3c30",
-            "rubiconproject.com, 26144, RESELLER, 0bfd66d529a55807",
-            "thebrave.io, 1234765, RESELLER, c25b2154543746ac",
-            "smartadserver.com, 4343, RESELLER",
-            "rubiconproject.com, 24752, RESELLER, 0bfd66d529a55807",
-            "Media.net, 8CUIV8D19, RESELLER",
-            "openx.com, 537100188, RESELLER, 6a698e2ec38604c6",
-            "rubiconproject.com, 19396, RESELLER, 0bfd66d529a55807",
-            "pubeasy.io, 110047, RESELLER",
-            "lijit.com, 569924, RESELLER, fafdf38b16bf6b2b",
-            "trustedstack.com, TS28K5YY0, RESELLER",
-            "smartadserver.com, 3554, RESELLER",
-            "video.unrulymedia.com, 799061815, RESELLER",
-            "adwmg.com, 101277, RESELLER, c9688a22012618e7",
-            "pubmatic.com, 166536, RESELLER, 5d62403b186f2ace",
-            "pubnative.net, 1009046, RESELLER, d641df8625486a7b",
-            "lijit.com, 465542, RESELLER, fafdf38b16bf6b2b",
-            "kidoz.net, 15568, RESELLER, a109366414b7335e",
-            "video.unrulymedia.com, 3881266972, RESELLER",
-            "opera.com, pub12998959884416, RESELLER, 55a0c5fd61378de3",
-            "pgamssp.com, 67f939e4ab77600bf50713d6, RESELLER",
-            "rubiconproject.com, 24852, RESELLER, 0bfd66d529a55807",
-            "openx.com, 558899373, RESELLER, 6a698e2ec38604c6",
-            "triplelift.com, 13482, RESELLER, 6c33edb13117fd86",
-            "adagio.io, 1529, RESELLER",
-            "rubiconproject.com, 19116, RESELLER, 0bfd66d529a55807",
-            "adelement.com, 48362, RESELLER",
-            "smaato.com, 1100059282, RESELLER, 07bcf65f187117b4",
-            "rubiconproject.com, 20744, RESELLER, 0bfd66d529a55807",
-            "triplelift.com, 12158, RESELLER, 6c33edb13117fd86",
-            "xandr.com, 13799, RESELLER",
-            "indexexchange.com, 211613, RESELLER, 50b1c356f2c5c8fc",
-            "taboola.com, 1618213, DIRECT, c228e6794e811952",
-            "pubnative.net, 1008770, RESELLER, d641df8625486a7b",
-            "rubiconproject.com, 17328, RESELLER, 0bfd66d529a55807",
-            "apester.com, 91071, DIRECT",
-            "triplelift.com, 11457, RESELLER, 6c33edb13117fd86",
-            "rubiconproject.com, 27784, RESELLER, 0bfd66d529a55807",
-            "33across.com, 001Pg00001CgsiwIAB, RESELLER, bbea06d9c4d2853c",
-            "appnexus.com, 10239, RESELLER, f5ab79cb980f11d1",
-            "rubiconproject.com, 21642, RESELLER, 0bfd66d529a55807",
-            "rubiconproject.com, 16414, RESELLER, 0bfd66d529a55807",
-            "sharethrough.com, 4343, RESELLER, d53b998a7bd4ecd2",
-            "video.unrulymedia.com, 5921144960123684292, RESELLER",
-            "inmobi.com, 12a9a79d60214a40a444a6103b81747c, RESELLER, 83e75a7ae333ca9d",
-            "video.unrulymedia.com, 188404962, RESELLER",
-            "voisetech.com, 1023, RESELLER",
-            "lijit.com, 502742, RESELLER, fafdf38b16bf6b2b",
-            "axis-marketplace.com, 246, RESELLER",
-            "sonobi.com, 4d1a8bf76a, RESELLER, d1a215d9eb5aee9e",
-            "axonix.com, 59204, RESELLER",
-            "bidmachine.io, 1201, RESELLER",
-            "improvedigital.com, 1532, RESELLER",
-            "admatic.de, ade-pub-1044423220, RESELLER",
-            "rubiconproject.com, 27026, RESELLER, 0bfd66d529a55807",
-            "sharethrough.com, inExmllk, RESELLER, d53b998a7bd4ecd2",
-            "sonobi.com, 18a95783cc, RESELLER, d1a215d9eb5aee9e",
-            "152media.info, 152M1134, RESELLER",
-            "app-stock.com, 509221, RESELLER, ed8c126ea5971415",
-            "pubmatic.com, 158154, RESELLER, 5d62403b186f2ace",
-            "bold-win.com, 165, RESELLER, 71746737d0bab951",
-            "smaato.com, 1100059563, RESELLER, 07bcf65f187117b4",
-            "video.unrulymedia.com, 390532592, RESELLER",
-            "video.unrulymedia.com, 579227028, RESELLER",
-            "lijit.com, 402418, RESELLER, fafdf38b16bf6b2b",
-            "videoheroes.tv, 212747, RESELLER, 064bc410192443d8",
-            "opera.com, pub7275292332480, RESELLER, 55a0c5fd61378de3",
-            "sharethrough.com, 6qlnf8SY, RESELLER, d53b998a7bd4ecd2",
-            "pubmatic.com, 165708, RESELLER, 5d62403b186f2ace",
-            "blueseasx.com, 7138118, RESELLER, 7998eac5087f6110",
-            "rubiconproject.com, 26132, RESELLER, 0bfd66d529a55807",
-            "video.unrulymedia.com, 389957698, RESELLER",
-            "triplelift.com, 14594, RESELLER, 6c33edb13117fd86",
-            "pubnative.net, 1009966, RESELLER, d641df8625486a7b",
-            "appnexus.com, 11673, RESELLER, f5ab79cb980f11d1",
-            "adgrid.io, 30264, RESELLER",
-            "pubmatic.com, 165750, RESELLER, 5d62403b186f2ace",
-            "rubiconproject.com, 22544, RESELLER, 0bfd66d529a55807",
-            "vidazoo.com, 67aa86ac8effa21af881368d, RESELLER, b6ada874b4d7d0b2",
-            "undertone.com, 4261, RESELLER",
-            "adyoulike.com, 721f20f70910d379981dc19ec5da709f, RESELLER",
-            "video.unrulymedia.com, 2464975885, RESELLER",
-            "bidmachine.io, 1447, RESELLER",
-            "smilewanted.com, 5959, RESELLER",
-            "pubmatic.com, 165611, RESELLER, 5d62403b186f2ace",
-            "smartadserver.com, 5044, RESELLER, 060d053dcf45cbf3",
-            "appnexus.com, 7664, RESELLER",
-            "pubmatic.com, 160925, RESELLER, 5d62403b186f2ace",
-            "rubiconproject.com, 20736, RESELLER, 0bfd66d529a55807",
-            "toponad.com, 168240066616ab, RESELLER, 1d49fe424a1a456d",
-            "rubiconproject.com, 28169, RESELLER, 0bfd66d529a55807",
-            "twist.win, TW2400538, RESELLER",
-            "Media.net, 8CU65V935, RESELLER",
-            "xandr.com, 11316, RESELLER",
-            "themediagrid.com, SJYVMZ, RESELLER, 35d5010d7789b49d",
-            "triplelift.com, 9342, RESELLER, 6c33edb13117fd86",
-            "netaddiction.it, 2037, RESELLER",
-            "pubmatic.com, 156423, RESELLER, 5d62403b186f2ace",
-            "pinklion.io, 190976892, DIRECT",
-            "display.io, 224613, RESELLER",
-            "bidease.com, bidease_seller_49, RESELLER",
-            "sovrn.com, 400766, RESELLER, fafdf38b16bf6b2b",
-            "peak226.com, 12900, RESELLER",
-            "bigo.sg, 887, RESELLER",
-            "rubiconproject.com, 22134, RESELLER, 0bfd66d529a55807",
-            "loopme.com, 11463, RESELLER, 6c8d5f95897a5a3b",
-            "smartadserver.com, 4568, RESELLER, 060d053dcf45cbf3",
-            "showheroes.com, 6833, RESELLER",
-            "rubiconproject.com, 26000, RESELLER, 0bfd66d529a55807",
-            "pubmatic.com, 167176, RESELLER, 5d62403b186f2ace",
-            "appnexus.com, 13774, RESELLER, f5ab79cb980f11d1",
-            "pubmatic.com, 165874, RESELLER, 5d62403b186f2ace",
-            "sharethrough.com, 2f18331a, RESELLER, d53b998a7bd4ecd2",
-            "adyoulike.com, 4d5014f8da11fc0a70ebbda5d4537935, RESELLER",
-            "mediayo.ai, 2255103, RESELLER",
-            "fourthdimentionconsulting.com, 19118819, RESELLER",
-            "audioboost.com, ADsBSrsbPdWXF20UZWhN, RESELLER",
-            "zetaglobal.net, 808, RESELLER",
-            "rubiconproject.com, 25872, RESELLER, 0bfd66d529a55807",
-            "screenil.com, 665898, RESELLER",
-            "appnexus.com, 16227, RESELLER, f5ab79cb980f11d1",
-            "triplelift.com, 8784, RESELLER, 6c33edb13117fd86",
-            "triplelift.com, 14697, RESELLER, 6c33edb13117fd86",
-            "indexexchange.com, 215209, RESELLER, 50b1c356f2c5c8fc"
-        ];
-        
-        // Initialize everything when page loads
-        window.onload = function() {
-            // Display ad networks
-            displayAdNetworks();
-            
-            // Load banner ad
-            loadBannerAd();
-            
-            // Load native ad
-            loadNativeAd();
-            
-            // Initialize Start.io
-            initStartIO();
-            
-            // Show welcome message
-            showToast('🚀 Real Ads Loaded Successfully!');
-        };
-        
-        function displayAdNetworks() {
-            const listDiv = document.getElementById('adNetworkList');
-            let html = '';
-            
-            // Show first 20 networks
-            for(let i = 0; i < 20; i++) {
-                html += `<div>✅ ${adNetworks[i]}</div>`;
-            }
-            html += `<div style="color: blue;">... and ${adNetworks.length - 20} more networks</div>`;
-            
-            listDiv.innerHTML = html;
-        }
-        
-        function loadBannerAd() {
-            const bannerDiv = document.getElementById('banner-ad');
-            
-            setTimeout(() => {
-                bannerDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 10px; background: white; padding: 8px; border-radius: 5px; width: 100%;">
-                        <img src="https://via.placeholder.com/40x40/1a73e8/ffffff?text=Ad" style="border-radius: 5px;">
-                        <div style="flex: 1; text-align: left; color: #333;">
-                            <div style="font-weight: bold;">Start.io App</div>
-                            <div style="font-size: 11px;">4.5 ★ | 1M+ downloads</div>
-                        </div>
-                        <button style="background: #1a73e8; color: white; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer;" onclick="handleAdClick('banner')">Install</button>
-                    </div>
-                `;
-            }, 2000);
-        }
-        
-        function loadNativeAd() {
-            setTimeout(() => {
-                const nativeDiv = document.getElementById('native-ad');
-                nativeDiv.innerHTML = `
-                    <div class="native-icon">🎮</div>
-                    <div class="native-text">
-                        <div class="native-title">Game Zone</div>
-                        <div class="native-desc">Play now and win prizes!</div>
-                    </div>
-                    <button class="native-button" onclick="handleAdClick('native')">Play</button>
-                `;
-            }, 1500);
-        }
-        
-        function initStartIO() {
-            console.log('🚀 Initializing Start.io...');
-            console.log(`📱 App ID: ${APP_ID}`);
-            console.log(`📢 Publisher: ${PUBLISHER_ID}`);
-            console.log('✅ Start.io Ready');
-        }
-        
-        function handleAdClick(type) {
-            showToast(`🔍 ${type} ad clicked - Opening store...`);
-            
-            // Track impression
-            console.log(`📊 Ad Clicked: ${type}`);
-            console.log(`   Publisher: 112468453`);
-            console.log(`   Time: ${new Date().toLocaleTimeString()}`);
-        }
-        
-        function showRewardedVideo() {
-            showToast('🔄 Loading Rewarded Video...');
-            
-            setTimeout(() => {
-                const confirmed = confirm('🎬 Video Completed!\n\nAapko 50 coins milenge!\n\nClaim karein?');
-                if(confirmed) {
-                    showToast('💰 50 Coins Added!');
-                    
-                    // Show multiple toasts for effect
-                    setTimeout(() => showToast('✨ Reward Claimed!'), 1000);
-                }
-            }, 3000);
-        }
-        
-        function showInterstitial() {
-            showToast('🔄 Loading Full Screen Ad...');
-            
-            setTimeout(() => {
-                document.getElementById('interstitialAd').style.display = 'flex';
-                
-                // Track impression
-                console.log('📊 Interstitial Ad Displayed');
-                console.log('   Network: pubmatic.com, 161162');
-            }, 1500);
-        }
-        
-        function closeInterstitial() {
-            document.getElementById('interstitialAd').style.display = 'none';
-            showToast('Ad Closed');
-        }
-        
-        function claimOffer() {
-            showToast('🎉 Offer Claimed! Check your email');
-            closeInterstitial();
-        }
-        
-        function showToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => toast.remove(), 3000);
-        }
-        
-        // Create app-ads.txt content (for server)
-        function createAdsTxt() {
-            return adNetworks.join('\n');
-        }
-        
-        console.log('✅ Total Ad Networks:', adNetworks.length);
-        console.log('📋 First entry:', adNetworks[0]);
-        console.log('🔧 App-ads.txt ready with', adNetworks.length, 'entries');
-    </script>
-    
-    <!-- IMPORTANT SETUP INSTRUCTIONS -->
-    <!--
-    ⚡ REAL ADS KE LIYE YEH STEPS FOLLOW KAREIN:
-    
-    1. SERVER PAR app-ads.txt FILE BANAYEIN:
-       - Filename: app-ads.txt
-       - Content: Uppar di gayi saari 100+ entries copy karein
-       - Location: Website ki root directory (jaise public_html/)
-       
-    2. START.IO SETUP:
-       - https://start.io par account banayein
-       - Apna App ID 202711281 register karein
-       - Unse milne wala SDK code lagayein
-       
-    3. GOOGLE ADSENSE/ADMOB:
-       - https://adsense.google.com par account banayein
-       - Publisher ID 112468453 verify karein
-       
-    4. TEST KAREIN:
-       - Website kholte hi ads load honge
-       - Banner ad 2 sec mein show hoga
-       - Native ad 1.5 sec mein show hoga
-       - Buttons click kar ke dekh sakte hain
-    
-    ✅ AB ADS DIKHENGE:
-    - Banner ad (top par) - REAL AD
-    - Native ad (beech mein) - SPONSORED
-    - Rewarded video - Coins ke liye
-    - Interstitial - Full screen popup
-    - Saari 100+ ad networks configured
-    - Start.io ki entry sabse upar
-    -->
+
+    <!-- main apps grid (सभी एप्लिकेशन) -->
+    <div class="apps-grid">
+      <!-- 1. Phone -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-phone-alt"></i></div>
+        <span class="app-name">फ़ोन</span>
+      </a>
+      <!-- 2. Messages -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-comment-dots"></i></div>
+        <span class="app-name">संदेश</span>
+      </a>
+      <!-- 3. Safari -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-compass"></i></div>
+        <span class="app-name">सफारी</span>
+      </a>
+      <!-- 4. Mail -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-envelope"></i></div>
+        <span class="app-name">मेल</span>
+      </a>
+      <!-- 5. Music -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-music"></i></div>
+        <span class="app-name">संगीत</span>
+      </a>
+      <!-- 6. Photos -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-images"></i></div>
+        <span class="app-name">फ़ोटो</span>
+      </a>
+      <!-- 7. Calculator -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-calculator"></i></div>
+        <span class="app-name">कैलकुलेटर</span>
+      </a>
+      <!-- 8. Calendar -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-calendar-alt"></i></div>
+        <span class="app-name">कैलेंडर</span>
+      </a>
+      <!-- 9. Maps -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-map-marked-alt"></i></div>
+        <span class="app-name">मैप्स</span>
+      </a>
+      <!-- 10. Weather -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-cloud-sun"></i></div>
+        <span class="app-name">मौसम</span>
+      </a>
+      <!-- 11. Clock -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-clock"></i></div>
+        <span class="app-name">घड़ी</span>
+      </a>
+      <!-- 12. Camera -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-camera"></i></div>
+        <span class="app-name">कैमरा</span>
+      </a>
+      <!-- 13. Wallet -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-wallet"></i></div>
+        <span class="app-name">वॉलेट</span>
+      </a>
+      <!-- 14. Settings -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-cog"></i></div>
+        <span class="app-name">सेटिंग</span>
+      </a>
+      <!-- 15. FaceTime -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-video"></i></div>
+        <span class="app-name">फेसटाइम</span>
+      </a>
+      <!-- 16. Health -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-heartbeat"></i></div>
+        <span class="app-name">स्वास्थ्य</span>
+      </a>
+      <!-- 17. Books -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-book"></i></div>
+        <span class="app-name">किताबें</span>
+      </a>
+      <!-- 18. Podcasts -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-podcast"></i></div>
+        <span class="app-name">पॉडकास्ट</span>
+      </a>
+      <!-- 19. Files -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-folder-open"></i></div>
+        <span class="app-name">फ़ाइलें</span>
+      </a>
+      <!-- 20. Fitness -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-dumbbell"></i></div>
+        <span class="app-name">फ़िटनेस</span>
+      </a>
+      <!-- 21. Reminders -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-check-circle"></i></div>
+        <span class="app-name">रिमाइंडर</span>
+      </a>
+      <!-- 22. Notes -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-pen"></i></div>
+        <span class="app-name">नोट्स</span>
+      </a>
+      <!-- 23. Voice Memos -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-microphone-alt"></i></div>
+        <span class="app-name">वॉइस मेमो</span>
+      </a>
+      <!-- 24. Contacts -->
+      <a href="#" class="app-tile" onclick="return false;">
+        <div class="app-icon"><i class="fas fa-address-book"></i></div>
+        <span class="app-name">संपर्क</span>
+      </a>
+    </div>
+
+    <!-- Dock (frequently used 4 apps) -->
+    <div class="dock">
+      <div class="dock-app">
+        <div class="dock-icon" style="background: linear-gradient(145deg, #34c759, #248a3d);"><i class="fas fa-comment"></i></div>
+        <span class="app-name">संदेश</span>
+      </div>
+      <div class="dock-app">
+        <div class="dock-icon" style="background: linear-gradient(145deg, #ff6b4a, #f53838);"><i class="fas fa-phone"></i></div>
+        <span class="app-name">फ़ोन</span>
+      </div>
+      <div class="dock-app">
+        <div class="dock-icon" style="background: linear-gradient(145deg, #5ac8fa, #1e93d3);"><i class="fas fa-globe"></i></div>
+        <span class="app-name">सफारी</span>
+      </div>
+      <div class="dock-app">
+        <div class="dock-icon" style="background: linear-gradient(145deg, #9475ff, #6a4be0);"><i class="fas fa-music"></i></div>
+        <span class="app-name">संगीत</span>
+      </div>
+    </div>
+  </div> <!-- end iphone-mock -->
+
+  <!-- नीचे हिंदी में डिस्क्रिप्शन -->
+  <p class="page-tagline">
+    <i class="fas fa-apple"></i> एक ही जगह पर <strong>मोबाइल के सारे ऐप्लिकेशन</strong> – फ़ोन, मैसेज, कैमरा, म्यूज़िक, मैप्स और बहुत कुछ।
+  </p>
+
+  <!-- attribution (बस कॉपीराइट जैसा) -->
+  <div class="attribution">
+    iPhone वाला वेबसाइट • सभी 24+ एप्लिकेशन असली जैसे • होम स्क्रीन अनुभव
+  </div>
 </body>
 </html>
