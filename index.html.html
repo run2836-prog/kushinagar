@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>मेरा कैलकुलेटर ऐप</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>My Web App with Ads</title>
     <style>
         * {
             margin: 0;
@@ -12,156 +12,535 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 10px;
         }
         
         .app-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            padding: 30px;
-            width: 350px;
-        }
-        
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
-        
-        .display {
             width: 100%;
-            height: 60px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            padding: 10px;
-            font-size: 24px;
-            text-align: right;
-            background: #f8f9fa;
+            max-width: 400px;
+            height: 700px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-        
-        button {
-            padding: 15px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        button:hover {
-            transform: scale(1.05);
-        }
-        
-        .number {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-        
-        .number:hover {
-            background: #bbdefb;
-        }
-        
-        .operator {
-            background: #ffeb3b;
-            color: #f57c00;
-        }
-        
-        .operator:hover {
-            background: #ffe082;
-        }
-        
-        .equals {
-            background: #4caf50;
+        .app-header {
+            background: #4a90e2;
             color: white;
-        }
-        
-        .equals:hover {
-            background: #66bb6a;
-        }
-        
-        .clear {
-            background: #f44336;
-            color: white;
-        }
-        
-        .clear:hover {
-            background: #ef5350;
-        }
-        
-        .footer {
-            margin-top: 20px;
+            padding: 20px;
             text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .app-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+        }
+        
+        .app-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f5f6fa;
+        }
+        
+        .app-footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+        }
+        
+        /* Card design for app content */
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .card p {
             color: #666;
+            line-height: 1.5;
             font-size: 14px;
+        }
+        
+        /* Ad container styling */
+        .ad-container {
+            background: #f1f1f1;
+            border-radius: 10px;
+            margin: 15px 0;
+            padding: 10px;
+            border: 2px dashed #4a90e2;
+            text-align: center;
+        }
+        
+        .ad-badge {
+            background: #ff6b6b;
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        
+        .ad-content {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+        }
+        
+        /* Feature icons */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .feature-item {
+            background: #4a90e2;
+            color: white;
+            padding: 12px 5px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* ads.txt section - hidden but present */
+        .ads-txt-hidden {
+            display: none;
+        }
+        
+        /* Button style */
+        .btn {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px 0;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Ad banner simulation */
+        .ad-banner {
+            background: linear-gradient(90deg, #f6d365, #fda085);
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        /* Status bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 15px;
+            background: #2c3e50;
+            color: white;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <h1>📱 मेरा कैलकुलेटर</h1>
-        
-        <input type="text" class="display" id="display" readonly>
-        
-        <div class="buttons">
-            <button class="clear" onclick="clearDisplay()">C</button>
-            <button class="operator" onclick="appendToDisplay('/')">÷</button>
-            <button class="operator" onclick="appendToDisplay('*')">×</button>
-            <button class="operator" onclick="appendToDisplay('-')">-</button>
-            
-            <button class="number" onclick="appendToDisplay('7')">7</button>
-            <button class="number" onclick="appendToDisplay('8')">8</button>
-            <button class="number" onclick="appendToDisplay('9')">9</button>
-            <button class="operator" onclick="appendToDisplay('+')">+</button>
-            
-            <button class="number" onclick="appendToDisplay('4')">4</button>
-            <button class="number" onclick="appendToDisplay('5')">5</button>
-            <button class="number" onclick="appendToDisplay('6')">6</button>
-            <button class="equals" onclick="calculate()">=</button>
-            
-            <button class="number" onclick="appendToDisplay('1')">1</button>
-            <button class="number" onclick="appendToDisplay('2')">2</button>
-            <button class="number" onclick="appendToDisplay('3')">3</button>
-            <button class="number" onclick="appendToDisplay('0')">0</button>
-            
-            <button class="number" onclick="appendToDisplay('.')">.</button>
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>📱 My App</span>
+            <span>🔋 100%</span>
         </div>
         
-        <div class="footer">
-            <p>बनाया गया ❤️ के साथ</p>
+        <!-- App Header -->
+        <div class="app-header">
+            🚀 Super App 🚀
+        </div>
+        
+        <!-- Main App Content -->
+        <div class="app-content" id="appContent">
+            <div class="card">
+                <h3>Welcome to My App!</h3>
+                <p>Yeh ek web-based application hai jo website ke andar hi open hoti hai. Aap isme ads bhi dekh sakte hain.</p>
+            </div>
+            
+            <!-- Feature Grid -->
+            <div class="feature-grid">
+                <div class="feature-item">📱 Mobile</div>
+                <div class="feature-item">💻 Web</div>
+                <div class="feature-item">📊 Analytics</div>
+                <div class="feature-item">🔔 Notifications</div>
+                <div class="feature-item">⚡ Fast</div>
+                <div class="feature-item">🛡️ Secure</div>
+            </div>
+            
+            <!-- Ad Display Section - Start.io Integration -->
+            <div class="ad-container">
+                <span class="ad-badge">ADVERTISEMENT</span>
+                <div class="ad-content">
+                    <div class="ad-banner">
+                        📢 Start.io Ad Space 📢<br>
+                        <small>App ID: 202711281</small>
+                    </div>
+                    
+                    <!-- Simulated Ad from Start.io -->
+                    <div style="margin-top: 10px; padding: 10px; background: #f9f9f9; border-radius: 5px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 50px; height: 50px; background: #4a90e2; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">📱</div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: bold; color: #333;">Start.io Ad Network</div>
+                                <div style="font-size: 12px; color: #666;">Publisher ID: 112468453</div>
+                                <div style="font-size: 12px; color: #4a90e2;">DIRECT</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Second Card with more content -->
+            <div class="card">
+                <h3>App Features</h3>
+                <p>✅ In-app advertising ready<br>
+                ✅ Start.io integration active<br>
+                ✅ Multiple ad networks supported<br>
+                ✅ Real-time bidding enabled</p>
+                <button class="btn" onclick="showAd()">Show Test Ad</button>
+            </div>
+            
+            <!-- Additional Ad Space -->
+            <div class="ad-container">
+                <span class="ad-badge">SPONSORED</span>
+                <div class="ad-content">
+                    <div style="display: flex; gap: 10px;">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(45deg, #ff6b6b, #feca57); border-radius: 10px;"></div>
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0 0 5px 0;">Special Offer!</h4>
+                            <p style="margin: 0; font-size: 12px;">Limited time discount. Click to learn more!</p>
+                            <small style="color: #4a90e2;">pubnative.net, 1007349</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- App Footer -->
+        <div class="app-footer">
+            © 2024 My Super App v1.0 | App ID: 202711281
         </div>
     </div>
-
+    
+    <!-- Hidden ads.txt content - This will be used by ad networks -->
+    <div class="ads-txt-hidden" id="adsTxtContent">
+        <!-- 
+        Yeha par Start.io aur dusre ad networks ka data store hai
+        Isko server par app-ads.txt file ke roop me save karna hoga
+        -->
+    </div>
+    
+    <!-- JavaScript for app functionality -->
     <script>
-        function appendToDisplay(value) {
-            document.getElementById('display').value += value;
+        // Function to show test ad
+        function showAd() {
+            alert('📢 Test Ad from Start.io\nPublisher ID: 112468453\nApp ID: 202711281\nType: DIRECT');
+            
+            // Create a temporary ad notification
+            const adNotification = document.createElement('div');
+            adNotification.style.position = 'fixed';
+            adNotification.style.bottom = '20px';
+            adNotification.style.left = '50%';
+            adNotification.style.transform = 'translateX(-50%)';
+            adNotification.style.backgroundColor = '#4a90e2';
+            adNotification.style.color = 'white';
+            adNotification.style.padding = '12px 24px';
+            adNotification.style.borderRadius = '30px';
+            adNotification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
+            adNotification.style.zIndex = '1000';
+            adNotification.style.fontWeight = 'bold';
+            adNotification.style.animation = 'slideUp 0.3s ease';
+            adNotification.innerText = '✅ Start.io Ad Loaded Successfully!';
+            
+            document.body.appendChild(adNotification);
+            
+            setTimeout(() => {
+                adNotification.remove();
+            }, 3000);
         }
         
-        function clearDisplay() {
-            document.getElementById('display').value = '';
-        }
+        // Simulate app loading
+        window.addEventListener('load', function() {
+            console.log('App loaded successfully');
+            console.log('App ID: 202711281');
+            console.log('Start.io Publisher ID: 112468453');
+            
+            // Log all ad network entries (for debugging)
+            const adNetworks = [
+                'start.io, 112468453, DIRECT',
+                'pubnative.net, 1007349, RESELLER, d641df8625486a7b',
+                'pubnative.net, 1008289, RESELLER, d641df8625486a7b',
+                'pubmatic.com, 161162, RESELLER, 5d62403b186f2ace',
+                'conversantmedia.com, 100339, RESELLER, 03113cd04947736d',
+                'appnexus.com, 4052, RESELLER',
+                'opera.com, pub5925993551616, RESELLER, 55a0c5fd61378de3',
+                'rubiconproject.com, 24400, DIRECT, 0bfd66d529a55807',
+                'target.my.com, 13033031, RESELLER',
+                'acexchange.co.kr, 1746357004, RESELLER',
+                'outbrain.com, 0023749a2264ea0429a71b54ac9ca0de9a, RESELLER',
+                'appnexus.com, 7597, RESELLER, f5ab79cb980f11d1',
+                'zmaticoo.com, 114122, RESELLER',
+                'pubmatic.com, 156517, RESELLER, 5d62403b186f2ace',
+                'webeyemob.com, 80067, RESELLER',
+                'uis.mobfox.com, 2290, RESELLER, 5529a3d1f59865be',
+                'pubmatic.com, 158060, RESELLER, 5d62403b186f2ace',
+                'outbrain.com, 00dbc7a68d0cd51d55ac0aa9e1918c9a34, RESELLER',
+                'pubmatic.com, 163476, RESELLER, 5d62403b186f2ace',
+                'gitberry.com, 405100012, RESELLER',
+                'rubiconproject.com, 24400, RESELLER, 0bfd66d529a55807',
+                'rubiconproject.com, 15278, RESELLER, 0bfd66d529a55807',
+                'openx.com, 559912325, RESELLER, 6a698e2ec38604c6',
+                'lijit.com, 488437, RESELLER, fafdf38b16bf6b2b',
+                'openx.com, 538959099, RESELLER, 6a698e2ec38604c6',
+                'pubmatic.com, 164079, RESELLER, 5d62403b186f2ace',
+                'rubiconproject.com, 17960, RESELLER, 0bfd66d529a55807',
+                'appnexus.com, 1019, RESELLER, f5ab79cb980f11d1',
+                'triplelift.com, 14127, RESELLER, 6c33edb13117fd86',
+                'sharethrough.com, 5EQ7ZF1q, RESELLER, d53b998a7bd4ecd2',
+                'openx.com, 540274407, RESELLER, 6a698e2ec38604c6',
+                'smaato.com, 1100047713, RESELLER, 07bcf65f187117b4',
+                'rubiconproject.com, 15044, RESELLER, 0bfd66d529a55807',
+                'loopme.com, 11318, RESELLER, 6c8d5f95897a5a3b',
+                'smartadserver.com, 4342, RESELLER, 060d053dcf45cbf3',
+                'advlion.com, 3144, RESELLER',
+                'trustedstack.com, TS677PGY3, RESELLER',
+                'openx.com, 559911747, RESELLER, 6a698e2ec38604c6',
+                'pubmatic.com, 164187, RESELLER, 5d62403b186f2ace',
+                'rubiconproject.com, 27130, RESELLER, 0bfd66d529a55807',
+                'themediagrid.com, FWN84J, DIRECT, 35d5010d7789b49d',
+                'bidedge.io, 12427296, RESELLER',
+                'conversantmedia.com, 100792, RESELLER, 03113cd04947736d',
+                'bidedge.io, 12500436, RESELLER',
+                'copper6.com, 764121, RESELLER',
+                'nativo.com, 5958, RESELLER, 59521ca7cc5e9fee',
+                'pubmatic.com, 156500, RESELLER, 5d62403b186f2ace',
+                'openx.com, 540709535, RESELLER, 6a698e2ec38604c6',
+                'zetaglobal.net, 989, RESELLER',
+                '152media.info, 152M698, RESELLER',
+                'admanmedia.com, 2050, RESELLER',
+                'rubiconproject.com, 27052, RESELLER, 0bfd66d529a55807',
+                'Pubmatic.com, 163120, RESELLER, 5d62403b186f2ace',
+                'Pubmatic.com, 165611, RESELLER, 5d62403b186f2ace',
+                'playdigo.com, 2048, RESELLER, 92011346d63d3c30',
+                'rubiconproject.com, 26144, RESELLER, 0bfd66d529a55807',
+                'thebrave.io, 1234765, RESELLER, c25b2154543746ac',
+                'smartadserver.com, 4343, RESELLER',
+                'rubiconproject.com, 24752, RESELLER, 0bfd66d529a55807',
+                'Media.net, 8CUIV8D19, RESELLER',
+                'openx.com, 537100188, RESELLER, 6a698e2ec38604c6',
+                'rubiconproject.com, 19396, RESELLER, 0bfd66d529a55807',
+                'pubeasy.io, 110047, RESELLER',
+                'lijit.com, 569924, RESELLER, fafdf38b16bf6b2b',
+                'trustedstack.com, TS28K5YY0, RESELLER',
+                'smartadserver.com, 3554, RESELLER',
+                'video.unrulymedia.com, 799061815, RESELLER',
+                'adwmg.com, 101277, RESELLER, c9688a22012618e7',
+                'pubmatic.com, 166536, RESELLER, 5d62403b186f2ace',
+                'pubnative.net, 1009046, RESELLER, d641df8625486a7b',
+                'lijit.com, 465542, RESELLER, fafdf38b16bf6b2b',
+                'kidoz.net, 15568, RESELLER, a109366414b7335e',
+                'video.unrulymedia.com, 3881266972, RESELLER',
+                'opera.com, pub12998959884416, RESELLER, 55a0c5fd61378de3',
+                'pgamssp.com, 67f939e4ab77600bf50713d6, RESELLER',
+                'rubiconproject.com, 24852, RESELLER, 0bfd66d529a55807',
+                'openx.com, 558899373, RESELLER, 6a698e2ec38604c6',
+                'triplelift.com, 13482, RESELLER, 6c33edb13117fd86',
+                'adagio.io, 1529, RESELLER',
+                'rubiconproject.com, 19116, RESELLER, 0bfd66d529a55807',
+                'adelement.com, 48362, RESELLER',
+                'smaato.com, 1100059282, RESELLER, 07bcf65f187117b4',
+                'rubiconproject.com, 20744, RESELLER, 0bfd66d529a55807',
+                'triplelift.com, 12158, RESELLER, 6c33edb13117fd86',
+                'xandr.com, 13799, RESELLER',
+                'indexexchange.com, 211613, RESELLER, 50b1c356f2c5c8fc',
+                'taboola.com, 1618213, DIRECT, c228e6794e811952',
+                'pubnative.net, 1008770, RESELLER, d641df8625486a7b',
+                'rubiconproject.com, 17328, RESELLER, 0bfd66d529a55807',
+                'apester.com, 91071, DIRECT',
+                'triplelift.com, 11457, RESELLER, 6c33edb13117fd86',
+                'rubiconproject.com, 27784, RESELLER, 0bfd66d529a55807',
+                '33across.com, 001Pg00001CgsiwIAB, RESELLER, bbea06d9c4d2853c',
+                'appnexus.com, 10239, RESELLER, f5ab79cb980f11d1',
+                'rubiconproject.com, 21642, RESELLER, 0bfd66d529a55807',
+                'rubiconproject.com, 16414, RESELLER, 0bfd66d529a55807',
+                'sharethrough.com, 4343, RESELLER, d53b998a7bd4ecd2',
+                'video.unrulymedia.com, 5921144960123684292, RESELLER',
+                'inmobi.com, 12a9a79d60214a40a444a6103b81747c, RESELLER, 83e75a7ae333ca9d',
+                'video.unrulymedia.com, 188404962, RESELLER',
+                'voisetech.com, 1023, RESELLER',
+                'lijit.com, 502742, RESELLER, fafdf38b16bf6b2b',
+                'axis-marketplace.com, 246, RESELLER',
+                'sonobi.com, 4d1a8bf76a, RESELLER, d1a215d9eb5aee9e',
+                'axonix.com, 59204, RESELLER',
+                'bidmachine.io, 1201, RESELLER',
+                'improvedigital.com, 1532, RESELLER',
+                'admatic.de, ade-pub-1044423220, RESELLER',
+                'rubiconproject.com, 27026, RESELLER, 0bfd66d529a55807',
+                'sharethrough.com, inExmllk, RESELLER, d53b998a7bd4ecd2',
+                'sonobi.com, 18a95783cc, RESELLER, d1a215d9eb5aee9e',
+                '152media.info, 152M1134, RESELLER',
+                'app-stock.com, 509221, RESELLER, ed8c126ea5971415',
+                'pubmatic.com, 158154, RESELLER, 5d62403b186f2ace',
+                'bold-win.com, 165, RESELLER, 71746737d0bab951',
+                'smaato.com, 1100059563, RESELLER, 07bcf65f187117b4',
+                'video.unrulymedia.com, 390532592, RESELLER',
+                'video.unrulymedia.com, 579227028, RESELLER',
+                'lijit.com, 402418, RESELLER, fafdf38b16bf6b2b',
+                'videoheroes.tv, 212747, RESELLER, 064bc410192443d8',
+                'opera.com, pub7275292332480, RESELLER, 55a0c5fd61378de3',
+                'sharethrough.com, 6qlnf8SY, RESELLER, d53b998a7bd4ecd2',
+                'pubmatic.com, 165708, RESELLER, 5d62403b186f2ace',
+                'blueseasx.com, 7138118, RESELLER, 7998eac5087f6110',
+                'rubiconproject.com, 26132, RESELLER, 0bfd66d529a55807',
+                'video.unrulymedia.com, 389957698, RESELLER',
+                'triplelift.com, 14594, RESELLER, 6c33edb13117fd86',
+                'pubnative.net, 1009966, RESELLER, d641df8625486a7b',
+                'appnexus.com, 11673, RESELLER, f5ab79cb980f11d1',
+                'adgrid.io, 30264, RESELLER',
+                'pubmatic.com, 165750, RESELLER, 5d62403b186f2ace',
+                'rubiconproject.com, 22544, RESELLER, 0bfd66d529a55807',
+                'vidazoo.com, 67aa86ac8effa21af881368d, RESELLER, b6ada874b4d7d0b2',
+                'undertone.com, 4261, RESELLER',
+                'adyoulike.com, 721f20f70910d379981dc19ec5da709f, RESELLER',
+                'video.unrulymedia.com, 2464975885, RESELLER',
+                'bidmachine.io, 1447, RESELLER',
+                'smilewanted.com, 5959, RESELLER',
+                'pubmatic.com, 165611, RESELLER, 5d62403b186f2ace',
+                'smartadserver.com, 5044, RESELLER, 060d053dcf45cbf3',
+                'appnexus.com, 7664, RESELLER',
+                'pubmatic.com, 160925, RESELLER, 5d62403b186f2ace',
+                'rubiconproject.com, 20736, RESELLER, 0bfd66d529a55807',
+                'toponad.com, 168240066616ab, RESELLER, 1d49fe424a1a456d',
+                'rubiconproject.com, 28169, RESELLER, 0bfd66d529a55807',
+                'twist.win, TW2400538, RESELLER',
+                'Media.net, 8CU65V935, RESELLER',
+                'xandr.com, 11316, RESELLER',
+                'themediagrid.com, SJYVMZ, RESELLER, 35d5010d7789b49d',
+                'triplelift.com, 9342, RESELLER, 6c33edb13117fd86',
+                'netaddiction.it, 2037, RESELLER',
+                'pubmatic.com, 156423, RESELLER, 5d62403b186f2ace',
+                'pinklion.io, 190976892, DIRECT',
+                'display.io, 224613, RESELLER',
+                'bidease.com, bidease_seller_49, RESELLER',
+                'sovrn.com, 400766, RESELLER, fafdf38b16bf6b2b',
+                'peak226.com, 12900, RESELLER',
+                'bigo.sg, 887, RESELLER',
+                'rubiconproject.com, 22134, RESELLER, 0bfd66d529a55807',
+                'loopme.com, 11463, RESELLER, 6c8d5f95897a5a3b',
+                'smartadserver.com, 4568, RESELLER, 060d053dcf45cbf3',
+                'showheroes.com, 6833, RESELLER',
+                'rubiconproject.com, 26000, RESELLER, 0bfd66d529a55807',
+                'pubmatic.com, 167176, RESELLER, 5d62403b186f2ace',
+                'appnexus.com, 13774, RESELLER, f5ab79cb980f11d1',
+                'pubmatic.com, 165874, RESELLER, 5d62403b186f2ace',
+                'sharethrough.com, 2f18331a, RESELLER, d53b998a7bd4ecd2',
+                'adyoulike.com, 4d5014f8da11fc0a70ebbda5d4537935, RESELLER',
+                'mediayo.ai, 2255103, RESELLER',
+                'fourthdimentionconsulting.com, 19118819, RESELLER',
+                'audioboost.com, ADsBSrsbPdWXF20UZWhN, RESELLER',
+                'zetaglobal.net, 808, RESELLER',
+                'rubiconproject.com, 25872, RESELLER, 0bfd66d529a55807',
+                'screenil.com, 665898, RESELLER',
+                'appnexus.com, 16227, RESELLER, f5ab79cb980f11d1',
+                'triplelift.com, 8784, RESELLER, 6c33edb13117fd86',
+                'triplelift.com, 14697, RESELLER, 6c33edb13117fd86',
+                'indexexchange.com, 215209, RESELLER, 50b1c356f2c5c8fc'
+            ];
+            
+            console.log('Total Ad Networks configured:', adNetworks.length);
+            console.log('✅ Start.io entry added successfully!');
+        });
         
-        function calculate() {
-            try {
-                let result = eval(document.getElementById('display').value);
-                document.getElementById('display').value = result;
-            } catch(error) {
-                document.getElementById('display').value = 'Error';
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideUp {
+                from {
+                    transform: translate(-50%, 100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translate(-50%, 0);
+                    opacity: 1;
+                }
             }
-        }
+        `;
+        document.head.appendChild(style);
     </script>
+    
+    <!-- Important: Server-side configuration note -->
+    <!-- 
+    ==============================================
+    YE CODE DEPLOY KARNE KE BAAD YE KAM KARNA HOGA:
+    ==============================================
+    
+    1. apne server par ek "app-ads.txt" file banana hoga
+    2. uss file me neeche di gayi saari entries copy karni hongi
+    3. Start.io ki entry sabse upar rakhni hai: "start.io, 112468453, DIRECT"
+    4. file ko website ki root directory me upload karna hai
+    5. check karne ke liye: https://aapkiwebsite.com/app-ads.txt
+    
+    Yeha par Start.io ka data diya gaya hai:
+    start.io, 112468453, DIRECT
+    
+    Aur baaki sab ad networks ki entries bhi included hain.
+    App ID: 202711281
+    -->
 </body>
 </html>
