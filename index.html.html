@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S NEWS LUCKNOW 24 – Grid with YouTube</title>
-    <!-- Font Awesome for icons -->
+    <title>S NEWS LUCKNOW 24 · लाइव</title>
+    <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -15,33 +15,22 @@
         }
 
         body {
-            background: #e8ecf1;
-            display: flex;
-            justify-content: center;
-            padding: 20px 10px;
+            background: #f2f2f2;
         }
 
-        .site-container {
-            max-width: 1300px;
-            width: 100%;
-            background: white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            border-radius: 30px 30px 20px 20px;
-            overflow: hidden;
-        }
-
-        /* top bar */
-        .top-bar {
-            background: linear-gradient(145deg, #041e3a, #0b2b4b);
+        /* ---------- रेड हेडर (मांग 9) ---------- */
+        .red-header {
+            background: #c00000;  /* गहरा लाल */
             color: white;
-            padding: 15px 25px;
+            padding: 8px 20px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 4px solid #f5c542;
+            border-bottom: 3px solid #8b0000;
         }
 
+        /* लोगो + टाइटल (मांग 2) */
         .logo-area {
             display: flex;
             align-items: center;
@@ -50,672 +39,547 @@
         }
 
         .logo {
-            background: #f5c542;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #041e3a;
+            background: white;
+            color: #c00000;
             font-weight: 900;
             font-size: 28px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            padding: 5px 15px;
+            border-radius: 50px 10px 10px 50px;
+            box-shadow: 2px 2px 0 #630000;
+            letter-spacing: 1px;
+        }
+        .logo i {
+            color: #c00000;
+            font-size: 30px;
+            margin-right: 5px;
         }
 
-        .site-title h1 {
-            font-size: 2rem;
-            letter-spacing: 2px;
-            font-weight: 700;
-            text-shadow: 3px 3px 0 #00000055;
-        }
-
-        .site-title h1 small {
-            font-size: 0.8rem;
-            background: #f5c542;
-            color: #041e3a;
-            padding: 2px 8px;
-            border-radius: 50px;
-            margin-left: 8px;
-        }
-
-        .reporter-info {
-            font-size: 0.9rem;
-            background: #103a5e;
-            padding: 10px 15px;
-            border-radius: 50px;
-            border-left: 4px solid #f5c542;
+        .buro-details {
+            background: rgba(255,255,240,0.15);
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            border-left: 3px solid #ffd966;
             line-height: 1.5;
         }
-
-        .reporter-info i {
+        .buro-details i {
             margin-right: 6px;
-            color: #f5c542;
-        }
-
-        .live-clock {
-            background: #222;
-            padding: 10px 20px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border: 2px solid #f5c542;
-        }
-
-        .live-clock .date {
-            font-size: 0.9rem;
-            background: #f5c542;
-            color: #0b1e2f;
-            padding: 5px 12px;
-            border-radius: 40px;
-            margin-left: 5px;
-        }
-
-        /* ticker */
-        .ticker-wrap {
-            background: #0f2b40;
-            color: white;
-            padding: 12px 20px;
-            border-bottom: 2px solid #f5c542;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
-        }
-
-        .ticker-label {
-            background: #f5c542;
-            color: #041e3a;
-            font-weight: 800;
-            padding: 5px 18px;
-            border-radius: 40px;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .ticker-text {
-            overflow: hidden;
-            white-space: nowrap;
-            flex: 1;
-        }
-
-        .ticker-text marquee {
-            font-weight: 600;
             color: #ffd966;
-            font-size: 1.3rem;
+        }
+        .buro-details strong {
+            color: #fff5b0;
         }
 
-        /* admin zone */
-        .admin-zone {
+        /* ऊपर लाइव टाइम (मांग 4) और एडमिन बटन (मांग 7) */
+        .top-right-panel {
             display: flex;
-            justify-content: flex-end;
-            padding: 15px 25px 5px;
-            gap: 15px;
             align-items: center;
-            background: #f1f5f9;
-        }
-
-        .admin-btn {
-            background: #041e3a;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 40px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            border: 1px solid #f5c542;
-        }
-
-        .admin-btn:hover {
-            background: #f5c542;
-            color: #041e3a;
-        }
-
-        .admin-panel-link {
-            background: transparent;
-            color: #041e3a;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            text-decoration: underline dotted;
-        }
-
-        /* admin panel */
-        .admin-panel {
-            background: white;
-            margin: 15px 25px 25px;
-            padding: 25px;
-            border-radius: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            border: 2px solid #f5c542;
-            display: none;
-        }
-
-        .admin-panel.visible {
-            display: block;
-        }
-
-        .admin-panel h2 {
-            color: #041e3a;
-            border-left: 10px solid #f5c542;
-            padding-left: 15px;
-            margin-bottom: 25px;
-        }
-
-        .admin-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
-        .admin-form .full {
-            grid-column: span 2;
-        }
-
-        .admin-form label {
+        .live-time {
+            background: #1e1e1e;
+            padding: 8px 18px;
+            border-radius: 40px;
             font-weight: 600;
-            color: #1f3a57;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 0 2px #ffbf00;
         }
-
-        .admin-form input, .admin-form textarea, .admin-form select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #bdc9d5;
-            border-radius: 16px;
-            font-size: 1rem;
-            margin-top: 5px;
+        .live-time i {
+            color: #ff5e5e;
+            margin-right: 8px;
+            animation: blink 1.3s infinite;
         }
+        @keyframes blink { 0%{opacity:1;} 50%{opacity:0.3;} 100%{opacity:1;} }
 
-        .admin-form button {
-            background: #041e3a;
-            color: white;
+        .admin-btn {
+            background: white;
+            color: #c00000;
             border: none;
-            padding: 16px 25px;
+            padding: 10px 18px;
             border-radius: 40px;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1rem;
             cursor: pointer;
-            transition: 0.2s;
-            border: 1px solid #f5c542;
+            box-shadow: 0 3px 0 #990000;
+            transition: 0.1s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .admin-btn i {
+            color: #c00000;
+            font-size: 1.2rem;
+        }
+        .admin-btn:active {
+            transform: translateY(3px);
+            box-shadow: none;
         }
 
-        .admin-form button:hover {
-            background: #f5c542;
-            color: #041e3a;
+        /* रनिंग टिकर (मांग 3) */
+        .ticker-wrap {
+            background: #111;
+            color: #ffd966;
+            padding: 10px 0;
+            border-bottom: 2px solid #c00000;
+            overflow: hidden;
+        }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: moveTicker 30s linear infinite;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .ticker span {
+            margin-right: 50px;
+            background: #c00000;
+            padding: 4px 14px;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            margin-left: 15px;
+        }
+        @keyframes moveTicker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
-        /* GRID — perfect for videos & images */
+        /* मुख्य ग्रिड (मांग 1) */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
-            padding: 25px;
+            padding: 30px 20px;
+            max-width: 1400px;
+            margin: auto;
         }
 
-        .grid-item {
+        /* पोस्ट कार्ड */
+        .post-card {
             background: white;
-            border-radius: 30px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-radius: 20px;
             overflow: hidden;
-            transition: 0.15s ease;
-            border: 1px solid #cddae6;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.2s;
+            border-top: 5px solid #c00000;
             display: flex;
             flex-direction: column;
         }
-
-        .grid-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 35px -8px rgba(1, 39, 78, 0.3);
+        .post-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 10px 25px #c0000050;
         }
 
-        /* video container: makes iframe responsive */
-        .video-container {
-            position: relative;
+        .post-img {
             width: 100%;
-            background: black;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .item-image {
-            width: 100%;
-            aspect-ratio: 16 / 9;
+            height: 200px;
             object-fit: cover;
-            background: #d9e2ec;
+            background: #ddd;
             display: block;
         }
 
-        .item-content {
+        .post-content {
             padding: 18px 18px 12px;
         }
-
-        .item-content h1 {
+        .post-content h1 {
             font-size: 1.8rem;
-            margin-bottom: 6px;
-            color: #041e3a;
-            font-weight: 800;
+            color: #1e1e1e;
+            margin-bottom: 5px;
             line-height: 1.2;
         }
-
-        .item-content h2 {
+        .post-content h2 {
             font-size: 1.3rem;
-            margin: 8px 0;
-            color: #2b4b6f;
-            font-weight: 600;
-            border-left: 4px solid #f5c542;
-            padding-left: 12px;
+            color: #c00000;
+            font-weight: 500;
+            margin-bottom: 10px;
+            border-left: 4px solid #c00000;
+            padding-left: 10px;
         }
-
-        .item-content p {
-            color: #2d3f53;
-            margin: 12px 0;
-        }
-
-        .share-row {
-            padding: 10px 18px 18px;
+        .post-date {
+            color: #555;
+            font-size: 0.85rem;
+            margin: 8px 0 12px;
             display: flex;
-            gap: 15px;
-            border-top: 1px solid #e0e9f2;
-            margin-top: 8px;
+            align-items: center;
+            gap: 5px;
+        }
+        .post-date i {
+            color: #c00000;
         }
 
-        .share-row a {
-            text-decoration: none;
-            font-size: 1.2rem;
-            background: #eef3f8;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
+        /* शेयर बटन (मांग 6) */
+        .share-row {
+            display: flex;
+            gap: 12px;
+            padding: 0 18px 18px 18px;
+            margin-top: auto;
+        }
+        .whatsapp-btn, .facebook-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #1f3a57;
+            gap: 10px;
+            cursor: pointer;
+            color: white;
             transition: 0.2s;
+            font-size: 1rem;
+            text-decoration: none;
         }
+        .whatsapp-btn { background: #25D366; }
+        .facebook-btn { background: #1877F2; }
+        .whatsapp-btn:hover { background: #128C7E; }
+        .facebook-btn:hover { background: #145dbb; }
 
-        .share-row a.whatsapp:hover {
-            background: #25D366;
-            color: white;
-        }
-
-        .share-row a.facebook:hover {
-            background: #1877F2;
-            color: white;
-        }
-
-        .footer {
-            background: #041e3a;
-            color: white;
-            text-align: center;
-            padding: 22px;
-            font-size: 1.2rem;
-            border-top: 4px solid #f5c542;
-        }
-
-        .modal {
+        /* एडमिन पैनल (मांग 5) – छिपा हुआ डिफ़ॉल्ट */
+        .admin-panel-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
-            justify-content: center;
             align-items: center;
-            z-index: 999;
+            justify-content: center;
+            z-index: 9999;
         }
-
-        .modal-card {
+        .admin-panel {
             background: white;
-            padding: 35px;
-            border-radius: 40px;
-            width: 350px;
-            box-shadow: 0 30px 40px black;
-            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px black;
+            border: 3px solid #c00000;
         }
-
-        .modal-card input {
-            padding: 15px;
+        .admin-panel h2 {
+            color: #c00000;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .admin-panel input, .admin-panel textarea {
             width: 100%;
-            border: 2px solid #b0c4de;
-            border-radius: 60px;
-            font-size: 1.3rem;
-            margin: 20px 0;
-            text-align: center;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 40px;
+            font-size: 1rem;
         }
-
-        .modal-card button {
-            background: #041e3a;
+        .admin-panel textarea { border-radius: 20px; resize: vertical; }
+        .file-label {
+            background: #c00000;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .admin-panel button {
+            background: #c00000;
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 60px;
+            padding: 15px 25px;
+            border-radius: 40px;
+            font-size: 1.2rem;
             font-weight: bold;
+            width: 100%;
             cursor: pointer;
-            margin: 5px;
+        }
+        .close-admin {
+            float: right;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* फुटर (मांग 8 / 9) */
+        footer {
+            background: #1e1e1e;
+            color: #eee;
+            text-align: center;
+            padding: 25px;
+            font-size: 1.2rem;
+            border-top: 6px solid #c00000;
+        }
+        footer i {
+            color: #c00000;
         }
     </style>
 </head>
 <body>
-<div class="site-container">
-    <!-- top bar with logo & info -->
-    <div class="top-bar">
+
+    <!-- लाल हेडर (मांग 9) + सारी चीजें -->
+    <header class="red-header">
         <div class="logo-area">
-            <div class="logo">S24</div>
-            <div class="site-title">
-                <h1>S NEWS LUCKNOW 24 <small>हिंदी</small></h1>
+            <div class="logo">
+                <i class="fas fa-newspaper"></i> S NEWS
+            </div>
+            <div class="buro-details">
+                <i class="fas fa-map-marker-alt"></i> <strong>ब्यूरो चीफ रिपोर्टर:</strong> अशोक कुमार कनौजिया, चारबाग़ लखनऊ <br>
+                <i class="fas fa-phone-alt"></i> मो. 9984296868
             </div>
         </div>
-        <div class="reporter-info">
-            <i class="fas fa-user-tie"></i> ब्यूरो चीफ रिपोर्टर: अशोक कुमार कनौजिया<br>
-            <i class="fas fa-map-marker-alt"></i> चारबाग, लखनऊ  <i class="fas fa-phone-alt" style="margin-left: 15px;"></i> 9984296868
-        </div>
-        <div class="live-clock" id="liveClock">
-            <i class="fas fa-circle" style="color: #f5c542; font-size: 0.8rem;"></i> 
-            <span id="timeText">--:--:--</span>
-            <span class="date" id="dateText">---</span>
-        </div>
-    </div>
 
-    <!-- running ticker -->
-    <div class="ticker-wrap">
-        <span class="ticker-label"><i class="fas fa-bolt"></i> BREAKING</span>
-        <div class="ticker-text">
-            <marquee behavior="scroll" direction="left" id="runningMarquee">
-                समाचार अपडेट • सीएम का बड़ा एलान • लखनऊ में बारिश के आसार • ME NEWS • 
-            </marquee>
+        <div class="top-right-panel">
+            <div class="live-time" id="liveClock">
+                <i class="fas fa-circle"></i> 
+                <span id="timeDisplay"></span>
+            </div>
+            <!-- एडमिन बटन (मांग 7 / 5) -->
+            <button class="admin-btn" id="adminLoginBtn"><i class="fas fa-lock"></i> एडमिन</button>
+        </div>
+    </header>
+
+    <!-- रनिंग टेक्स्ट (मांग 3)  - डायनामिक रूप से निकलेगा नीचे से -->
+    <div class="ticker-wrap" id="tickerWrapper">
+        <div class="ticker" id="tickerText">
+            <!-- JS से भरेगा -->
         </div>
     </div>
 
-    <!-- admin button & link -->
-    <div class="admin-zone">
-        <span class="admin-panel-link" onclick="openPasswordModal()"><i class="fas fa-lock"></i> एडमिन पैनल</span>
-        <button class="admin-btn" onclick="openPasswordModal()"><i class="fas fa-user-shield"></i> ADMIN</button>
-    </div>
+    <!-- न्यूज़ ग्रिड (मांग 1) - पोस्ट यहाँ दिखेंगे -->
+    <main class="news-grid" id="newsGrid">
+        <!-- डमी पोस्ट दिखाने के लिए कुछ उदाहरण (हटाया जा सकता है) -->
+    </main>
 
-    <!-- admin panel (hidden) -->
-    <div id="adminPanel" class="admin-panel">
-        <h2><i class="fas fa-pen-alt"></i> एडमिन पैनल – नई पोस्ट / वीडियो</h2>
-        <div class="admin-form">
-            <div class="full">
-                <label>पोस्ट का H1 शीर्षक (बड़ा)</label>
-                <input type="text" id="postH1" placeholder="मुख्य शीर्षक...">
-            </div>
-            <div class="full">
-                <label>H2 उपशीर्षक</label>
-                <input type="text" id="postH2" placeholder="उपशीर्षक...">
-            </div>
-            <div class="full">
-                <label>विवरण / टेक्स्ट</label>
-                <textarea id="postDesc" rows="2">यहाँ खबर का विवरण लिखें...</textarea>
-            </div>
-            <div>
-                <label>छवि URL (image)</label>
-                <input type="url" id="postImage" placeholder="https://...jpg">
-            </div>
-            <div>
-                <label>YouTube वीडियो लिंक</label>
-                <input type="url" id="postVideo" placeholder="https://youtu.be/... या https://youtube.com/watch?v=...">
-            </div>
-            <div class="full" style="display: flex; gap: 20px; flex-wrap: wrap;">
-                <button onclick="addPost()"><i class="fas fa-plus-circle"></i> ग्रिड में जोड़ें</button>
-                <button onclick="updateTickerFromPosts()" style="background: #2e5f3e;">➕ टिकर अपडेट करें</button>
-            </div>
+    <!-- फुटर कॉपीराइट (मांग 9) -->
+    <footer>
+        <i class="far fa-copyright"></i> 2026 S NEWS LUCKNOW 24 | सर्वाधिकार सुरक्षित
+    </footer>
+
+    <!-- एडमिन पैनल (पासवर्ड 123 से खुलेगा) -->
+    <div class="admin-panel-overlay" id="adminOverlay">
+        <div class="admin-panel" id="adminPanel">
+            <button class="close-admin" id="closeAdminBtn"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-user-shield"></i> एडमिन – नई पोस्ट डालें</h2>
+            <input type="text" id="postH1" placeholder="H1 शीर्षक (बड़ा)">
+            <input type="text" id="postH2" placeholder="H2 उपशीर्षक (छोटा)">
+            <textarea id="postDesc" placeholder="विवरण / खबर (वैकल्पिक)" rows="2"></textarea>
+            
+            <label for="postImageInput" class="file-label"><i class="fas fa-image"></i> इमेज चुनें (H1 और H2 के बीच)</label>
+            <input type="file" id="postImageInput" accept="image/*" style="display: none;">
+            
+            <button id="publishPostBtn"><i class="fas fa-paper-plane"></i> पोस्ट प्रकाशित करें</button>
+            <p style="margin-top: 12px; color: gray; font-size:0.9rem;">पासवर्ड: 123 (एडमिन बटन पर क्लिक करें)</p>
         </div>
-        <p style="margin-top: 20px; color: gray;"><i class="fas fa-info-circle"></i> वीडियो लिंक डालें — ग्रिड में चलेगा और यूट्यूब चैनल पर क्लिक करने पर खुलेगा।</p>
     </div>
 
-    <!-- news grid (posts will appear here) -->
-    <div id="newsGridContainer" class="news-grid"></div>
+    <!-- पासवर्ड प्रॉम्प्ट के लिए छोटा डायलॉग (मांग 5) -->
+    <div style="display: none;" id="passwordPrompt"></div>
 
-    <!-- footer -->
-    <div class="footer">
-        © 2026 S NEWS LUCKNOW 24 | All rights reserved 
-    </div>
-</div>
+    <script>
+        (function() {
+            // ---------- स्टोरेज से पोस्ट लोड करना या डिफ़ॉल्ट पोस्ट ----------
+            let posts = JSON.parse(localStorage.getItem('snews_posts')) || [];
 
-<!-- password modal -->
-<div id="passwordModal" class="modal">
-    <div class="modal-card">
-        <i class="fas fa-key" style="font-size: 3rem; color: #f5c542;"></i>
-        <h3>एडमिन पासवर्ड</h3>
-        <input type="password" id="adminPass" placeholder="पासवर्ड डालें" value="">
-        <button onclick="checkPassword()">लॉगिन</button>
-        <button onclick="closeModal()" style="background: gray;">बंद करें</button>
-    </div>
-</div>
-
-<script>
-    // ================== GLOBALS ==================
-    let posts = [];
-
-    // ---------- LIVE CLOCK ----------
-    function updateClock() {
-        const now = new Date();
-        const timeStr = now.toLocaleTimeString('en-IN', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        const dateStr = now.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
-        document.getElementById('timeText').innerText = timeStr;
-        document.getElementById('dateText').innerText = dateStr;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // ---------- TICKER UPDATE (collect H1) + "ME NEWS" at end ----------
-    function updateTickerFromPosts() {
-        const marquee = document.getElementById('runningMarquee');
-        if (!marquee) return;
-        let h1Titles = posts.map(p => p.h1).filter(t => t && t.trim() !== '');
-        if (h1Titles.length === 0) {
-            marquee.innerText = 'कोई खबर नहीं • ME NEWS • ';
-            return;
-        }
-        let tickerString = h1Titles.join(' • ') + ' • ME NEWS • ';
-        marquee.innerText = tickerString;
-    }
-
-    // ---------- Convert YouTube links to embeddable (FIXED) ----------
-    function getYouTubeEmbedUrl(url) {
-        if (!url || url.trim() === '') return '';
-        
-        let videoId = '';
-        
-        // youtu.be/ID format
-        const youtuBeMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
-        if (youtuBeMatch && youtuBeMatch[1]) {
-            videoId = youtuBeMatch[1];
-        }
-        
-        // youtube.com/watch?v=ID format
-        const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
-        if (watchMatch && watchMatch[1]) {
-            videoId = watchMatch[1];
-        }
-        
-        // youtube.com/embed/ID format (already embed)
-        const embedMatch = url.match(/embed\/([a-zA-Z0-9_-]+)/);
-        if (embedMatch && embedMatch[1]) {
-            videoId = embedMatch[1];
-        }
-        
-        // youtube.com/shorts/ID format
-        const shortsMatch = url.match(/shorts\/([a-zA-Z0-9_-]+)/);
-        if (shortsMatch && shortsMatch[1]) {
-            videoId = shortsMatch[1];
-        }
-        
-        if (videoId) {
-            // Simple working embed URL without extra parameters that might cause errors
-            return `https://www.youtube.com/embed/${videoId}`;
-        }
-        
-        // If it's already an embed URL, return as is
-        if (url.includes('youtube.com/embed/')) {
-            return url;
-        }
-        
-        return ''; // not a valid youtube link
-    }
-
-    // ---------- RENDER GRID (video or image) ----------
-    function renderGrid() {
-        const container = document.getElementById('newsGridContainer');
-        if (!container) return;
-        
-        if (posts.length === 0) {
-            container.innerHTML = `
-            <div class="grid-item">
-                <img class="item-image" src="https://via.placeholder.com/400x200/1e3a5f/white?text=Lucknow+News" alt="news">
-                <div class="item-content">
-                    <h1>नमस्ते लखनऊ</h1>
-                    <h2>आज की बड़ी खबर</h2>
-                    <p>यह उदाहरण पोस्ट है। एडमिन पैनल से नई पोस्ट जोड़ें।</p>
-                </div>
-                <div class="share-row">
-                    <a href="#" class="whatsapp" onclick="shareWA('नमस्ते लखनऊ','लखनऊ खबर')"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="facebook" onclick="shareFB('नमस्ते लखनऊ')"><i class="fab fa-facebook-f"></i></a>
-                </div>
-            </div>`;
-            return;
-        }
-
-        let html = '';
-        for (let p of posts) {
-            let mediaHtml = '';
-
-            // PRIORITY: if video link exists and is convertible -> video embed
-            const videoEmbed = p.video ? getYouTubeEmbedUrl(p.video) : '';
-            if (videoEmbed) {
-                mediaHtml = `<div class="video-container"><iframe src="${videoEmbed}" allowfullscreen></iframe></div>`;
-            } 
-            else if (p.image && p.image.trim() !== '') {
-                mediaHtml = `<img class="item-image" src="${p.image}" alt="post image" onerror="this.src='https://via.placeholder.com/400x200/808080/white?text=Image+Error'">`;
-            } else {
-                // fallback default image
-                mediaHtml = `<img class="item-image" src="https://via.placeholder.com/400x200/2a4b6e/white?text=S+NEWS+24" alt="default">`;
+            // अगर कोई पोस्ट न हो तो दो डेमो पोस्ट दिखाओ (सिर्फ उदाहरण)
+            if (posts.length === 0) {
+                posts = [
+                    {
+                        h1: "लखनऊ में मेट्रो का विस्तार",
+                        h2: "चारबाग़ से सफेदाबाद तक 8 नए स्टेशन",
+                        image: "https://images.unsplash.com/photo-1625076312529-7b119f0a1b4c?w=400&auto=format",
+                        date: "11 मार्च 2026, 10:30 AM"
+                    },
+                    {
+                        h1: "कानपुर रोड पर भीषण सड़क हादसा",
+                        h2: "दो लोगों की मौत, तीन घायल",
+                        image: "https://images.unsplash.com/photo-1589225936253-9af0c7f02f2e?w=400&auto=format",
+                        date: "11 मार्च 2026, 8:15 AM"
+                    },
+                    {
+                        h1: "यूपी विधानसभा में हंगामा",
+                        h2: "सदन से निष्कासित किए गए 5 सदस्य",
+                        image: "https://images.unsplash.com/photo-1541578076726-e3a7e1d85d28?w=400&auto=format",
+                        date: "10 मार्च 2026, 6:40 PM"
+                    }
+                ];
+                localStorage.setItem('snews_posts', JSON.stringify(posts));
             }
 
-            // share texts (escape quotes)
-            const safeH1 = p.h1 ? p.h1.replace(/'/g, "\\'") : 'S NEWS';
-            const safeH2 = p.h2 ? p.h2.replace(/'/g, "\\'") : '';
+            // एलिमेंट्स
+            const newsGrid = document.getElementById('newsGrid');
+            const tickerTextDiv = document.getElementById('tickerText');
+            const adminLoginBtn = document.getElementById('adminLoginBtn');
+            const adminOverlay = document.getElementById('adminOverlay');
+            const closeAdminBtn = document.getElementById('closeAdminBtn');
+            const publishBtn = document.getElementById('publishPostBtn');
+            const postImageInput = document.getElementById('postImageInput');
+            const postH1 = document.getElementById('postH1');
+            const postH2 = document.getElementById('postH2');
+            const postDesc = document.getElementById('postDesc');  // extra, फिलहाल नहीं दिखा रहे लेकिन रख सकते हैं
+            const liveClockSpan = document.getElementById('timeDisplay');
 
-            html += `<div class="grid-item">
-                ${mediaHtml}
-                <div class="item-content">
-                    <h1>${p.h1 || 'बिना शीर्षक'}</h1>
-                    <h2>${p.h2 || 'उपशीर्षक'}</h2>
-                    <p>${p.desc || ' '}</p>
-                </div>
-                <div class="share-row">
-                    <a href="#" class="whatsapp" onclick="shareWA('${safeH1}','${safeH2}')"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="facebook" onclick="shareFB('${safeH1}')"><i class="fab fa-facebook-f"></i></a>
-                </div>
-            </div>`;
-        }
-        container.innerHTML = html;
-    }
+            // ---------- फंक्शन: सारी पोस्ट ग्रिड में रेंडर करो ----------
+            function renderPosts() {
+                if (!newsGrid) return;
+                // ग्रिड को खाली करो
+                newsGrid.innerHTML = '';
+                // हर पोस्ट के लिए कार्ड बनाओ (सबसे नई पोस्ट पहले)
+                const sortedPosts = [...posts].reverse();
+                sortedPosts.forEach(post => {
+                    const card = document.createElement('article');
+                    card.className = 'post-card';
 
-    // ---------- SHARE ----------
-    window.shareWA = function(title, subtitle) {
-        let text = `${title} - ${subtitle} | S NEWS LUCKNOW 24`;
-        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-    };
-    
-    window.shareFB = function(title) {
-        let url = window.location.href;
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(title)}`, '_blank');
-    };
+                    // इमेज (अगर मौजूद है)
+                    if (post.image) {
+                        const img = document.createElement('img');
+                        img.src = post.image;
+                        img.alt = post.h1;
+                        img.className = 'post-img';
+                        card.appendChild(img);
+                    } else {
+                        // नो इमेज प्लेसहोल्डर
+                        const placeholder = document.createElement('div');
+                        placeholder.style.background = '#ccc'; placeholder.style.height = '150px';
+                        placeholder.style.display = 'flex'; placeholder.style.alignItems = 'center'; 
+                        placeholder.style.justifyContent = 'center'; 
+                        placeholder.innerHTML = '<i class="fas fa-image" style="font-size:40px; color:gray;"></i>';
+                        card.appendChild(placeholder);
+                    }
 
-    // ---------- ADD POST (admin) ----------
-    window.addPost = function() {
-        const h1 = document.getElementById('postH1').value.trim() || 'ब्रेकिंग न्यूज';
-        const h2 = document.getElementById('postH2').value.trim() || 'लखनऊ अपडेट';
-        const desc = document.getElementById('postDesc').value.trim() || 'विस्तार से खबर...';
-        const image = document.getElementById('postImage').value.trim();
-        let video = document.getElementById('postVideo').value.trim();
+                    // कंटेंट डिव
+                    const contentDiv = document.createElement('div');
+                    contentDiv.className = 'post-content';
+                    contentDiv.innerHTML = `
+                        <h1>${escapeHtml(post.h1) || 'बिना शीर्षक'}</h1>
+                        <h2>${escapeHtml(post.h2) || ''}</h2>
+                        <div class="post-date"><i class="far fa-calendar-alt"></i> ${escapeHtml(post.date) || new Date().toLocaleString('hi-IN')}</div>
+                        ${post.desc ? `<p>${escapeHtml(post.desc)}</p>` : ''}
+                    `;
+                    card.appendChild(contentDiv);
 
-        const newPost = { h1, h2, desc, image, video };
-        posts.unshift(newPost);  // new on top
-        renderGrid();
-        updateTickerFromPosts();
+                    // शेयर रो (मांग 6)
+                    const shareDiv = document.createElement('div');
+                    shareDiv.className = 'share-row';
+                    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(post.h1 + ' - ' + post.h2 + ' S NEWS LUCKNOW 24')}`;
+                    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(post.h1)}`;
+                    
+                    shareDiv.innerHTML = `
+                        <a href="${whatsappUrl}" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> व्हाट्सएप</a>
+                        <a href="${facebookUrl}" target="_blank" class="facebook-btn"><i class="fab fa-facebook-f"></i> फेसबुक</a>
+                    `;
+                    card.appendChild(shareDiv);
+                    newsGrid.appendChild(card);
+                });
+            }
 
-        // clear form
-        document.getElementById('postH1').value = '';
-        document.getElementById('postH2').value = '';
-        document.getElementById('postDesc').value = '';
-        document.getElementById('postImage').value = '';
-        document.getElementById('postVideo').value = '';
+            // साधारण एस्केप (XSS से बचाव)
+            function escapeHtml(unsafe) {
+                if (!unsafe) return unsafe;
+                return unsafe.replace(/[&<>"]/g, function(m) {
+                    if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; if (m === '"') return '&quot;';
+                    return m;
+                });
+            }
 
-        alert('पोस्ट ग्रिड में जुड़ गई! वीडियो लिंक होगा तो एम्बेड होगा।');
-    };
+            // ---------- रनिंग टेक्स्ट (मांग 3) : हर पोस्ट के H1 से बनेगा ----------
+            function updateTicker() {
+                if (!tickerTextDiv) return;
+                // हर पोस्ट के h1 को लेकर ticker बनाओ
+                const h1List = posts.map(p => p.h1).filter(h => h);
+                if (h1List.length === 0) {
+                    tickerTextDiv.innerHTML = '<span>ताज़ा खबर</span> लखनऊ समाचार 🔥 <span>न्यूज़</span>';
+                    return;
+                }
+                // हर h1 के बाद "• NEWS" लगाओ
+                const tickerContent = h1List.map(title => `${title} <span>✹ NEWS</span>`).join('  🔴  ');
+                tickerTextDiv.innerHTML = tickerContent + '  🔴  ' + tickerContent;  // duplicate for smooth loop
+            }
 
-    // ---- password logic ----
-    const modal = document.getElementById('passwordModal');
-    window.openPasswordModal = function() {
-        modal.style.display = 'flex';
-        document.getElementById('adminPass').value = '';
-    };
-    
-    window.closeModal = function() {
-        modal.style.display = 'none';
-    };
-    
-    window.checkPassword = function() {
-        const pass = document.getElementById('adminPass').value;
-        if (pass === '123') {
-            modal.style.display = 'none';
-            document.getElementById('adminPanel').classList.add('visible');
-        } else {
-            alert('गलत पासवर्ड! 123 डालें');
-        }
-    };
-    
-    window.onclick = function(e) {
-        if (e.target === modal) closeModal();
-    };
+            // ---------- लाइव टाइम (मांग 4) ----------
+            function updateLiveTime() {
+                const now = new Date();
+                const options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second:'2-digit' };
+                const timeStr = now.toLocaleString('hi-IN', options);
+                if (liveClockSpan) liveClockSpan.innerText = timeStr;
+            }
+            setInterval(updateLiveTime, 1000);
+            updateLiveTime();
 
-    // ---------- INIT with working video example ----------
-    function initDefaultPosts() {
-        posts = [
-            { 
-                h1: 'लखनऊ में युवा महोत्सव', 
-                h2: 'सीएम करेंगे उद्घाटन', 
-                desc: 'सहारागंज में भव्य आयोजन, हजारों युवा शामिल', 
-                image: 'https://via.placeholder.com/500x250/1e4d7c/white?text=Lucknow+Fair', 
-                video: '' 
-            },
-            { 
-                h1: 'चारबाग रेलवे स्टेशन पर नई पार्किंग', 
-                h2: 'यात्रियों को राहत', 
-                desc: 'अब नहीं होगी जाम की समस्या', 
-                image: 'https://via.placeholder.com/500x250/2f6d41/white?text=Charbagh', 
-                video: '' 
-            },
-            { 
-                h1: 'सीएम का संबोधन (वीडियो)', 
-                h2: 'विकास योजनाओं की घोषणा', 
-                desc: 'लखनऊ में 500 करोड़ की परियोजनाएं — वीडियो देखें', 
-                image: '', 
-                video: 'https://www.youtube.com/watch?v=3JZ_D3ELwOQ'  // Working YouTube link
-            },
-        ];
-        renderGrid();
-        updateTickerFromPosts();
-    }
-    
-    initDefaultPosts();
+            // ---------- एडमिन पैनल पासवर्ड (मांग 5) ----------
+            adminLoginBtn.addEventListener('click', function() {
+                const pwd = prompt('एडमिन पासवर्ड डालें (123)');
+                if (pwd === '123') {
+                    adminOverlay.style.display = 'flex';
+                } else {
+                    alert('गलत पासवर्ड! केवल 123 स्वीकार्य है।');
+                }
+            });
 
-</script>
+            closeAdminBtn.addEventListener('click', function() {
+                adminOverlay.style.display = 'none';
+            });
+            // बैकग्राउंड क्लिक से बंद
+            adminOverlay.addEventListener('click', function(e) {
+                if (e.target === adminOverlay) adminOverlay.style.display = 'none';
+            });
+
+            // ---------- नई पोस्ट प्रकाशित करना (मांग 1, H1, H2 और इमेज) ----------
+            publishBtn.addEventListener('click', function() {
+                const h1 = postH1.value.trim();
+                const h2 = postH2.value.trim();
+                // इमेज फाइल
+                const file = postImageInput.files[0];
+                if (!h1) {
+                    alert('कृपया कम से कम H1 शीर्षक डालें');
+                    return;
+                }
+
+                // अगर इमेज है तो उसे base64 में बदलो (स्थानीय स्टोरेज के लिए)
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imageData = e.target.result;
+                        addNewPost(h1, h2, imageData);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    // बिना इमेज के पोस्ट
+                    addNewPost(h1, h2, null);
+                }
+            });
+
+            function addNewPost(h1, h2, imageData) {
+                const newPost = {
+                    h1: h1,
+                    h2: h2 || '',
+                    image: imageData || '',  // base64 या खाली
+                    date: new Date().toLocaleString('hi-IN', { year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' }),
+                    desc: postDesc.value.trim() || ''
+                };
+                posts.push(newPost);
+                localStorage.setItem('snews_posts', JSON.stringify(posts));
+                // फॉर्म साफ करो
+                postH1.value = ''; postH2.value = ''; postImageInput.value = ''; postDesc.value = '';
+                adminOverlay.style.display = 'none';
+                // री-रेंडर और टिकर अपडेट
+                renderPosts();
+                updateTicker();
+            }
+
+            // ---------- शुरू करो ----------
+            renderPosts();
+            updateTicker();
+
+            // टिकर को हर बार नए पोस्ट पर ताज़ा करने के लिए (पहले से ही updateTicker कॉल हो रहा)
+            // चूँकि posts बदल सकता है, हम render और ticker साथ में रखेंगे
+            // ऊपर addNewPost में renderPosts और updateTicker कॉल कर दिया।
+
+            // डेट के लिए मांग 8 (हर पोस्ट में दिख रहा है)
+        })();
+    </script>
+
+    <!-- नोट: व्हाट्सएप/फेसबुक शेयर के लिए यूआरएल डायनामिक है -->
 </body>
 </html>
