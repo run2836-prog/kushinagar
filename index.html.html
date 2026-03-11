@@ -1,451 +1,721 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>iPhone वाला App स्टोर – सभी मोबाइल एप्लिकेशन</title>
-  <!-- Font Awesome 6 (iPhone style icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* ===== GLOBAL RESET & APPLE-INSPIRED STYLES ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S NEWS LUCKNOW 24 – Grid with YouTube</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
 
-    body {
-      background: #f5f5f7;  /* light grey like Apple */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      padding: 0 0 30px 0;
-    }
+        body {
+            background: #e8ecf1;
+            display: flex;
+            justify-content: center;
+            padding: 20px 10px;
+        }
 
-    /* iPhone mock container — gives that rounded, glossy iPhone feel */
-    .iphone-mock {
-      max-width: 390px;        /* iPhone 13/14 width */
-      width: 100%;
-      background-color: #ffffff;
-      border-radius: 44px;      /* iPhone bezel curve */
-      box-shadow: 0 30px 50px -20px rgba(0,0,0,0.3), 0 0 0 8px #e3e3e8, 0 0 0 12px #f8f8fa;
-      overflow: hidden;
-      margin: 30px auto 15px auto;
-      transition: transform 0.2s ease;
-    }
+        .site-container {
+            max-width: 1300px;
+            width: 100%;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-radius: 30px 30px 20px 20px;
+            overflow: hidden;
+        }
 
-    .iphone-mock:hover {
-      transform: scale(1.01);
-    }
+        /* top bar */
+        .top-bar {
+            background: linear-gradient(145deg, #041e3a, #0b2b4b);
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 4px solid #f5c542;
+        }
 
-    /* dynamic island / top speaker (optional) */
-    .dynamic-island {
-      background: #1c1c1e;
-      width: 120px;
-      height: 30px;
-      margin: 12px auto 8px auto;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 0 10px;
-      opacity: 0.9;
-    }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-    .dynamic-island i {
-      color: #f5f5f7;
-      font-size: 12px;
-    }
+        .logo {
+            background: #f5c542;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #041e3a;
+            font-weight: 900;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
 
-    .dynamic-island span {
-      color: #ddd;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
+        .site-title h1 {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-shadow: 3px 3px 0 #00000055;
+        }
 
-    /* header / status bar (time, battery) */
-    .status-bar {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 24px 4px 24px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #1c1c1e;
-      background: white;
-    }
+        .site-title h1 small {
+            font-size: 0.8rem;
+            background: #f5c542;
+            color: #041e3a;
+            padding: 2px 8px;
+            border-radius: 50px;
+            margin-left: 8px;
+        }
 
-    /* === MAIN APPS SECTION (सभी एप्लिकेशन यहाँ होंगे) === */
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);  /* iPhone home screen style */
-      gap: 18px 8px;
-      padding: 20px 18px 30px 18px;
-      background: white;
-    }
+        .reporter-info {
+            font-size: 0.9rem;
+            background: #103a5e;
+            padding: 10px 15px;
+            border-radius: 50px;
+            border-left: 4px solid #f5c542;
+            line-height: 1.5;
+        }
 
-    /* individual app tile */
-    .app-tile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: #1c1c1e;
-      transition: 0.15s;
-      -webkit-tap-highlight-color: transparent;
-    }
+        .reporter-info i {
+            margin-right: 6px;
+            color: #f5c542;
+        }
 
-    .app-tile:active {
-      opacity: 0.7;
-      transform: scale(0.96);
-    }
+        .live-clock {
+            background: #222;
+            padding: 10px 20px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid #f5c542;
+        }
 
-    .app-icon {
-      width: 62px;
-      height: 62px;
-      background: linear-gradient(145deg, #f9f9fc, #eaeef5);
-      border-radius: 17.5px;    /* iOS app icon rounded */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px;
-      box-shadow: 0 5px 10px -3px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.05);
-      transition: box-shadow 0.2s;
-      color: white;
-      font-size: 32px;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    }
+        .live-clock .date {
+            font-size: 0.9rem;
+            background: #f5c542;
+            color: #0b1e2f;
+            padding: 5px 12px;
+            border-radius: 40px;
+            margin-left: 5px;
+        }
 
-    /* each icon gets its own iOS-like gradient */
-    .app-tile:nth-child(1) .app-icon { background: linear-gradient(145deg, #ff6b4a, #f53838); } /* phone */
-    .app-tile:nth-child(2) .app-icon { background: linear-gradient(145deg, #4cd964, #2eaa4a); } /* messages */
-    .app-tile:nth-child(3) .app-icon { background: linear-gradient(145deg, #5ac8fa, #1e93d3); } /* safari */
-    .app-tile:nth-child(4) .app-icon { background: linear-gradient(145deg, #ff9500, #e67e22); } /* mail */
-    .app-tile:nth-child(5) .app-icon { background: linear-gradient(145deg, #9475ff, #6a4be0); } /* music */
-    .app-tile:nth-child(6) .app-icon { background: linear-gradient(145deg, #ff2d55, #da1e42); } /* photos */
-    .app-tile:nth-child(7) .app-icon { background: linear-gradient(145deg, #8e8e93, #636366); } /* calculator */
-    .app-tile:nth-child(8) .app-icon { background: linear-gradient(145deg, #34c759, #248a3d); } /* calendar */
-    .app-tile:nth-child(9) .app-icon { background: linear-gradient(145deg, #007aff, #0055b3); } /* maps */
-    .app-tile:nth-child(10) .app-icon { background: linear-gradient(145deg, #5856d6, #3634a3); } /* weather */
-    .app-tile:nth-child(11) .app-icon { background: linear-gradient(145deg, #ff3b30, #c62828); } /* clock */
-    .app-tile:nth-child(12) .app-icon { background: linear-gradient(145deg, #af52de, #7b2fa3); } /* camera */
-    .app-tile:nth-child(13) .app-icon { background: linear-gradient(145deg, #5e5ce0, #3a38b0); } /* wallet */
-    .app-tile:nth-child(14) .app-icon { background: linear-gradient(145deg, #ff9f0a, #d97c00); } /* settings */
-    .app-tile:nth-child(15) .app-icon { background: linear-gradient(145deg, #64d2ff, #1e9ad8); } /* facetime */
-    .app-tile:nth-child(16) .app-icon { background: linear-gradient(145deg, #f69f9f, #d35f5f); } /* health */
-    .app-tile:nth-child(17) .app-icon { background: linear-gradient(145deg, #bfafb1, #8e787c); } /* books */
-    .app-tile:nth-child(18) .app-icon { background: linear-gradient(145deg, #a2845e, #7b623f); } /* podcast */
-    .app-tile:nth-child(19) .app-icon { background: linear-gradient(145deg, #009688, #00695c); } /* files */
-    .app-tile:nth-child(20) .app-icon { background: linear-gradient(145deg, #ef5f9f, #c64b7b); } /* fitness */
-    .app-tile:nth-child(21) .app-icon { background: linear-gradient(145deg, #ffcc00, #e6b800); } /* reminders */
-    .app-tile:nth-child(22) .app-icon { background: linear-gradient(145deg, #99d9ff, #56abf2); } /* notes */
-    .app-tile:nth-child(23) .app-icon { background: linear-gradient(145deg, #111111, #333333); } /* voice memos */
-    .app-tile:nth-child(24) .app-icon { background: linear-gradient(145deg, #6c7a89, #4a5562); } /* contacts */
+        /* ticker */
+        .ticker-wrap {
+            background: #0f2b40;
+            color: white;
+            padding: 12px 20px;
+            border-bottom: 2px solid #f5c542;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
 
-    .app-name {
-      font-size: 10px;
-      font-weight: 500;
-      text-align: center;
-      max-width: 68px;
-      line-height: 1.3;
-      color: #1c1c1e;
-      letter-spacing: -0.2px;
-    }
+        .ticker-label {
+            background: #f5c542;
+            color: #041e3a;
+            font-weight: 800;
+            padding: 5px 18px;
+            border-radius: 40px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
 
-    /* small dot for new / notification (iOS style) */
-    .app-tile {
-      position: relative;
-    }
-    .app-tile::after {
-      content: '';
-      position: absolute;
-      top: 6px;
-      right: 18px;
-      width: 8px;
-      height: 8px;
-      background: #ff3b30;
-      border-radius: 10px;
-      border: 1.5px solid white;
-      display: none; /* only show for some apps */
-    }
-    /* add red dot on messages, phone, mail to look lively */
-    .app-tile:nth-child(1)::after,
-    .app-tile:nth-child(2)::after,
-    .app-tile:nth-child(4)::after,
-    .app-tile:nth-child(8)::after {
-      display: block;
-    }
+        .ticker-text {
+            overflow: hidden;
+            white-space: nowrap;
+            flex: 1;
+        }
 
-    /* bottom dock (favorite apps) */
-    .dock {
-      background: rgba(255,255,255,0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid #e3e3e8;
-      display: flex;
-      justify-content: space-around;
-      padding: 14px 24px 18px 24px;
-      border-radius: 0 0 44px 44px;
-    }
+        .ticker-text marquee {
+            font-weight: 600;
+            color: #ffd966;
+            font-size: 1.3rem;
+        }
 
-    .dock-app {
-      width: 58px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        /* admin zone */
+        .admin-zone {
+            display: flex;
+            justify-content: flex-end;
+            padding: 15px 25px 5px;
+            gap: 15px;
+            align-items: center;
+            background: #f1f5f9;
+        }
 
-    .dock-icon {
-      width: 54px;
-      height: 54px;
-      border-radius: 16px;
-      background: #e9e9ed;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: white;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-    }
+        .admin-btn {
+            background: #041e3a;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 1px solid #f5c542;
+        }
 
-    .dock .app-name {
-      font-size: 9px;
-      margin-top: 4px;
-      opacity: 0.8;
-    }
+        .admin-btn:hover {
+            background: #f5c542;
+            color: #041e3a;
+        }
 
-    /* footer text */
-    .page-tagline {
-      color: #6c6c70;
-      text-align: center;
-      font-size: 14px;
-      letter-spacing: -0.2px;
-      font-weight: 400;
-      margin-top: 8px;
-      padding: 0 16px;
-    }
+        .admin-panel-link {
+            background: transparent;
+            color: #041e3a;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: underline dotted;
+        }
 
-    .page-tagline i {
-      color: #007aff;
-    }
+        /* admin panel */
+        .admin-panel {
+            background: white;
+            margin: 15px 25px 25px;
+            padding: 25px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 2px solid #f5c542;
+            display: none;
+        }
 
-    /* small hint */
-    .attribution {
-      color: #8e8e93;
-      font-size: 11px;
-      text-align: center;
-      margin-top: 20px;
-      border-top: 1px solid #d8d8dd;
-      padding-top: 14px;
-      width: 100%;
-      max-width: 390px;
-    }
+        .admin-panel.visible {
+            display: block;
+        }
 
-    /* responsive fix for very small */
-    @media (max-width: 400px) {
-      .app-icon {
-        width: 58px;
-        height: 58px;
-        font-size: 28px;
-      }
-      .apps-grid {
-        gap: 12px 4px;
-        padding: 16px 10px;
-      }
-    }
+        .admin-panel h2 {
+            color: #041e3a;
+            border-left: 10px solid #f5c542;
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
 
-    /* extra hindi text iPhon wala */
-    .hindi-badge {
-      background: #f2f2f7;
-      color: #3a3a3c;
-      padding: 6px 18px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 500;
-      margin: 8px 0 5px;
-      display: inline-block;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-  </style>
+        .admin-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .admin-form .full {
+            grid-column: span 2;
+        }
+
+        .admin-form label {
+            font-weight: 600;
+            color: #1f3a57;
+        }
+
+        .admin-form input, .admin-form textarea, .admin-form select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #bdc9d5;
+            border-radius: 16px;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .admin-form button {
+            background: #041e3a;
+            color: white;
+            border: none;
+            padding: 16px 25px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #f5c542;
+        }
+
+        .admin-form button:hover {
+            background: #f5c542;
+            color: #041e3a;
+        }
+
+        /* GRID — perfect for videos & images */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 25px;
+            padding: 25px;
+        }
+
+        .grid-item {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: 0.15s ease;
+            border: 1px solid #cddae6;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 35px -8px rgba(1, 39, 78, 0.3);
+        }
+
+        /* video container: makes iframe responsive */
+        .video-container {
+            position: relative;
+            width: 100%;
+            background: black;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .item-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #d9e2ec;
+            display: block;
+        }
+
+        .item-content {
+            padding: 18px 18px 12px;
+        }
+
+        .item-content h1 {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+            color: #041e3a;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .item-content h2 {
+            font-size: 1.3rem;
+            margin: 8px 0;
+            color: #2b4b6f;
+            font-weight: 600;
+            border-left: 4px solid #f5c542;
+            padding-left: 12px;
+        }
+
+        .item-content p {
+            color: #2d3f53;
+            margin: 12px 0;
+        }
+
+        .share-row {
+            padding: 10px 18px 18px;
+            display: flex;
+            gap: 15px;
+            border-top: 1px solid #e0e9f2;
+            margin-top: 8px;
+        }
+
+        .share-row a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            background: #eef3f8;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1f3a57;
+            transition: 0.2s;
+        }
+
+        .share-row a.whatsapp:hover {
+            background: #25D366;
+            color: white;
+        }
+
+        .share-row a.facebook:hover {
+            background: #1877F2;
+            color: white;
+        }
+
+        .footer {
+            background: #041e3a;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            font-size: 1.2rem;
+            border-top: 4px solid #f5c542;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal-card {
+            background: white;
+            padding: 35px;
+            border-radius: 40px;
+            width: 350px;
+            box-shadow: 0 30px 40px black;
+            text-align: center;
+        }
+
+        .modal-card input {
+            padding: 15px;
+            width: 100%;
+            border: 2px solid #b0c4de;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .modal-card button {
+            background: #041e3a;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
-  <!-- iPhone style top badge (हिंदी में टैगलाइन) -->
-  <div class="hindi-badge">
-    <i class="fas fa-mobile-alt" style="margin-right: 6px;"></i> iPhone वाला ऐप स्टोर – सारे मोबाइल एप्लिकेशन
-  </div>
-
-  <!-- iPhone mock container -->
-  <div class="iphone-mock">
-    <!-- dynamic island (just for look) -->
-    <div class="dynamic-island">
-      <i class="fas fa-wifi"></i>
-      <span>iPhone वाला</span>
-      <i class="fas fa-battery-three-quarters"></i>
+<div class="site-container">
+    <!-- top bar with logo & info -->
+    <div class="top-bar">
+        <div class="logo-area">
+            <div class="logo">S24</div>
+            <div class="site-title">
+                <h1>S NEWS LUCKNOW 24 <small>हिंदी</small></h1>
+            </div>
+        </div>
+        <div class="reporter-info">
+            <i class="fas fa-user-tie"></i> ब्यूरो चीफ रिपोर्टर: अशोक कुमार कनौजिया<br>
+            <i class="fas fa-map-marker-alt"></i> चारबाग, लखनऊ  <i class="fas fa-phone-alt" style="margin-left: 15px;"></i> 9984296868
+        </div>
+        <div class="live-clock" id="liveClock">
+            <i class="fas fa-circle" style="color: #f5c542; font-size: 0.8rem;"></i> 
+            <span id="timeText">--:--:--</span>
+            <span class="date" id="dateText">---</span>
+        </div>
     </div>
 
-    <!-- status bar -->
-    <div class="status-bar">
-      <span>9:41</span>
-      <span><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-full"></i></span>
+    <!-- running ticker -->
+    <div class="ticker-wrap">
+        <span class="ticker-label"><i class="fas fa-bolt"></i> BREAKING</span>
+        <div class="ticker-text">
+            <marquee behavior="scroll" direction="left" id="runningMarquee">
+                समाचार अपडेट • सीएम का बड़ा एलान • लखनऊ में बारिश के आसार • ME NEWS • 
+            </marquee>
+        </div>
     </div>
 
-    <!-- main apps grid (सभी एप्लिकेशन) -->
-    <div class="apps-grid">
-      <!-- 1. Phone -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-phone-alt"></i></div>
-        <span class="app-name">फ़ोन</span>
-      </a>
-      <!-- 2. Messages -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-comment-dots"></i></div>
-        <span class="app-name">संदेश</span>
-      </a>
-      <!-- 3. Safari -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-compass"></i></div>
-        <span class="app-name">सफारी</span>
-      </a>
-      <!-- 4. Mail -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-envelope"></i></div>
-        <span class="app-name">मेल</span>
-      </a>
-      <!-- 5. Music -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-music"></i></div>
-        <span class="app-name">संगीत</span>
-      </a>
-      <!-- 6. Photos -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-images"></i></div>
-        <span class="app-name">फ़ोटो</span>
-      </a>
-      <!-- 7. Calculator -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-calculator"></i></div>
-        <span class="app-name">कैलकुलेटर</span>
-      </a>
-      <!-- 8. Calendar -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-calendar-alt"></i></div>
-        <span class="app-name">कैलेंडर</span>
-      </a>
-      <!-- 9. Maps -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-map-marked-alt"></i></div>
-        <span class="app-name">मैप्स</span>
-      </a>
-      <!-- 10. Weather -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-cloud-sun"></i></div>
-        <span class="app-name">मौसम</span>
-      </a>
-      <!-- 11. Clock -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-clock"></i></div>
-        <span class="app-name">घड़ी</span>
-      </a>
-      <!-- 12. Camera -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-camera"></i></div>
-        <span class="app-name">कैमरा</span>
-      </a>
-      <!-- 13. Wallet -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-wallet"></i></div>
-        <span class="app-name">वॉलेट</span>
-      </a>
-      <!-- 14. Settings -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-cog"></i></div>
-        <span class="app-name">सेटिंग</span>
-      </a>
-      <!-- 15. FaceTime -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-video"></i></div>
-        <span class="app-name">फेसटाइम</span>
-      </a>
-      <!-- 16. Health -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-heartbeat"></i></div>
-        <span class="app-name">स्वास्थ्य</span>
-      </a>
-      <!-- 17. Books -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-book"></i></div>
-        <span class="app-name">किताबें</span>
-      </a>
-      <!-- 18. Podcasts -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-podcast"></i></div>
-        <span class="app-name">पॉडकास्ट</span>
-      </a>
-      <!-- 19. Files -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-folder-open"></i></div>
-        <span class="app-name">फ़ाइलें</span>
-      </a>
-      <!-- 20. Fitness -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-dumbbell"></i></div>
-        <span class="app-name">फ़िटनेस</span>
-      </a>
-      <!-- 21. Reminders -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-check-circle"></i></div>
-        <span class="app-name">रिमाइंडर</span>
-      </a>
-      <!-- 22. Notes -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-pen"></i></div>
-        <span class="app-name">नोट्स</span>
-      </a>
-      <!-- 23. Voice Memos -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-microphone-alt"></i></div>
-        <span class="app-name">वॉइस मेमो</span>
-      </a>
-      <!-- 24. Contacts -->
-      <a href="#" class="app-tile" onclick="return false;">
-        <div class="app-icon"><i class="fas fa-address-book"></i></div>
-        <span class="app-name">संपर्क</span>
-      </a>
+    <!-- admin button & link -->
+    <div class="admin-zone">
+        <span class="admin-panel-link" onclick="openPasswordModal()"><i class="fas fa-lock"></i> एडमिन पैनल</span>
+        <button class="admin-btn" onclick="openPasswordModal()"><i class="fas fa-user-shield"></i> ADMIN</button>
     </div>
 
-    <!-- Dock (frequently used 4 apps) -->
-    <div class="dock">
-      <div class="dock-app">
-        <div class="dock-icon" style="background: linear-gradient(145deg, #34c759, #248a3d);"><i class="fas fa-comment"></i></div>
-        <span class="app-name">संदेश</span>
-      </div>
-      <div class="dock-app">
-        <div class="dock-icon" style="background: linear-gradient(145deg, #ff6b4a, #f53838);"><i class="fas fa-phone"></i></div>
-        <span class="app-name">फ़ोन</span>
-      </div>
-      <div class="dock-app">
-        <div class="dock-icon" style="background: linear-gradient(145deg, #5ac8fa, #1e93d3);"><i class="fas fa-globe"></i></div>
-        <span class="app-name">सफारी</span>
-      </div>
-      <div class="dock-app">
-        <div class="dock-icon" style="background: linear-gradient(145deg, #9475ff, #6a4be0);"><i class="fas fa-music"></i></div>
-        <span class="app-name">संगीत</span>
-      </div>
+    <!-- admin panel (hidden) -->
+    <div id="adminPanel" class="admin-panel">
+        <h2><i class="fas fa-pen-alt"></i> एडमिन पैनल – नई पोस्ट / वीडियो</h2>
+        <div class="admin-form">
+            <div class="full">
+                <label>पोस्ट का H1 शीर्षक (बड़ा)</label>
+                <input type="text" id="postH1" placeholder="मुख्य शीर्षक...">
+            </div>
+            <div class="full">
+                <label>H2 उपशीर्षक</label>
+                <input type="text" id="postH2" placeholder="उपशीर्षक...">
+            </div>
+            <div class="full">
+                <label>विवरण / टेक्स्ट</label>
+                <textarea id="postDesc" rows="2">यहाँ खबर का विवरण लिखें...</textarea>
+            </div>
+            <div>
+                <label>छवि URL (image)</label>
+                <input type="url" id="postImage" placeholder="https://...jpg">
+            </div>
+            <div>
+                <label>YouTube वीडियो लिंक</label>
+                <input type="url" id="postVideo" placeholder="https://youtu.be/... या https://youtube.com/watch?v=...">
+            </div>
+            <div class="full" style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <button onclick="addPost()"><i class="fas fa-plus-circle"></i> ग्रिड में जोड़ें</button>
+                <button onclick="updateTickerFromPosts()" style="background: #2e5f3e;">➕ टिकर अपडेट करें</button>
+            </div>
+        </div>
+        <p style="margin-top: 20px; color: gray;"><i class="fas fa-info-circle"></i> वीडियो लिंक डालें — ग्रिड में चलेगा और यूट्यूब चैनल पर क्लिक करने पर खुलेगा।</p>
     </div>
-  </div> <!-- end iphone-mock -->
 
-  <!-- नीचे हिंदी में डिस्क्रिप्शन -->
-  <p class="page-tagline">
-    <i class="fas fa-apple"></i> एक ही जगह पर <strong>मोबाइल के सारे ऐप्लिकेशन</strong> – फ़ोन, मैसेज, कैमरा, म्यूज़िक, मैप्स और बहुत कुछ।
-  </p>
+    <!-- news grid (posts will appear here) -->
+    <div id="newsGridContainer" class="news-grid"></div>
 
-  <!-- attribution (बस कॉपीराइट जैसा) -->
-  <div class="attribution">
-    iPhone वाला वेबसाइट • सभी 24+ एप्लिकेशन असली जैसे • होम स्क्रीन अनुभव
-  </div>
+    <!-- footer -->
+    <div class="footer">
+        © 2026 S NEWS LUCKNOW 24 | All rights reserved 
+    </div>
+</div>
+
+<!-- password modal -->
+<div id="passwordModal" class="modal">
+    <div class="modal-card">
+        <i class="fas fa-key" style="font-size: 3rem; color: #f5c542;"></i>
+        <h3>एडमिन पासवर्ड</h3>
+        <input type="password" id="adminPass" placeholder="पासवर्ड डालें" value="">
+        <button onclick="checkPassword()">लॉगिन</button>
+        <button onclick="closeModal()" style="background: gray;">बंद करें</button>
+    </div>
+</div>
+
+<script>
+    // ================== GLOBALS ==================
+    let posts = [];
+
+    // ---------- LIVE CLOCK ----------
+    function updateClock() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-IN', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const dateStr = now.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+        document.getElementById('timeText').innerText = timeStr;
+        document.getElementById('dateText').innerText = dateStr;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // ---------- TICKER UPDATE (collect H1) + "ME NEWS" at end ----------
+    function updateTickerFromPosts() {
+        const marquee = document.getElementById('runningMarquee');
+        if (!marquee) return;
+        let h1Titles = posts.map(p => p.h1).filter(t => t && t.trim() !== '');
+        if (h1Titles.length === 0) {
+            marquee.innerText = 'कोई खबर नहीं • ME NEWS • ';
+            return;
+        }
+        let tickerString = h1Titles.join(' • ') + ' • ME NEWS • ';
+        marquee.innerText = tickerString;
+    }
+
+    // ---------- Convert YouTube links to embeddable (FIXED) ----------
+    function getYouTubeEmbedUrl(url) {
+        if (!url || url.trim() === '') return '';
+        
+        let videoId = '';
+        
+        // youtu.be/ID format
+        const youtuBeMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+        if (youtuBeMatch && youtuBeMatch[1]) {
+            videoId = youtuBeMatch[1];
+        }
+        
+        // youtube.com/watch?v=ID format
+        const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+        if (watchMatch && watchMatch[1]) {
+            videoId = watchMatch[1];
+        }
+        
+        // youtube.com/embed/ID format (already embed)
+        const embedMatch = url.match(/embed\/([a-zA-Z0-9_-]+)/);
+        if (embedMatch && embedMatch[1]) {
+            videoId = embedMatch[1];
+        }
+        
+        // youtube.com/shorts/ID format
+        const shortsMatch = url.match(/shorts\/([a-zA-Z0-9_-]+)/);
+        if (shortsMatch && shortsMatch[1]) {
+            videoId = shortsMatch[1];
+        }
+        
+        if (videoId) {
+            // Simple working embed URL without extra parameters that might cause errors
+            return `https://www.youtube.com/embed/${videoId}`;
+        }
+        
+        // If it's already an embed URL, return as is
+        if (url.includes('youtube.com/embed/')) {
+            return url;
+        }
+        
+        return ''; // not a valid youtube link
+    }
+
+    // ---------- RENDER GRID (video or image) ----------
+    function renderGrid() {
+        const container = document.getElementById('newsGridContainer');
+        if (!container) return;
+        
+        if (posts.length === 0) {
+            container.innerHTML = `
+            <div class="grid-item">
+                <img class="item-image" src="https://via.placeholder.com/400x200/1e3a5f/white?text=Lucknow+News" alt="news">
+                <div class="item-content">
+                    <h1>नमस्ते लखनऊ</h1>
+                    <h2>आज की बड़ी खबर</h2>
+                    <p>यह उदाहरण पोस्ट है। एडमिन पैनल से नई पोस्ट जोड़ें।</p>
+                </div>
+                <div class="share-row">
+                    <a href="#" class="whatsapp" onclick="shareWA('नमस्ते लखनऊ','लखनऊ खबर')"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="facebook" onclick="shareFB('नमस्ते लखनऊ')"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>`;
+            return;
+        }
+
+        let html = '';
+        for (let p of posts) {
+            let mediaHtml = '';
+
+            // PRIORITY: if video link exists and is convertible -> video embed
+            const videoEmbed = p.video ? getYouTubeEmbedUrl(p.video) : '';
+            if (videoEmbed) {
+                mediaHtml = `<div class="video-container"><iframe src="${videoEmbed}" allowfullscreen></iframe></div>`;
+            } 
+            else if (p.image && p.image.trim() !== '') {
+                mediaHtml = `<img class="item-image" src="${p.image}" alt="post image" onerror="this.src='https://via.placeholder.com/400x200/808080/white?text=Image+Error'">`;
+            } else {
+                // fallback default image
+                mediaHtml = `<img class="item-image" src="https://via.placeholder.com/400x200/2a4b6e/white?text=S+NEWS+24" alt="default">`;
+            }
+
+            // share texts (escape quotes)
+            const safeH1 = p.h1 ? p.h1.replace(/'/g, "\\'") : 'S NEWS';
+            const safeH2 = p.h2 ? p.h2.replace(/'/g, "\\'") : '';
+
+            html += `<div class="grid-item">
+                ${mediaHtml}
+                <div class="item-content">
+                    <h1>${p.h1 || 'बिना शीर्षक'}</h1>
+                    <h2>${p.h2 || 'उपशीर्षक'}</h2>
+                    <p>${p.desc || ' '}</p>
+                </div>
+                <div class="share-row">
+                    <a href="#" class="whatsapp" onclick="shareWA('${safeH1}','${safeH2}')"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="facebook" onclick="shareFB('${safeH1}')"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>`;
+        }
+        container.innerHTML = html;
+    }
+
+    // ---------- SHARE ----------
+    window.shareWA = function(title, subtitle) {
+        let text = `${title} - ${subtitle} | S NEWS LUCKNOW 24`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    };
+    
+    window.shareFB = function(title) {
+        let url = window.location.href;
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(title)}`, '_blank');
+    };
+
+    // ---------- ADD POST (admin) ----------
+    window.addPost = function() {
+        const h1 = document.getElementById('postH1').value.trim() || 'ब्रेकिंग न्यूज';
+        const h2 = document.getElementById('postH2').value.trim() || 'लखनऊ अपडेट';
+        const desc = document.getElementById('postDesc').value.trim() || 'विस्तार से खबर...';
+        const image = document.getElementById('postImage').value.trim();
+        let video = document.getElementById('postVideo').value.trim();
+
+        const newPost = { h1, h2, desc, image, video };
+        posts.unshift(newPost);  // new on top
+        renderGrid();
+        updateTickerFromPosts();
+
+        // clear form
+        document.getElementById('postH1').value = '';
+        document.getElementById('postH2').value = '';
+        document.getElementById('postDesc').value = '';
+        document.getElementById('postImage').value = '';
+        document.getElementById('postVideo').value = '';
+
+        alert('पोस्ट ग्रिड में जुड़ गई! वीडियो लिंक होगा तो एम्बेड होगा।');
+    };
+
+    // ---- password logic ----
+    const modal = document.getElementById('passwordModal');
+    window.openPasswordModal = function() {
+        modal.style.display = 'flex';
+        document.getElementById('adminPass').value = '';
+    };
+    
+    window.closeModal = function() {
+        modal.style.display = 'none';
+    };
+    
+    window.checkPassword = function() {
+        const pass = document.getElementById('adminPass').value;
+        if (pass === '123') {
+            modal.style.display = 'none';
+            document.getElementById('adminPanel').classList.add('visible');
+        } else {
+            alert('गलत पासवर्ड! 123 डालें');
+        }
+    };
+    
+    window.onclick = function(e) {
+        if (e.target === modal) closeModal();
+    };
+
+    // ---------- INIT with working video example ----------
+    function initDefaultPosts() {
+        posts = [
+            { 
+                h1: 'लखनऊ में युवा महोत्सव', 
+                h2: 'सीएम करेंगे उद्घाटन', 
+                desc: 'सहारागंज में भव्य आयोजन, हजारों युवा शामिल', 
+                image: 'https://via.placeholder.com/500x250/1e4d7c/white?text=Lucknow+Fair', 
+                video: '' 
+            },
+            { 
+                h1: 'चारबाग रेलवे स्टेशन पर नई पार्किंग', 
+                h2: 'यात्रियों को राहत', 
+                desc: 'अब नहीं होगी जाम की समस्या', 
+                image: 'https://via.placeholder.com/500x250/2f6d41/white?text=Charbagh', 
+                video: '' 
+            },
+            { 
+                h1: 'सीएम का संबोधन (वीडियो)', 
+                h2: 'विकास योजनाओं की घोषणा', 
+                desc: 'लखनऊ में 500 करोड़ की परियोजनाएं — वीडियो देखें', 
+                image: '', 
+                video: 'https://www.youtube.com/watch?v=3JZ_D3ELwOQ'  // Working YouTube link
+            },
+        ];
+        renderGrid();
+        updateTickerFromPosts();
+    }
+    
+    initDefaultPosts();
+
+</script>
 </body>
 </html>
