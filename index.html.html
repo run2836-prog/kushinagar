@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
+    <script>
+fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
+  .then(response => response.text())
+  .then(data => {
+    const elements = document.querySelectorAll('[id="ZerAds300"]');
+    for (const element of elements) {
+        if (element.style.display === 'none') {
+        element.style.display = 'inline-block';
+        if(data.includes("*BLANK*") == false) {
+        data = data.replace('<meta http-equiv="refresh" content="280">', '');
+        element.innerHTML = "<iframe style='border:none;' width='300' height='250'></iframe>";
+        element.querySelector('iframe').srcdoc = data;
+        } else {
+        element.innerHTML = "insert your html code here.";
+        }
+        break;
+        }
+    }
+  });
+</script>
+<div id="ZerAds300" style="display: none;"></div>
+
     <meta http-equiv="Delegate-CH" content="Sec-CH-UA https://s.magsrv.com; Sec-CH-UA-Mobile https://s.magsrv.com; Sec-CH-UA-Arch https://s.magsrv.com; Sec-CH-UA-Model https://s.magsrv.com; Sec-CH-UA-Platform https://s.magsrv.com; Sec-CH-UA-Platform-Version https://s.magsrv.com; Sec-CH-UA-Bitness https://s.magsrv.com; Sec-CH-UA-Full-Version-List https://s.magsrv.com; Sec-CH-UA-Full-Version https://s.magsrv.com;">
     <meta content="5c918338ae3e1ee41d618410010a7c67" name="skytraffix-site-verification" />
     <meta charset="UTF-8">
