@@ -1,36 +1,14 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <script>
-fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
-  .then(response => response.text())
-  .then(data => {
-    const elements = document.querySelectorAll('[id="ZerAds300"]');
-    for (const element of elements) {
-        if (element.style.display === 'none') {
-        element.style.display = 'inline-block';
-        if(data.includes("*BLANK*") == false) {
-        data = data.replace('<meta http-equiv="refresh" content="280">', '');
-        element.innerHTML = "<iframe style='border:none;' width='300' height='250'></iframe>";
-        element.querySelector('iframe').srcdoc = data;
-        } else {
-        element.innerHTML = "insert your html code here.";
-        }
-        break;
-        }
-    }
-  });
-</script>
-<div id="ZerAds300" style="display: none;"></div>
-
-    <meta http-equiv="Delegate-CH" content="Sec-CH-UA https://s.magsrv.com; Sec-CH-UA-Mobile https://s.magsrv.com; Sec-CH-UA-Arch https://s.magsrv.com; Sec-CH-UA-Model https://s.magsrv.com; Sec-CH-UA-Platform https://s.magsrv.com; Sec-CH-UA-Platform-Version https://s.magsrv.com; Sec-CH-UA-Bitness https://s.magsrv.com; Sec-CH-UA-Full-Version-List https://s.magsrv.com; Sec-CH-UA-Full-Version https://s.magsrv.com;">
-    <meta content="5c918338ae3e1ee41d618410010a7c67" name="skytraffix-site-verification" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S NEWS LUCKNOW 24 · लाइव</title>
     
     <!-- यहाँ सही मेटा टैग लगाया गया है -->
     <meta name="6a97888e-site-verification" content="33ea11e2fa8053de7d2beb0c120ef425">
+    <meta content="5c918338ae3e1ee41d618410010a7c67" name="skytraffix-site-verification" />
+    <meta http-equiv="Delegate-CH" content="Sec-CH-UA https://s.magsrv.com; Sec-CH-UA-Mobile https://s.magsrv.com; Sec-CH-UA-Arch https://s.magsrv.com; Sec-CH-UA-Model https://s.magsrv.com; Sec-CH-UA-Platform https://s.magsrv.com; Sec-CH-UA-Platform-Version https://s.magsrv.com; Sec-CH-UA-Bitness https://s.magsrv.com; Sec-CH-UA-Full-Version-List https://s.magsrv.com; Sec-CH-UA-Full-Version https://s.magsrv.com;">
     
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -272,6 +250,40 @@ fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
         .whatsapp-btn:hover { background: #128C7E; }
         .facebook-btn:hover { background: #145dbb; }
 
+        /* एड कार्ड के लिए स्टाइल */
+        .ad-card {
+            background: #f9f9f9;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid #ff9900; /* अलग रंग ताकि पहचान हो */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px; /* ऊंचाई सुनिश्चित करें */
+        }
+        .ad-card .ad-label {
+            background: #ff9900;
+            color: white;
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin: 10px 0 5px;
+            display: inline-block;
+        }
+        .ad-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        /* ZerAds300 डिफ़ॉल्ट छुपा रहेगा, लेकिन कार्ड में दिखेगा */
+        #ZerAds300 {
+            margin: 0 auto;
+        }
+
         .admin-panel-overlay {
             display: none;
             position: fixed;
@@ -406,6 +418,9 @@ fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
         </div>
     </div>
 
+    <!-- ZerAds के लिए जरूरी एलिमेंट (अब यह कार्ड के अंदर डाला जाएगा) -->
+    <div id="ZerAds300" style="display: none;"></div>
+
     <script>
         (function() {
             // स्टोरेज से पोस्ट लोड करना
@@ -449,12 +464,45 @@ fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
             const postDesc = document.getElementById('postDesc');
             const liveClockSpan = document.getElementById('timeDisplay');
 
-            // पोस्ट रेंडर करो
+            // ZerAds कोड - यह सुनिश्चित करता है कि एड सही जगह दिखे
+            function loadZerAds() {
+                fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
+                    .then(response => response.text())
+                    .then(data => {
+                        // उन सभी एलिमेंट्स को ढूंढो जिनका id "ZerAds300" है
+                        const elements = document.querySelectorAll('[id="ZerAds300"]');
+                        for (const element of elements) {
+                            // अगर यह एलिमेंट छुपा हुआ है, तो इसे दिखाएँ और एड डालें
+                            if (element.style.display === 'none') {
+                                element.style.display = 'inline-block'; // या 'block'
+                                if (data.includes("*BLANK*") === false) {
+                                    // रिफ्रेश मेटा टैग हटाएँ अगर हो तो
+                                    data = data.replace('<meta http-equiv="refresh" content="280">', '');
+                                    // iframe बनाएँ और srcdoc में एड डालें
+                                    element.innerHTML = "<iframe style='border:none;' width='300' height='250'></iframe>";
+                                    element.querySelector('iframe').srcdoc = data;
+                                } else {
+                                    element.innerHTML = "insert your html code here."; // बैकअप
+                                }
+                                break; // सिर्फ पहले एलिमेंट को अपडेट करें
+                            }
+                        }
+                    })
+                    .catch(error => console.error('ZerAds load error:', error));
+            }
+
+            // पोस्ट रेंडर करो (अब इसमें एक एड कार्ड भी शामिल है)
             function renderPosts() {
                 if (!newsGrid) return;
                 newsGrid.innerHTML = '';
+                
+                // पोस्ट को उल्टा क्रम में दिखाएँ (नया पहले)
                 const sortedPosts = [...posts].reverse();
-                sortedPosts.forEach(post => {
+                
+                // हर 3 पोस्ट के बाद एक एड कार्ड डालें (यहाँ दूसरे स्थान पर)
+                let postCount = 0;
+                sortedPosts.forEach((post, index) => {
+                    // पोस्ट कार्ड बनाएँ
                     const card = document.createElement('article');
                     card.className = 'post-card';
 
@@ -496,9 +544,60 @@ fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
                     `;
                     card.appendChild(shareDiv);
                     newsGrid.appendChild(card);
+                    
+                    postCount++;
+
+                    // हर 2 पोस्ट के बाद एक एड कार्ड डालें (दूसरे पोस्ट के बाद)
+                    // और एड कार्ड को दोबारा न डालें (सिर्फ एक बार)
+                    if (postCount === 2) {
+                        const adCard = document.createElement('div');
+                        adCard.className = 'ad-card';
+                        adCard.innerHTML = `
+                            <span class="ad-label"><i class="fas fa-ad"></i> विज्ञापन</span>
+                            <div class="ad-container" id="zerads-container"></div>
+                        `;
+                        newsGrid.appendChild(adCard);
+                        
+                        // एड कंटेनर में ZerAds300 एलिमेंट को डालें
+                        const container = adCard.querySelector('#zerads-container');
+                        // पुराने ZerAds300 एलिमेंट को ढूंढें और उसे इस कंटेनर में ले जाएँ
+                        const zeradsElement = document.getElementById('ZerAds300');
+                        if (zeradsElement) {
+                            // एलिमेंट को क्लोन करके नए कंटेनर में डालें, क्योंकि एक एलिमेंट एक ही जगह हो सकता है
+                            const clonedAd = zeradsElement.cloneNode(true);
+                            clonedAd.style.display = 'none'; // छुपा रहेगा, loadZerAds इसे दिखाएगा
+                            container.appendChild(clonedAd);
+                            
+                            // एड लोड करें (सुनिश्चित करें कि यह नए क्लोन के लिए भी चले)
+                            // थोड़ा इंतजार करके लोड करें ताकि DOM तैयार हो जाए
+                            setTimeout(() => {
+                                loadZerAdsForElement(clonedAd);
+                            }, 100);
+                        }
+                    }
                 });
             }
 
+            // किसी खास एलिमेंट के लिए ZerAds लोड करने का फंक्शन
+            function loadZerAdsForElement(element) {
+                fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
+                    .then(response => response.text())
+                    .then(data => {
+                        if (element.style.display === 'none') {
+                            element.style.display = 'inline-block';
+                            if (data.includes("*BLANK*") === false) {
+                                data = data.replace('<meta http-equiv="refresh" content="280">', '');
+                                element.innerHTML = "<iframe style='border:none;' width='300' height='250'></iframe>";
+                                element.querySelector('iframe').srcdoc = data;
+                            } else {
+                                element.innerHTML = "insert your html code here.";
+                            }
+                        }
+                    })
+                    .catch(error => console.error('ZerAds load error:', error));
+            }
+
+            // एस्केप HTML
             function escapeHtml(unsafe) {
                 if (!unsafe) return unsafe;
                 return unsafe.replace(/[&<>"]/g, function(m) {
@@ -588,12 +687,16 @@ fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
                 postDesc.value = '';
                 adminOverlay.style.display = 'none';
                 
-                renderPosts();
+                renderPosts(); // री-रेंडर करें
                 updateTicker();
             }
 
+            // शुरू में पोस्ट रेंडर करें
             renderPosts();
             updateTicker();
+
+            // पेज लोड होने पर ZerAds को भी लोड करने का प्रयास करें (बैकअप के तौर पर)
+            // लेकिन हम renderPosts में पहले ही इसे हैंडल कर चुके हैं।
         })();
     </script>
 </body>
