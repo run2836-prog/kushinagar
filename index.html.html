@@ -348,6 +348,7 @@
             cursor: pointer;
         }
 
+        /* फुटर स्टाइल - विजिटर काउंटर के साथ */
         footer {
             background: #1e1e1e;
             color: #eee;
@@ -358,6 +359,29 @@
         }
         footer i {
             color: #c00000;
+        }
+        .visitor-counter {
+            margin-top: 15px;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 50px;
+            display: inline-block;
+            border: 1px solid #c00000;
+        }
+        .visitor-counter i {
+            margin-right: 8px;
+            color: #ffd966;
+        }
+        .visitor-counter span {
+            font-weight: bold;
+            color: #ffd966;
+            font-size: 1.5rem;
+            margin: 0 5px;
+        }
+        .visitor-label {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-left: 5px;
         }
     </style>
 </head>
@@ -396,9 +420,16 @@
         <!-- पोस्ट यहाँ दिखेंगे -->
     </main>
 
-    <!-- फुटर -->
+    <!-- फुटर (विजिटर काउंटर के साथ) -->
     <footer>
-        <i class="far fa-copyright"></i> 2026 S NEWS LUCKNOW 24 | सर्वाधिकार सुरक्षित
+        <div>
+            <i class="far fa-copyright"></i> 2026 S NEWS LUCKNOW 24 | सर्वाधिकार सुरक्षित
+        </div>
+        <div class="visitor-counter" id="visitorCounter">
+            <i class="fas fa-eye"></i> 
+            <span id="todayCount">0</span>
+            <span class="visitor-label">आज के दर्शक</span>
+        </div>
     </footer>
 
     <!-- एडमिन पैनल -->
@@ -423,7 +454,38 @@
 
     <script>
         (function() {
-            // स्टोरेज से पोस्ट लोड करना
+            // ========== डेली विज़िटर काउंटर ==========
+            function updateVisitorCounter() {
+                const today = new Date().toDateString(); // आज की तारीख (Mon Mar 12 2026)
+                let visitorData = JSON.parse(localStorage.getItem('snews_visitors')) || { date: '', count: 0 };
+                
+                // अगर नई तारीख है या डेटा नहीं है तो रीसेट करें
+                if (visitorData.date !== today) {
+                    visitorData = { date: today, count: 0 };
+                }
+                
+                // पहली बार आने वाले विज़िटर को ट्रैक करें (सिर्फ एक बार per session)
+                const sessionKey = 'snews_session_visited';
+                if (!sessionStorage.getItem(sessionKey)) {
+                    visitorData.count += 1;
+                    localStorage.setItem('snews_visitors', JSON.stringify(visitorData));
+                    sessionStorage.setItem(sessionKey, 'true'); // इस सेशन में दोबारा न गिनें
+                }
+                
+                // काउंटर दिखाएँ
+                const counterSpan = document.getElementById('todayCount');
+                if (counterSpan) {
+                    counterSpan.textContent = visitorData.count;
+                }
+            }
+            
+            // काउंटर को तुरंत अपडेट करें
+            updateVisitorCounter();
+            
+            // हर 30 सेकंड में काउंटर रीफ्रेश करें (अगर किसी और टैब ने बदला हो)
+            setInterval(updateVisitorCounter, 30000);
+
+            // ========== पोस्ट मैनेजमेंट ==========
             let posts = JSON.parse(localStorage.getItem('snews_posts')) || [];
 
             // अगर कोई पोस्ट न हो तो डेमो पोस्ट दिखाओ
@@ -464,27 +526,19 @@
             const postDesc = document.getElementById('postDesc');
             const liveClockSpan = document.getElementById('timeDisplay');
 
-            // ZerAds कोड - यह सुनिश्चित करता है कि एड सही जगह दिखे
-            function loadZerAds() {
+            // ZerAds कोड - किसी खास एलिमेंट के लिए ZerAds लोड करने का फंक्शन
+            function loadZerAdsForElement(element) {
                 fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
                     .then(response => response.text())
                     .then(data => {
-                        // उन सभी एलिमेंट्स को ढूंढो जिनका id "ZerAds300" है
-                        const elements = document.querySelectorAll('[id="ZerAds300"]');
-                        for (const element of elements) {
-                            // अगर यह एलिमेंट छुपा हुआ है, तो इसे दिखाएँ और एड डालें
-                            if (element.style.display === 'none') {
-                                element.style.display = 'inline-block'; // या 'block'
-                                if (data.includes("*BLANK*") === false) {
-                                    // रिफ्रेश मेटा टैग हटाएँ अगर हो तो
-                                    data = data.replace('<meta http-equiv="refresh" content="280">', '');
-                                    // iframe बनाएँ और srcdoc में एड डालें
-                                    element.innerHTML = "<iframe style='border:none;' width='300' height='250'></iframe>";
-                                    element.querySelector('iframe').srcdoc = data;
-                                } else {
-                                    element.innerHTML = "insert your html code here."; // बैकअप
-                                }
-                                break; // सिर्फ पहले एलिमेंट को अपडेट करें
+                        if (element.style.display === 'none') {
+                            element.style.display = 'inline-block';
+                            if (data.includes("*BLANK*") === false) {
+                                data = data.replace('<meta http-equiv="refresh" content="280">', '');
+                                element.innerHTML = "<iframe style='border:none;' width='300' height='250'></iframe>";
+                                element.querySelector('iframe').srcdoc = data;
+                            } else {
+                                element.innerHTML = "insert your html code here.";
                             }
                         }
                     })
@@ -576,25 +630,6 @@
                         }
                     }
                 });
-            }
-
-            // किसी खास एलिमेंट के लिए ZerAds लोड करने का फंक्शन
-            function loadZerAdsForElement(element) {
-                fetch('https://zerads.com/ad/ad.php?ref=10891&width=300')
-                    .then(response => response.text())
-                    .then(data => {
-                        if (element.style.display === 'none') {
-                            element.style.display = 'inline-block';
-                            if (data.includes("*BLANK*") === false) {
-                                data = data.replace('<meta http-equiv="refresh" content="280">', '');
-                                element.innerHTML = "<iframe style='border:none;' width='300' height='250'></iframe>";
-                                element.querySelector('iframe').srcdoc = data;
-                            } else {
-                                element.innerHTML = "insert your html code here.";
-                            }
-                        }
-                    })
-                    .catch(error => console.error('ZerAds load error:', error));
             }
 
             // एस्केप HTML
@@ -694,9 +729,6 @@
             // शुरू में पोस्ट रेंडर करें
             renderPosts();
             updateTicker();
-
-            // पेज लोड होने पर ZerAds को भी लोड करने का प्रयास करें (बैकअप के तौर पर)
-            // लेकिन हम renderPosts में पहले ही इसे हैंडल कर चुके हैं।
         })();
     </script>
 </body>
