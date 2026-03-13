@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kushinagar News - Your Local News Portal</title>
+    <title>Kushinagar Times - Your Local News Portal</title>
     <style>
         * {
             margin: 0;
@@ -46,6 +46,7 @@
         nav {
             display: flex;
             gap: 2rem;
+            flex-wrap: wrap;
         }
 
         nav a {
@@ -205,6 +206,8 @@
             padding: 2rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             animation: slideIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes slideIn {
@@ -335,6 +338,24 @@
             font-family: monospace;
         }
 
+        .ad-preview {
+            background: #f0f0f0;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            border: 2px dashed #999;
+        }
+
+        .size-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+        }
+
         /* Footer */
         footer {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -376,18 +397,28 @@
             background: #f8f9fa;
             border-radius: 10px;
             text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
         }
     </style>
+    <!-- Dynamic Head Ad Section -->
+    <div id="dynamic-head-ads"></div>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <div class="logo">Kushinagar Times</div>
+            <div class="logo">कुशीनगर टाइम्स</div>
             <nav>
-                <a href="#" onclick="loadPage('home')">Home</a>
-                <a href="#" onclick="loadPage('about')">About Us</a>
-                <a href="#" onclick="loadPage('contact')">Contact Us</a>
-                <a href="#" onclick="loadPage('privacy')">Privacy Policy</a>
+                <a href="#" onclick="loadPage('home'); return false;">Home</a>
+                <a href="#" onclick="loadPage('about'); return false;">About Us</a>
+                <a href="#" onclick="loadPage('contact'); return false;">Contact Us</a>
+                <a href="#" onclick="loadPage('privacy'); return false;">Privacy Policy</a>
             </nav>
         </div>
     </header>
@@ -407,20 +438,20 @@
         <div class="admin-content">
             <div class="login-form" id="login-form">
                 <h2>Admin Login</h2>
-                <input type="password" id="password" placeholder="Enter Password">
+                <input type="password" id="password" placeholder="Enter Password (123)">
                 <button onclick="checkPassword()">Login</button>
             </div>
 
             <div class="admin-dashboard" id="admin-dashboard">
                 <h2>Admin Dashboard</h2>
-                <button onclick="closeAdminPanel()" style="float: right; background: #dc3545;">Close</button>
+                <button onclick="closeAdminPanel()" style="float: right; background: #dc3545; padding: 0.5rem 1rem; border: none; color: white; border-radius: 5px; cursor: pointer;">Close</button>
                 
                 <div class="post-form">
                     <h3>Create New Post</h3>
                     <input type="text" id="post-title" placeholder="Post Title (Keyword)">
-                    <textarea id="post-description" placeholder="Post Description (at least 100 words)"></textarea>
-                    <input type="url" id="post-image" placeholder="Image URL">
-                    <button onclick="createPost()">Publish Post</button>
+                    <textarea id="post-description" placeholder="Post Description (minimum 100 words recommended)"></textarea>
+                    <input type="url" id="post-image" placeholder="Image URL (leave empty for random image)">
+                    <button onclick="createPost()">📝 Publish Post</button>
                 </div>
 
                 <div class="post-list" id="post-list">
@@ -429,15 +460,30 @@
 
                 <div class="ad-settings">
                     <h3>Ad Settings</h3>
-                    <div class="ad-input">
-                        <label>Head Section Code</label>
-                        <textarea id="head-code" placeholder="<script> or <style> code for head section"></textarea>
+                    <p>Available Ad Sizes:</p>
+                    <div>
+                        <span class="size-badge">300×250 px</span>
+                        <span class="size-badge">336×280 px</span>
+                        <span class="size-badge">728×90 px</span>
+                        <span class="size-badge">160×600 px</span>
                     </div>
+                    
                     <div class="ad-input">
-                        <label>Body Section Code</label>
-                        <textarea id="body-code" placeholder="Ad codes for body section"></textarea>
+                        <label>Head Section Code (Scripts, Styles, Meta Tags)</label>
+                        <textarea id="head-code" placeholder="Example: &#x3C;script&#x3E;console.log('Ad script');&#x3C;/script&#x3E;"></textarea>
                     </div>
-                    <button onclick="saveAdSettings()">Save Ad Settings</button>
+                    
+                    <div class="ad-input">
+                        <label>Body Section Code (Ad Codes)</label>
+                        <textarea id="body-code" placeholder="Example: &#x3C;div class='ad-300x250'&#x3E;Ad Content&#x3C;/div&#x3E;"></textarea>
+                    </div>
+                    
+                    <div class="ad-preview" id="ad-preview">
+                        <strong>Preview:</strong> Your ads will appear here on the website
+                    </div>
+                    
+                    <button onclick="saveAdSettings()">💾 Save Ad Settings</button>
+                    <button onclick="testAdCode()" style="background: #28a745;">🧪 Test Ad Code</button>
                 </div>
             </div>
         </div>
@@ -459,7 +505,7 @@
                 posts.push({
                     id: Date.now() + i,
                     title: `Sample Post ${i}`,
-                    description: `This is a detailed sample post number ${i}. It contains more than 100 words to demonstrate the content structure. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+                    description: `This is a detailed sample post number ${i}. It contains more than 100 words to demonstrate the content structure. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.`,
                     image: `https://picsum.photos/400/300?random=${i}`,
                     date: new Date().toLocaleDateString()
                 });
@@ -471,6 +517,56 @@
         if (!localStorage.getItem('adSettings')) {
             localStorage.setItem('adSettings', JSON.stringify(adSettings));
         }
+
+        // Function to inject head code properly
+        function injectHeadCode(code) {
+            // Remove existing dynamic head ads
+            const existingHeadAds = document.getElementById('dynamic-head-ads');
+            if (existingHeadAds) {
+                existingHeadAds.innerHTML = '';
+            }
+            
+            if (code && code.trim() !== '') {
+                // Create a container for head ads
+                const headContainer = document.getElementById('dynamic-head-ads');
+                if (headContainer) {
+                    headContainer.innerHTML = code;
+                    
+                    // Execute any scripts in the code
+                    const scripts = headContainer.getElementsByTagName('script');
+                    for (let script of scripts) {
+                        const newScript = document.createElement('script');
+                        if (script.src) {
+                            newScript.src = script.src;
+                        } else {
+                            newScript.textContent = script.textContent;
+                        }
+                        document.head.appendChild(newScript);
+                    }
+                }
+            }
+        }
+
+        // Function to inject body code
+        function injectBodyCode() {
+            const bodyAdsContainer = document.getElementById('body-ads-container');
+            if (!bodyAdsContainer) {
+                const container = document.createElement('div');
+                container.id = 'body-ads-container';
+                document.body.insertBefore(container, document.querySelector('footer'));
+            }
+            
+            if (adSettings.body && adSettings.body.trim() !== '') {
+                const container = document.getElementById('body-ads-container');
+                if (container) {
+                    container.innerHTML = adSettings.body;
+                    container.style.display = 'block';
+                }
+            }
+        }
+
+        // Apply head code on page load
+        injectHeadCode(adSettings.head);
 
         function loadPage(page) {
             const mainContent = document.getElementById('main-content');
@@ -509,7 +605,7 @@
                                 <h3>Email:</h3>
                                 <p>General Inquiries: info@kushinagartimes.com<br>
                                 News Tips: news@kushinagartimes.com<br>
-                Advertising: ads@kushinagartimes.com</p>
+                                Advertising: ads@kushinagartimes.com</p>
                                 <h3>Office Hours:</h3>
                                 <p>Monday - Friday: 9:00 AM to 6:00 PM<br>
                                 Saturday: 10:00 AM to 2:00 PM<br>
@@ -553,12 +649,12 @@
                 html += `
                     <a href="#" class="grid-item" onclick="viewPost(${post.id}); return false;">
                         <div class="grid-image">
-                            <img src="${post.image}" alt="${post.title}">
+                            <img src="${post.image}" alt="${post.title}" onerror="this.src='https://picsum.photos/400/300?random=${post.id}'">
                         </div>
                         <div class="grid-content">
                             <h3 class="grid-title">${post.title}</h3>
-                            <p class="grid-description">${post.description.substring(0, 100)}...</p>
-                            <small>${post.date}</small>
+                            <p class="grid-description">${post.description.substring(0, 150)}...</p>
+                            <small>📅 ${post.date}</small>
                         </div>
                     </a>
                 `;
@@ -573,14 +669,6 @@
                 paginationHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
             }
             paginationDiv.innerHTML = paginationHtml;
-            
-            // Add body ads if any
-            if (adSettings.body) {
-                const adContainer = document.createElement('div');
-                adContainer.className = 'ad-container';
-                adContainer.innerHTML = adSettings.body;
-                gridContainer.parentNode.insertBefore(adContainer, gridContainer);
-            }
         }
 
         function changePage(page) {
@@ -595,16 +683,16 @@
             let html = `
                 <div class="post-page">
                     <h1>${post.title}</h1>
-                    <img src="${post.image}" alt="${post.title}" class="featured-image">
-                    <div class="post-date">Published: ${post.date}</div>
+                    <img src="${post.image}" alt="${post.title}" class="featured-image" onerror="this.src='https://picsum.photos/800/400?random=${post.id}'">
+                    <div class="post-date">📅 Published: ${post.date}</div>
                     <div class="post-content">
-                        <p>${post.description}</p>
+                        <p>${post.description.replace(/\n/g, '<br>')}</p>
                     </div>
             `;
             
-            // Add ads if any
-            if (adSettings.body) {
-                html += `<div class="ad-container">${adSettings.body}</div>`;
+            // Add body ads if any
+            if (adSettings.body && adSettings.body.trim() !== '') {
+                html += `<div class="ad-container"><div class="ad-label">Advertisement</div>${adSettings.body}</div>`;
             }
             
             html += `<button onclick="displayPosts()" style="padding: 1rem 2rem; margin: 1rem 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 5px; cursor: pointer;">← Back to Home</button></div>`;
@@ -632,10 +720,10 @@
                 document.getElementById('admin-dashboard').classList.add('active');
                 updatePostList();
                 // Load ad settings
-                document.getElementById('head-code').value = adSettings.head;
-                document.getElementById('body-code').value = adSettings.body;
+                document.getElementById('head-code').value = adSettings.head || '';
+                document.getElementById('body-code').value = adSettings.body || '';
             } else {
-                alert('Wrong password!');
+                alert('Wrong password! Please try again.');
             }
         }
 
@@ -645,12 +733,18 @@
             const image = document.getElementById('post-image').value || 'https://picsum.photos/400/300?random=' + Date.now();
             
             if (title && description) {
+                if (description.split(' ').length < 20) {
+                    if (!confirm('Description is quite short. Are you sure you want to continue?')) {
+                        return;
+                    }
+                }
+                
                 const newPost = {
                     id: Date.now(),
                     title: title,
                     description: description,
                     image: image,
-                    date: new Date().toLocaleDateString()
+                    date: new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
                 };
                 
                 posts.unshift(newPost);
@@ -663,9 +757,9 @@
                 
                 updatePostList();
                 displayPosts();
-                alert('Post created successfully!');
+                alert('✅ Post created successfully!');
             } else {
-                alert('Please fill in all required fields!');
+                alert('❌ Please fill in both title and description!');
             }
         }
 
@@ -675,6 +769,7 @@
                 localStorage.setItem('posts', JSON.stringify(posts));
                 updatePostList();
                 displayPosts();
+                alert('✅ Post deleted successfully!');
             }
         }
 
@@ -682,35 +777,68 @@
             const postList = document.getElementById('post-list');
             let html = '<h3>Existing Posts</h3>';
             
-            posts.forEach(post => {
-                html += `
-                    <div class="post-item">
-                        <span>${post.title} (${post.date})</span>
-                        <button onclick="deletePost(${post.id})">Delete</button>
-                    </div>
-                `;
-            });
+            if (posts.length === 0) {
+                html += '<p>No posts yet. Create your first post!</p>';
+            } else {
+                posts.forEach(post => {
+                    html += `
+                        <div class="post-item">
+                            <span><strong>${post.title}</strong> <small>(${post.date})</small></span>
+                            <button onclick="deletePost(${post.id})">🗑️ Delete</button>
+                        </div>
+                    `;
+                });
+            }
             
             postList.innerHTML = html;
         }
 
         function saveAdSettings() {
+            const headCode = document.getElementById('head-code').value;
+            const bodyCode = document.getElementById('body-code').value;
+            
             adSettings = {
-                head: document.getElementById('head-code').value,
-                body: document.getElementById('body-code').value
+                head: headCode,
+                body: bodyCode
             };
+            
             localStorage.setItem('adSettings', JSON.stringify(adSettings));
             
-            // Add head code to document
-            let headScript = document.getElementById('ad-head-script');
-            if (!headScript) {
-                headScript = document.createElement('div');
-                headScript.id = 'ad-head-script';
-                document.head.appendChild(headScript);
-            }
-            headScript.innerHTML = adSettings.head;
+            // Apply head code immediately
+            injectHeadCode(headCode);
             
-            alert('Ad settings saved successfully!');
+            // Update preview
+            document.getElementById('ad-preview').innerHTML = '<strong>Preview:</strong> ' + (bodyCode ? 'Ad code saved: ' + bodyCode.substring(0, 50) + '...' : 'No ad code yet');
+            
+            alert('✅ Ad settings saved successfully! Refresh the page to see all changes.');
+        }
+
+        function testAdCode() {
+            const headCode = document.getElementById('head-code').value;
+            const bodyCode = document.getElementById('body-code').value;
+            
+            alert('Testing ad code... Check console for any errors.');
+            console.log('=== Head Code Test ===');
+            console.log(headCode || 'No head code');
+            console.log('=== Body Code Test ===');
+            console.log(bodyCode || 'No body code');
+            
+            if (bodyCode) {
+                const testContainer = document.createElement('div');
+                testContainer.style.position = 'fixed';
+                testContainer.style.bottom = '10px';
+                testContainer.style.left = '10px';
+                testContainer.style.background = 'white';
+                testContainer.style.padding = '10px';
+                testContainer.style.border = '2px solid red';
+                testContainer.style.zIndex = '9999';
+                testContainer.innerHTML = '<strong>Test Ad:</strong><br>' + bodyCode;
+                document.body.appendChild(testContainer);
+                
+                setTimeout(() => {
+                    testContainer.remove();
+                }, 5000);
+            }
         }
 
         // Initialize the page
@@ -724,12 +852,14 @@
                 viewPost(parseInt(postId));
             }
             
-            // Load head ads
-            if (adSettings.head) {
-                const headScript = document.createElement('div');
-                headScript.id = 'ad-head-script';
-                headScript.innerHTML = adSettings.head;
-                document.head.appendChild(headScript);
+            // Create body ads container
+            const bodyAdsContainer = document.createElement('div');
+            bodyAdsContainer.id = 'body-ads-container';
+            document.body.insertBefore(bodyAdsContainer, document.querySelector('footer'));
+            
+            // Apply body code
+            if (adSettings.body && adSettings.body.trim() !== '') {
+                bodyAdsContainer.innerHTML = adSettings.body;
             }
         });
     </script>
