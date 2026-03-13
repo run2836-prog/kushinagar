@@ -1,895 +1,2486 @@
-<!DOCTYPE html>
-<html lang="en">
+
+
+
+
+
+
+
+<!DOCTYPE html> 
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>कुशीनगर टाइम्स - Your Local News Portal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
 
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="max-age=0, must-revalidate, no-cache, no-store, private">
+<meta http-equiv="Cache-Control" content="post-check=0, pre-check=0">
+<meta http-equiv="Expires" content="0"> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Stamp And Registration Department,Uttar Pradesh</title>
+  
+    
+<!-- ==================================================================================================== -->
 
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+<script type="text/javascript"  src="/igrsup/js/jquery-3.7.1.js"></script>
+<script type="text/javascript"  src="/igrsup/js/bootstrap.min.js"></script>
+<script type="text/javascript"  src="/igrsup/js/bootstrap.bundle.min.js"></script>
 
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+<script type="text/javascript"  src="/igrsup/js/jquery-ui.js"></script>
+         <script type="text/javascript" language="javascript" src="/igrsup/js/jquery.uniform.js  charset="utf-8"></script>
 
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
 
-        nav {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
+<link rel="stylesheet" type="text/css" href="/igrsup/css/cardBS5.css"></link>
+<link rel="stylesheet" type="text/css" href="/igrsup/css/jquery-ui.css"></link>
+<link rel="stylesheet" type="text/css" href="/igrsup/css/bootstrap.min.css"></link> 
+<link rel="stylesheet" type="text/css" href="/igrsup/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="/igrsup/css/prerna4_dashboard.css"></link>
+<link rel="stylesheet" type="text/css" href="/igrsup/css/prerna4_lato.css"></link>
+<link rel="stylesheet" type="text/css" href="/igrsup/css/prerna4_montserrat.css"></link>
+<link rel="stylesheet" type="text/css" href="/igrsup/css/karyalaya.css"></link>
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
+<!-- ==================================================================================================== -->
 
-        nav a:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        /* Grid Container */
-        .grid-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+<script type="text/javascript" >
 
-        .grid-item {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
+var timeleft = 10;
+$(document).ready(function() {
+    function disableBack() { window.history.forward() }
 
-        .grid-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
-        }
+    window.onload = disableBack();
+    window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+    //showModal();
+    //showRibbon();
+	//timeleft = 9;
+});
 
-        .grid-image {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            background: #f0f0f0;
+ //Prevents backspace except in the case of textareas and text inputs to prevent user navigation.
+$(document).keydown(function (e) {
+    var preventKeyPress;
+    if (e.keyCode == 8) {
+        var d = e.srcElement || e.target;
+        switch (d.tagName.toUpperCase()) {
+            case 'TEXTAREA':
+                preventKeyPress = d.readOnly || d.disabled;
+                break;
+            case 'INPUT':
+                preventKeyPress = d.readOnly || d.disabled ||
+                    (d.attributes["type"] && $.inArray(d.attributes["type"].value.toLowerCase(), ["radio", "checkbox", "submit", "button"]) >= 0);
+                break;
+            case 'DIV':
+                preventKeyPress = d.readOnly || d.disabled || !(d.attributes["contentEditable"] && d.attributes["contentEditable"].value == "true");
+                break;
+            default:
+                preventKeyPress = true;
+                break;
         }
+    }
+    else
+        preventKeyPress = false;
 
-        .grid-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.5s ease;
-        }
+    if (preventKeyPress)
+        e.preventDefault();
+});
 
-        .grid-item:hover .grid-image img {
-            transform: scale(1.1);
-        }
+ /* 
+function enterSite(){
+	document.getElementById('enterBtn').style.display = 'none';
+	document.getElementById('imgPlaceholder').src = 'img/ribbon.gif';
+	
+	$(".modal-wrap1").addClass("show-modal").delay(7200).queue(function(next){
+	    $(this).removeClass("show-modal");
+	    next();
+	}); 
 
-        .grid-content {
-            padding: 1.5rem;
-        }
+	$(".modal-wrap2").removeClass("show-details").delay(7200).queue(function(next){
+	    $(this).addClass("show-details");
+	    next();
+	}); 
+	
+	$(".modal-content2").removeClass("show-details").delay(9500).queue(function(next){
+	    $(this).addClass("show-details");
+	    next();
+	}); 
+	$(".dist1").removeClass("show-details").delay(9500).queue(function(next){
+	    $(this).addClass("show-details");
+	    next();
+	}); 
+	$(".dist2").removeClass("show-details").delay(10500).queue(function(next){
+	    $(this).addClass("show-details");
+	    next();
+	}); 
 
-        .grid-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: bold;
-        }
+	
+	$(".closeBtn").removeClass("show-details").delay(11500).queue(function(next){
+	    $(this).addClass("show-details");
+	    
 
-        .grid-description {
-            color: #666;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
+	    var loadingTimer = setInterval(function(){
+	      if(timeleft < 0){
+	        clearInterval(loadingTimer);
+	        document.getElementById("countdown").innerHTML = "";
+	      } else {
+	        document.getElementById("countdown").innerHTML = timeleft;
+	      }
+	      timeleft -= 1;
+	    }, 1000);
 
-        /* Pagination */
-        .pagination {
-            max-width: 1200px;
-            margin: 2rem auto;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+	    next();
+	    
+	}); 
+	$(".modal1").removeClass("hide-modal").delay(22000).queue(function(next){
+		window.location = "http://igrsup.gov.in/igrsup/defaultAction";
+	    //$(this).addClass("hide-modal");
+	    //$(this).hide();
+	    next();
+	});
+	
+} 
+ */
 
-        .page-btn {
-            padding: 0.5rem 1rem;
-            background: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
 
-        .page-btn:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            transform: translateY(-2px);
-        }
+</script>
 
-        .page-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
+<script type="text/javascript">
+		
+	$('.close_modal').click(function(){
+		hideModal();
+	});
+	
+	function showModal(){
+		$('.modal').addClass("show-modal");
+		//$('.modal').show();
+	}
+	
+	function hideModal(){
+		$('.modal').removeClass("show-modal");
+		//$('.modal').hide();
+	}
+	
+	$(window).click(function(e) {
+		var modal = document.querySelector('.modal');
+	    if (e.target === modal) {
+	        hideModal();
+	    }
+	});
+	
+	$('.close_ribbon').click(function(){
+		//hideRibbon();
+		//enterSite();
+		$(".modal-wrap").addClass("show-modal").delay(7600).queue(function(next){
+		    $(this).removeClass("show-modal");
+		    next();
+		}); 
+	});
+	
+	function showRibbon(){
+		$('.modal-wrap').addClass("show-modal");
+		$('.modal').show();
+	}
+	
+	/* 	function hideRibbon(){
+		window.location = "http://igrsup.gov.in/igrsup/defaultAction";
+		//$('.modal1').addClass("hide-modal");
+		//$('.modal1').hide();
+	} */
+	
 
-        /* Admin Button */
-        .admin-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
+	
+</script>
 
-        .admin-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
+<style>
 
-        /* Admin Panel */
-        .admin-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            overflow-y: auto;
-        }
+/* **************____Marquee_Part____************** */
+.marquee-wrapper {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: 36px;
+  padding: 0;
+}
 
-        .admin-panel.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.marquee_header_row {
+  margin: 0;
+  flex-shrink: 0;
+  position: relative;
+  font-family: 'ArchivoNarrow-Regular', 'Marcellus-Regular';
+  background: linear-gradient(to right, #143d73 0%, #2b7daf 100%);
+  border-radius: 10px 0 0 0 !important;
+  width: 150px;
+  height: 100%;
+  color: #fff;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+}
 
-        .admin-content {
-            background: white;
-            width: 90%;
-            max-width: 800px;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            animation: slideIn 0.3s ease;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
+/* Left small notch */
+.marquee_header_row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 0;
+  border-top: 6px solid #0f2f57;
+  border-left: 6px solid transparent;
+}
 
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+/* Right arrow */
+.marquee_header_row::after {
+  content: "";
+  position: absolute;
+  right: -20px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+  border-left: 20px solid #2b7daf;
+}
 
-        .login-form {
-            text-align: center;
-        }
+/* Area where text scrolls */
+.marquee-track {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+}
 
-        .login-form input {
-            width: 100%;
-            padding: 1rem;
-            margin: 1rem 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
+/* Moving text */
+.marquee-text {
+  display: inline-block;
+  padding-left: 100%;
+  color: #0a5f8c;
+  font-weight: 900;
+  line-height: 36px;
+  animation: move 30s linear infinite;
+}
 
-        .login-form button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
+.marquee-text span {
+  color: red;
+}
 
-        .login-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
+/* Pause on hover */
+.marquee-track:hover .marquee-text {
+  animation-play-state: paused;
+}
 
-        /* Admin Dashboard */
-        .admin-dashboard {
-            display: none;
-        }
+@keyframes move {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
 
-        .admin-dashboard.active {
-            display: block;
-        }
 
-        .post-form input, .post-form textarea, .post-form select {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
+/* **************____Marquee_Part____************** */
 
-        .post-form textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
 
-        .post-form button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 0.5rem;
-            transition: all 0.3s ease;
-        }
+.modal{
+	position: fixed;
+	display:block;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.75);
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(1.1);
+	transition: visibility 0s linear 0.25s, opacity 0.45s 0s, transform 0.45s, display 0.3s;
+	z-index:10000;
+}
+.modal-wrap {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 1rem 1.5rem;
+	border-radius: 0.5rem;
+	width: 39%;
+}
 
-        .post-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
+.close-button {
+    float: right;
+    width: 1.6rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.85rem;
+    /* background-color: lightgray; */
+    box-shadow: 0rem 0rem 0.4rem 0rem #09090991;
+}
 
-        .post-list {
-            margin-top: 2rem;
-            max-height: 300px;
-            overflow-y: auto;
-        }
+.close-button:hover {
+    background-color: #09090991;
+    color:white;
+}
+.modal-img{
+	width: 260px;
+	height: 150px;
+	display: block;
+	margin: 15px auto;
+}
+.modal-caption{
+	margin: 5px 60px;
+	font-size: 20px;
+	font-weight: 510;
+	color: dodgerblue;
+	line-height: 20px;
+}
+.modal-content{
+	border:1px solid rgb(40, 15, 160);
+	width:97%;
+}
 
-        .post-item {
-            background: #f8f9fa;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
 
-        .post-item button {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-            cursor: pointer;
-        }
 
-        .ad-settings {
-            margin-top: 2rem;
-            border-top: 2px solid #eee;
-            padding-top: 2rem;
-        }
 
-        .ad-input {
-            margin: 1rem 0;
-        }
+.modal1{
+	position: fixed;
+	display:block;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.75);
+	transform: scale(1.1);
+	transition: visibility 0s linear 0.25s, opacity 0.45s 0s, transform 0.45s, display 0.7s;
+	z-index:10000;
+}
+.modal-wrap1 {
+	opacity: 0;
+	visibility: hidden;
+}
+.modal-wrap2 {
+	position: absolute;
+	top: 23%;
+	left: 2%;
+	opacity: 0;
+	visibility: hidden;
+}
+.modal-content2, .dist1, .dist2, .dist3, .dist4, .closeBtn {
+	opacity: 0;
+	visibility: hidden;
+}
+.darkBG{
+	width: 120%;
+	height: 130%;
+	background-color: #000000fd;
+	position: absolute;
+}
+.info{
+	display: inline-block;
+	color: #681919e5;
+	font-size: 1.1rem;
+}
+.my-btn{
+	background-color:rgba(11, 140, 11, 0.92);
+	border-radius:1rem;
+}
+#enterBtn{
+	background-color:rgba(37, 167, 181, 0.92);
+	box-shadow: 0.1rem 0.5rem 1.2rem rgba(20, 140, 193, 0.5);
+}
 
-        .ad-input label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
+#enterBtn:active, #enterBtn:focus, #enterBtn:hover{
+	background-image:none;
+	background-color:rgb(44, 129, 170);
+	border-radius:1rem;
+}
 
-        .ad-input textarea {
-            width: 100%;
-            min-height: 100px;
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: monospace;
-        }
+.modal-content2 .card-body{
+	background-color: #ffcfcfb2;
+}
 
-        .ad-preview {
-            background: #f0f0f0;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 5px;
-            border: 2px dashed #999;
-        }
 
-        .size-badge {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin: 0.2rem;
-        }
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.45s 0s, transform 0.45s, display 0.5s;
+} 
+.hide-modal {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.45s 0s, transform 0.45s, display 0.5s;
+} 
+.show-details {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.8s 0s, transform 0.45s, display 0.8s;
+} 
 
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 3rem;
-        }
 
-        .page-content {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
+.highlight{
+	background-color: #0f2a79;
+	padding: 5px 4px;
+	border-radius: 10px;
+}
 
-        .post-page {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
 
-        .featured-image {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin: 1rem 0;
-        }
+.close-button {
+    float: right;
+    width: 1.6rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.85rem;
+    /* background-color: lightgray; */
+    box-shadow: 0rem 0rem 0.4rem 0rem #09090991;
+}
 
-        .ad-container {
-            margin: 2rem 0;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
+.close-button:hover {
+    background-color: #09090991;
+    color:white;
+}
+.modal-img{
+	width: 260px;
+	height: 150px;
+	display: block;
+	margin: 15px auto;
+}
+.modal-caption{
+	margin: 5px 60px;
+	font-size: 20px;
+	font-weight: 510;
+	color: dodgerblue;
+	line-height: 20px;
+}
+.modal-content{
+/* 	border:1px solid rgb(40, 15, 160); */
+	border: none;
+	width:97%;
+}
 
-        .ad-label {
-            font-size: 0.8rem;
-            color: #999;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.45s 0s, transform 0.45s, display 0.5s;
+} 
+.hide-modal {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.45s 0s, transform 0.45s, display 0.5s;
+} 
+.show-details {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.8s 0s, transform 0.45s, display 0.8s;
+} 
 
-        .security-note {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 0.5rem;
-            font-style: italic;
-        }
-    </style>
-    <!-- Dynamic Head Ad Section -->
-    <div id="dynamic-head-ads"></div>
+
+.highlight{
+	background-color: #0f2a79;
+	padding: 5px 4px;
+	border-radius: 10px;
+}
+
+    /* Responsive adjustments */
+   @media (max-width: 768px) {
+       .modal-wrap {
+           width: 95%;
+           padding: 15px;
+       }
+
+       .modal-caption h3 {
+           font-size: 20px;
+       }
+
+       .modal-caption font {
+           font-size: 14px;
+       }
+   }
+
+/*****************_____________Close_Button_________*******************/
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  min-width: 200px;
+  min-height: 45px;
+  display: inline-flex;
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1.1px;
+  font-weight: 700;
+  color: #313133;
+  background: #4FD1C5;
+  background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+  border: none;
+  border-radius: 1000px;
+  box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 10px;
+  margin-top: 20px;
+  }
+
+.button::before {
+  content: '';
+  border-radius: 1000px;
+  min-width: calc(240px + 12px);
+  min-height: calc(60px + 12px);
+  border: 5px solid #00FFCB;
+  box-shadow: 0 0 60px rgba(0,255,203,.64);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .3s ease-in-out 0s;
+}
+
+.button:hover, 
+.button:focus {
+  color: #313133;
+  transform: translateY(-6px);
+}
+
+.button:hover::before, 
+.button:focus::before {
+  opacity: 1;
+}
+
+.button::after {
+  content: '';
+  width: 30px; height: 30px;
+  border-radius: 100%;
+  border: 6px solid #00FFCB;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring 1.5s infinite;
+}
+
+.button:hover::after, 
+.button:focus::after {
+  animation: none;
+  display: none;
+}
+
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+
+
+
+
+</style>
+
+        
 </head>
-<body>
-    <header>
-        <div class="header-container">
-            <div class="logo">कुशीनगर टाइम्स</div>
-            <nav>
-                <a href="#" onclick="loadPage('home'); return false;">Home</a>
-                <a href="#" onclick="loadPage('about'); return false;">About Us</a>
-                <a href="#" onclick="loadPage('contact'); return false;">Contact Us</a>
-                <a href="#" onclick="loadPage('privacy'); return false;">Privacy Policy</a>
-            </nav>
-        </div>
-    </header>
 
-    <main id="main-content">
-        <div class="grid-container" id="post-grid"></div>
-        <div class="pagination" id="pagination"></div>
-    </main>
 
-    <footer>
-        <p>Copyright © 2026 – Kushinagar. All rights reserved.</p>
-    </footer>
+<body id="igrsupHome" data-spy="scroll" data-target=".navbar" data-offset="60" style="background-image: url('/igrsup/img/background_orange.jpg');background-repeat:no-repeat;background-size: 100% 100%;">
+	<!-- <nav class="navbar navbar-default fixed-top" style="margin:0px 0px 0px 0px; height:70px; padding:0px 0px 0px 0px"> -->
+	
+	
+	
+	
+	
+	<!-- ############################## MODAL POP-UP for HomePage ############################ -->
+	<!-- 
+	<div class="modal">
+		<div class="modal-wrap">
+			<span class="close-button close_modal"><i class="fas fa-times"></i></span>
+			<div class="modal-content">
+				
+				<img src="img/up-global-inv-summit-logo.png" class="modal-img">
+				<p class="modal-caption">Uttar Pradesh Government is geared up to organize Global Investors Summit-2023.</p>
+				<div class="row" style="margin: 20px 0px;">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-5 text-center"><a class="btn btn-sm btn-danger" href="https://invest.up.gov.in/upgis2023/" target="_blank">Click here for more details.</a></div>
+					<div class="col-sm-3"><a class="btn btn-sm btn-danger" href="https://invest.up.gov.in/investorcrm/event/event_registration" target="_blank">Register Now</a></div>
+					<div class="col-sm-2"></div>
+				</div>
+			</div>
+			<div class="row mt-2">
+				<div class="col-sm-10"></div>
+				<div class="col-sm-2 text-center"><button class="btn btn-sm btn-outline-dark close_modal">Close</button></div>
+			</div>
+		</div>
+	</div>-->
+	
+	
+	
+	
+	
+	
+	<!-- Uncomment For Maintenance Pop-Up -->
+	 
+	
 
-    <button class="admin-btn" onclick="openAdminPanel()">⚙️ Admin Panel</button>
-
-    <div class="admin-panel" id="admin-panel">
-        <div class="admin-content">
-            <div class="login-form" id="login-form">
-                <h2>Admin Login</h2>
-                <input type="password" id="password" placeholder="Enter Password">
-                <button onclick="checkPassword()">Login</button>
-                <p class="security-note">🔒 Secure Login</p>
+	
+	
+	<!--     ///****************************  add Changes On Live at 28/01/2026     //  by  S.S    -->
+   
+   	<div class="modal show-modal">
+        <div class="modal-wrap" style="margin-top: 10%;">
+            <span class="close-button close_modal"><i class="fas fa-times"></i></span>
+            <div class="modal-content">
+                <div class="modal-caption mt-5 mb-5">
+                    <h3 style="text-align: center;"><i class="fas fa-exclamation-circle text-danger"></i>  महत्वपूर्ण सूचना : <i class="fas fa-exclamation-circle text-danger"></i></h3>
+                    <br>
+                    <font style="color:#000; font-weight: 900; line-height: 30px;">  <br/>
+                    <span style="color:red;">  1 अप्रैल 2026 से पंजीकरण हेतु अपॉइंटमेंट के लिए आवंटित समय केवल 1 घंटे तक ही मान्य होगा, </span>
+                    	 तत्पश्चात सम्बंधित आवेदन विभागीय पोर्टल पर पंजीकरण हेतु उपलब्ध नहीं होगा । 
+                    </font>
+                     <!--   <button class="btn btn-sm btn-outline-dark close_modal" style="width: 95%;">
+            				<a 	href="/prernadoc/Mantra/Aadhaar_Authentication_Manual.pdf" target='_blank' style="color:white;text-align:left;">Aadhaar Authentication Guidelines(आधार प्रमाणीकरण दिशा-निर्देश)</a>
+            		   </button> -->
+                </div>
             </div>
-
-            <div class="admin-dashboard" id="admin-dashboard">
-                <h2>Admin Dashboard</h2>
-                <button onclick="closeAdminPanel()" style="float: right; background: #dc3545; padding: 0.5rem 1rem; border: none; color: white; border-radius: 5px; cursor: pointer;">Close</button>
+             <div class="row mt-5">
+            	<div class="col-sm-4 text-center">
+            	<!-- <button class="btn btn-sm btn-outline-dark close_modal" style="width: 90%;">
+            		<a 	 href="https://www.mantratec.com/Download/User"  target="_blank" style="color:white;text-align:left;">Mantra's बायोमेट्रिक आरडी सर्विस सॉफ्टवेयर</a> </button> -->
+            		</div>
+                <div class="col-sm-2"></div>
                 
-                <div class="post-form">
-                    <h3>Create New Post</h3>
-                    <input type="text" id="post-title" placeholder="Post Title (Keyword)">
-                    <textarea id="post-description" placeholder="Post Description (minimum 100 words recommended)"></textarea>
-                    <input type="url" id="post-image" placeholder="Image URL (leave empty for random image)">
-                    <button onclick="createPost()">📝 Publish Post</button>
+              <!--   <div class="col-sm-2 text-center"><button class="btn btn-sm btn-outline-dark close_modal">Close</button></div> -->
+                <div class="col-sm-4 text-center"><!-- <button class="btn btn-sm btn-outline-dark close_modal">Close</button> -->
+                
+                		<div class="wrap">
+						  <button class="button close_modal">Close</button>
+						</div>
                 </div>
-
-                <div class="post-list" id="post-list">
-                    <h3>Existing Posts</h3>
-                </div>
-
-                <div class="ad-settings">
-                    <h3>Ad Settings</h3>
-                    <p>Available Ad Sizes:</p>
-                    <div>
-                        <span class="size-badge">300×250 px</span>
-                        <span class="size-badge">336×280 px</span>
-                        <span class="size-badge">728×90 px</span>
-                        <span class="size-badge">160×600 px</span>
-                    </div>
-                    
-                    <div class="ad-input">
-                        <label>Head Section Code (Scripts, Styles, Meta Tags)</label>
-                        <textarea id="head-code" placeholder="Example: <script>console.log('Ad script');</script>"></textarea>
-                    </div>
-                    
-                    <div class="ad-input">
-                        <label>Body Section Code (Ad Codes)</label>
-                        <textarea id="body-code" placeholder="Example: <div class='ad-300x250'>Ad Content</div>"></textarea>
-                    </div>
-                    
-                    <div class="ad-preview" id="ad-preview">
-                        <strong>Preview:</strong> Your ads will appear here on the website
-                    </div>
-                    
-                    <button onclick="saveAdSettings()">💾 Save Ad Settings</button>
-                    <button onclick="testAdCode()" style="background: #28a745;">🧪 Test Ad Code</button>
-                </div>
+                <!--     ///****************************  add Changes On Live at 09/02/2026     //  by  S.S    -->
             </div>
         </div>
     </div>
+	
+	
+	
+	
+	
+	
+	
+ 
+	<!-- ################################## -->
+	 
+	 
+	 
+	<!--Add/Remove this class to display/hide modal - "show-modal" -->
+	<!-- <div class="modal show-modal"> -->
+	<div class="modal">
+		<div class="modal-wrap" style="top: 40%;">
+			<span class="close-button close_modal"><i class="fas fa-times"></i></span>
+			<div class="modal-content">
+				<div class="modal-caption mt-5 mb-5">
+					<h3 style="text-align: center;"> <i class="fas fa-exclamation-circle text-danger"></i> विज्ञप्ति <i class="fas fa-exclamation-circle text-danger"></i></h3>
+					
+				</div>
+				
+				<div class="modal-caption mt-5 mb-5">
+					<font style="color:#000; font-weight: 900; line-height: 30px;">
+						<!-- दिनांक 11 मार्च 2025 से पूर्व क्रय किए गए रु० 10000 से रु० 25000 तक मूल्य वर्ग के भौतिक गैर न्यायिक स्टाम्प पत्रों का प्रयोग तथा वापसी दिनांक 31 मार्च 2025 तक विधि मान्य होगा । -->
+						 सर्वसाधारण को सूचित किया जाता है कि स्टाम्प एवं रजिस्ट्रेशन विभाग के ऑनलाईन पोर्टल (igrsup.gov.in) को अन्य सर्वर पर स्थानान्तरित (migrate) किया जाना प्रस्तावित है। इस कारण दिनांक 08.11.2025 (शनिवार) से 11.11.2025 (मंगलवार) तक (कुल चार दिवस) सर्वर पर रख-रखाव एवं स्थानान्तरण का कार्य सम्पन्न किया जाएगा, जिसके फलस्वरूप उक्त अवधि में आमजन द्वारा ऑनलाईन लेखपत्र पंजीकरण एवं अन्य आवेदनों का कार्य अस्थायी रूप से बाधित रहेगा तथा उप निबन्धक कार्यालयों में पंजीकरण (Registration) का कार्य संपादित नहीं किया जा सकेगा।
+					</font>
+				</div>
+				
+			</div>
+			<div class="row mt-2">
+				<div class="col-sm-10"></div>
+				<div class="col-sm-2 text-center"><button class="btn btn-sm btn-outline-dark close_modal">Close</button></div>
+			</div>
+		</div>
+	</div>
+	  
+	 
+	
+	<!-- ###################################################################################### -->
+	
+	 
+	 
+	 
+	 
+	
+	<!-- ###################################################################################### -->
+	
+	
+		
+	<nav class="navbar navbar-default" style="margin:0px 0px 0px 0px; height:70px; padding:0px 0px 0px 0px">
+		<!-- <div class="container"> -->
+		<div class="col-md-12" id="prerna4_header_div">
+				
 
-    <script>
-        // Data storage
-        let posts = JSON.parse(localStorage.getItem('posts')) || [];
-        let adSettings = JSON.parse(localStorage.getItem('adSettings')) || {
-            head: '',
-            body: ''
-        };
-        let currentPage = 1;
-        const postsPerPage = 10;
 
-        // 🔐 Secure password handling - Password is encrypted and not visible in source
-        const securePassword = (function() {
-            // Encrypted password (original: "123")
-            // Using multiple encoding layers for security
-            const encrypted = btoa('MTIz'); // Base64 encoded
-            return {
-                verify: function(input) {
-                    // Multiple step verification
-                    const step1 = btoa(input); // Convert input to base64
-                    const step2 = btoa(step1); // Double encode
-                    const step3 = step2.split('').reverse().join(''); // Reverse string
-                    
-                    // The correct encrypted value for "123"
-                    const correctHash = '=' + '=' + 'M' + 'T' + 'I' + 'z' + 'M' + 'T' + 'I' + 'z'; // This resolves to "MTIzMTIz"
-                    
-                    // Final verification
-                    return input === '123'; // Simple check but encrypted in code
-                }
-            };
-        })();
 
-        // Alternative: Using hash comparison
-        function verifyPassword(input) {
-            // Create a simple hash of the input
-            let hash = 0;
-            for (let i = 0; i < input.length; i++) {
-                hash = ((hash << 5) - hash) + input.charCodeAt(i);
-                hash = hash & hash; // Convert to 32-bit integer
-            }
-            
-            // Hash of "123" is 486256
-            return hash === 486256; // Compare with pre-calculated hash
-        }
+	
+	<div style="height:inherit;background-image: url('/igrsup/img/banner.png');background-repeat:no-repeat;background-size: 100% 100%;">
+	</div>
+	<div class="row" style="width: 100%;margin: 0px 0px 0px 0px; height:90px;">
+	
+		<div class="col-lg-1 mt-1" style="margin: 0px 0px 0px 0px; padding: 0px 15px 0px 15px">
+	     	<span class="d-none d-lg-block">
+	     		<img src="img/logo.png"  height="70px;width:70px;"/>
+	     	</span>
+	    </div>
+	    <div class="col-lg-9 g-0 ps-4" >
+	     	 
+		     <a    class="navbar-brand" href="#igrsupHome">
+		     	
+		     	<span class="d-none d-lg-block d-inline">
+		     		<h1 style="font-size:36px; margin:20px 0px 20px;">Stamp And Registration Department,Uttar Pradesh</h1>
+		     		</span>
+		     	<span class="d-none d-md-block d-lg-none d-inline">
+		     		<img src="img/logo.png"  height="35px;width:35px;"/>
+		     		<h3>Stamp And Registration Department,Uttar Pradesh</h3>
+		     	</span>		     	
+		     	<span class="d-block d-md-none">
+		     		<img src="img/logo.png"  height="25px;width:25px;"/>
+		     		<small>Stamp And Registration Department,Uttar Pradesh</small>
+		     	</span>
+		     </a>
+		     
+	   	</div>	   	
+	   	
+		<div class="col-lg-2 text-end pe-20">
+	     	<span class="d-none d-lg-block">
+	     		<img src="img/mahotsavlogo.png"  height="70px;width:70px;"/>
+	     	</span>
+	    	</div>
+	</div>
 
-        // Sample data initialization
-        if (posts.length === 0) {
-            for (let i = 1; i <= 20; i++) {
-                posts.push({
-                    id: Date.now() + i,
-                    title: `Sample Post ${i}`,
-                    description: `This is a detailed sample post number ${i}. It contains more than 100 words to demonstrate the content structure. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.`,
-                    image: `https://picsum.photos/400/300?random=${i}`,
-                    date: new Date().toLocaleDateString()
-                });
-            }
-            localStorage.setItem('posts', JSON.stringify(posts));
-        }
 
-        // Initialize ad settings
-        if (!localStorage.getItem('adSettings')) {
-            localStorage.setItem('adSettings', JSON.stringify(adSettings));
-        }
 
-        // Function to inject head code properly
-        function injectHeadCode(code) {
-            // Remove existing dynamic head ads
-            const existingHeadAds = document.getElementById('dynamic-head-ads');
-            if (existingHeadAds) {
-                existingHeadAds.innerHTML = '';
-            }
-            
-            if (code && code.trim() !== '') {
-                // Create a container for head ads
-                const headContainer = document.getElementById('dynamic-head-ads');
-                if (headContainer) {
-                    headContainer.innerHTML = code;
-                    
-                    // Execute any scripts in the code
-                    const scripts = headContainer.getElementsByTagName('script');
-                    for (let script of scripts) {
-                        const newScript = document.createElement('script');
-                        if (script.src) {
-                            newScript.src = script.src;
-                        } else {
-                            newScript.textContent = script.textContent;
-                        }
-                        document.head.appendChild(newScript);
-                    }
-                }
-            }
-        }
+	
+	
+	
 
-        // Apply head code on page load
-        injectHeadCode(adSettings.head);
+			</div>			
+	  	<!-- </div> -->
+	</nav>
 
-        function loadPage(page) {
-            const mainContent = document.getElementById('main-content');
-            
-            if (page === 'home') {
-                displayPosts();
-            } else {
-                let content = '';
-                switch(page) {
-                    case 'about':
-                        content = `
-                            <div class="page-content">
-                                <h1>About Us</h1>
-                                <p>Welcome to Kushinagar Times, your premier source for local news and updates from the historic city of Kushinagar. Our mission is to provide accurate, timely, and relevant information to the residents and visitors of this sacred land where Lord Buddha attained Mahaparinirvana.</p>
-                                <p>Founded in 2024, we have grown to become the most trusted voice in Kushinagar, covering everything from local events and cultural celebrations to important announcements and community developments. Our team of dedicated journalists works tirelessly to bring you stories that matter, with integrity and professionalism.</p>
-                                <p>Kushinagar, being one of the most important Buddhist pilgrimage sites, attracts visitors from all over the world. We take pride in showcasing the spiritual heritage, cultural richness, and modern developments of our beloved city. From the ancient ruins and stupas to the growing infrastructure and tourism facilities, we cover it all.</p>
-                                <p>Our commitment to excellence in journalism and community service drives us to continuously improve and expand our coverage. We believe in the power of information to bring people together and create positive change in society.</p>
-                                <p>Thank you for being part of our journey. Together, we're building a more informed and connected Kushinagar community.</p>
-                            </div>
-                        `;
-                        break;
-                    case 'contact':
-                        content = `
-                            <div class="page-content">
-                                <h1>Contact Us</h1>
-                                <p>We'd love to hear from you! Whether you have a news tip, feedback about our coverage, or just want to say hello, here's how you can reach us:</p>
-                                <h3>Office Address:</h3>
-                                <p>Kushinagar Times<br>
-                                Main Road, Near Buddha Temple<br>
-                                Kushinagar, Uttar Pradesh - 274403<br>
-                                India</p>
-                                <h3>Phone Numbers:</h3>
-                                <p>Editorial Desk: +91 12345 67890<br>
-                                Advertising: +91 09876 54321<br>
-                                Customer Support: +91 11223 44556</p>
-                                <h3>Email:</h3>
-                                <p>General Inquiries: info@kushinagartimes.com<br>
-                                News Tips: news@kushinagartimes.com<br>
-                                Advertising: ads@kushinagartimes.com</p>
-                                <h3>Office Hours:</h3>
-                                <p>Monday - Friday: 9:00 AM to 6:00 PM<br>
-                                Saturday: 10:00 AM to 2:00 PM<br>
-                                Sunday: Closed</p>
-                            </div>
-                        `;
-                        break;
-                    case 'privacy':
-                        content = `
-                            <div class="page-content">
-                                <h1>Privacy Policy</h1>
-                                <p>At Kushinagar Times, accessible from www.kushinagartimes.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Kushinagar Times and how we use it.</p>
-                                <h3>Log Files</h3>
-                                <p>Kushinagar Times follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
-                                <h3>Cookies and Web Beacons</h3>
-                                <p>Like any other website, Kushinagar Times uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
-                                <h3>Privacy Policies</h3>
-                                <p>You may consult this list to find the Privacy Policy for each of the advertising partners of Kushinagar Times.</p>
-                                <p>Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on Kushinagar Times, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.</p>
-                                <p>Note that Kushinagar Times has no access to or control over these cookies that are used by third-party advertisers.</p>
-                                <h3>Consent</h3>
-                                <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
-                            </div>
-                        `;
-                        break;
-                }
-                mainContent.innerHTML = content;
-            }
-        }
+	<!-- <div><img src="img/tirangaAzadiMahotsav.jpg"   width="100%" height="280px" /></div> -->
 
-        function displayPosts() {
-            const gridContainer = document.getElementById('post-grid');
-            const paginationDiv = document.getElementById('pagination');
-            
-            const startIndex = (currentPage - 1) * postsPerPage;
-            const endIndex = startIndex + postsPerPage;
-            const currentPosts = posts.slice(startIndex, endIndex);
-            
-            let html = '';
-            currentPosts.forEach(post => {
-                html += `
-                    <a href="#" class="grid-item" onclick="viewPost(${post.id}); return false;">
-                        <div class="grid-image">
-                            <img src="${post.image}" alt="${post.title}" onerror="this.src='https://picsum.photos/400/300?random=${post.id}'">
-                        </div>
-                        <div class="grid-content">
-                            <h3 class="grid-title">${post.title}</h3>
-                            <p class="grid-description">${post.description.substring(0, 150)}...</p>
-                            <small>📅 ${post.date}</small>
-                        </div>
-                    </a>
-                `;
-            });
-            
-            gridContainer.innerHTML = html;
-            
-            // Create pagination
-            const totalPages = Math.ceil(posts.length / postsPerPage);
-            let paginationHtml = '';
-            for (let i = 1; i <= totalPages; i++) {
-                paginationHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
-            }
-            paginationDiv.innerHTML = paginationHtml;
-        }
+	<div class="jumbotron text-center" style="padding:8px 0px 8px 0px;">
+	      
+	      	<div id="prerna4_topmenu_div">
+				
 
-        function changePage(page) {
-            currentPage = page;
-            displayPosts();
-        }
 
-        function viewPost(postId) {
-            const post = posts.find(p => p.id === postId);
-            const mainContent = document.getElementById('main-content');
-            
-            let html = `
-                <div class="post-page">
-                    <h1>${post.title}</h1>
-                    <img src="${post.image}" alt="${post.title}" class="featured-image" onerror="this.src='https://picsum.photos/800/400?random=${post.id}'">
-                    <div class="post-date">📅 Published: ${post.date}</div>
-                    <div class="post-content">
-                        <p>${post.description.replace(/\n/g, '<br>')}</p>
+<script type="text/javascript">
+	function counterfunction(code) {
+//		alert("Inside counterfunction code is :" + code);
+	    
+ 	    $.post('ModelLekhpatracounter', 
+	    {
+	    	code : code
+	    },
+	    function (data) {
+	        if (data) {
+	            if(data.result === "true"){
+	            	return true;
+	            }
+	            else {
+	            	return false;
+	            }
+
+	        }
+	        else {
+				return false;
+	        }
+	    });
+	    
+	}
+</script>
+
+
+<nav class="navbar navbar-expand-sm navbar-light" id="myNavbar">
+  <div class="container-fluid">
+  
+    <!-- Brand and toggle get grouped for better mobile display -->
+	    
+    <div class="navbar-header d-block d-sm-none" style="width: 100%">    	
+    	    	
+		    <button type="button" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#igrsup-navbar-collapse-1" aria-expanded="false">
+		        <span class="visually-hidden-focusable">Toggle navigation</span>
+		        <span class="navbar-toggler-icon"></span>
+		    </button>	
+		
+
+    </div>
+
+    
+    
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="igrsup-navbar-collapse-1" style="width: 100%; padding:0px 15px;" >
+    
+		<ul class="nav navbar-nav" style="width:100%; font-size:12px; spacing:10px;">
+
+				<li class="dropdown"><a    href="#" class="dropdown-toggle"
+					data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">हमारे बारे में <span class="caret"></span></a>
+
+					<ul class="dropdown-menu">
+						<li><a    href="IntroPdfOne" class="dropdown-item">परिचय</a></li>
+						<li><a    href="IntroPdfTwo" class="dropdown-item">विभाग का
+								संरचनात्मक ढांचा</a></li>
+						<li><a    href="IntroPdfThree" class="dropdown-item">विभाग द्वारा
+								जनसामान्य को प्रदत्त सुविधायें</a></li>
+						<li role="separator" class="divider"></li>
+					</ul></li>
+
+
+				<li class="dropdown"><a    class="dropdown-toggle"
+					data-bs-toggle="dropdown" href="#"  >अधिनियम <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a    href="AdhiniyamHindi" class="dropdown-item">रजिस्ट्रेशन
+								अधिनियम,1908 (हिन्दी)</a></li>
+						<li><a    href="AdhiniyamEnglish" class="dropdown-item"
+							class="dropdown-item">रजिस्ट्रेशन अधिनियम,1908 (अंग्रेज़ी)</a></li>
+						<li><a    href="StampAdhiniyamHindi" class="dropdown-item">भारतीय
+								स्टाम्प अधिनियम 1899 (हिन्दी)</a></li>
+						<li><a    href="StampAdhiniyamEnglish" class="dropdown-item">भारतीय
+								स्टाम्प अधिनियम 1899 (अंग्रेज़ी)</a></li>
+						<li><a    href="HinduMarriageAdhiniyamHindi" class="dropdown-item">हिन्दू
+								विवाह अधिनियम 1955 (हिन्दी)</a></li>
+						<li><a    href="HinduMarriageAdhiniyam" class="dropdown-item">हिन्दू
+								विवाह अधिनियम 1955(अंग्रेज़ी)</a></li>
+						<li><a    href="CourtFeeAdhiniyam" class="dropdown-item">न्यायालय
+								शुल्क अधिनियम 1870</a></li>
+	
+					</ul></li>
+
+
+
+
+				<li class="dropdown"><a    class="dropdown-toggle"
+					data-bs-toggle="dropdown" href="#"  > नियम <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					
+						<li><a    href="UPStampAdhiniyamruleHindi">उत्तर प्रदेश
+								स्टाम्प नियमावली, 1942(हिन्दी)</a></li>
+						<li><a    href="UPStampAdhiniyamrule" class="dropdown-item">उत्तर
+								प्रदेश स्टाम्प नियमवाली,1942(अंग्रेज़ी)</a></li>
+						<li><a    href="registrationManual" class="dropdown-item">रजिस्ट्रेशन
+								मैनुअल उत्तर प्रदेश (हिन्दी)</a></li>
+						<li><a    href="RegistryAdhiniyamrule" class="dropdown-item">रजिस्ट्रेशन
+								मैनुअल उत्तर प्रदेश (अंग्रेज़ी)</a></li>
+						<li><a    href="UPStampPropertytAdhiniyamrule" class="dropdown-item">उत्तर
+								प्रदेश स्टाम्प (सम्पति का मूल्यांकन) नियमवाली,1997(हिन्दी)</a></li>						
+						<li><a    href="RegistryFeeAdhiniyamrule" class="dropdown-item">रजिस्ट्रीकरण
+								फीस सारणी(हिन्दी)</a></li>
+						<li><a    href="RegistryFeeAdhiniyamruleEnglish"
+							class="dropdown-item">रजिस्ट्रीकरण फीस सारणी(अंग्रेज़ी)</a></li>
+						<li><a    href="E_stamp_Rules" class="dropdown-item">ई-स्टाम्पिंग
+								नियमावली 2013</a></li>
+						<li><a    href="HinduMarriageRegistryAdhiniyamrule"
+							class="dropdown-item">हिन्दू विवाह रजिस्ट्रीकरण नियमावली, 1973</a></li>
+						<li><a    href="UPECourtFeeAdhiniyamrule" class="dropdown-item">उत्तर
+								प्रदेश ई-कोर्ट फीस नियमावली, 2016(हिन्दी)</a></li>
+						<li><a    href="UPECourtFeeAdhiniyamruleEnglish"
+							class="dropdown-item">उत्तर प्रदेश ई-कोर्ट फीस नियमावली,
+								2016(अंग्रेज़ी)</a></li>
+						<li><a    href="/prernadoc/upMarriageAct2017.pdf"
+							class="dropdown-item" target='_blank'>उत्तर प्रदेश विवाह पंजीकरण
+								नियमावली-2017</a></li>
+
+						<li><a    href="UPGovEmpAdhiniyam" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">उत्तर प्रदेश सरकारी सेवक (अनुशासन एवं अपील)
+								नियमावली, 1999</a></li>
+						<li><a    href="UPGovEmpSeniorAdhiniyam" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">उत्तर प्रदेश सरकारी सेवक ज्येष्ठता नियमावली
+								1991</a></li>
+						<li><a    href="DeadDependentNiyojanAdhiniyam" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">मृतक आश्रित का नियोजन</a></li>
+						<li><a    href="GroupDEmpNiyojanAdhiniyam" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">समूह “घ” कर्मचारी सेवा नियमावली,1985</a></li>
+						<li><a    href="ParivichaAdhiniyam" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">परिवीक्षा नियमावली 2013</a></li>
+						<li><a    href="Adhiniyam" class="dropdown-item" target="_blank" rel="noopener noreferrer">परिवीक्षा
+								नियमावली 2016</a></li>
+						<li><a    href="UPGovMedicalAdhiniyam" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">उत्तर प्रदेश सरकारी (चिकित्सा परिचर्या) प्रथम
+								संशोधन नियमावली 2014</a></li>
+						<li><a    href="UPGovMedicalSecandAdhiniyam" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">उत्तर प्रदेश सरकारी (चिकित्सा परिचर्या)
+								द्वितीय संशोधन नियमावली 2014</a></li>
+						<li><a    href="stenogrpherNiyamavali" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">आशुलिपिक नियमावली</a></li>
+						<li><a    href="lipikNiyamavali" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">लिपिक नियमावली</a></li>
+						<li><a    href="karmchariAcharan" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">उत्तर प्रदेश कर्मचारी आचरण नियमावली </a></li>
+						<li><a    href="UPStampDeptAdhiniyamrule" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">उत्तर प्रदेश स्टाम्प एवं रजिस्ट्रेशन
+								डिपार्टमेंट (समूह क एवं समूह ख) सेवा नियमावली 1982</a></li>
+					</ul></li>
+					
+				<li class="dropdown"><a    class="dropdown-toggle"
+					data-bs-toggle="dropdown" href="#">प्रमुख आदेश <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="/prernadoc/shasnaAdesh/GO final/powerOfSAtterny.html"
+							target='_blank' class="dropdown-item">पॉवर ऑफ़ एटार्नी से सम्बंधी
+								आदेश</a></li>
+						<li><a
+							href="/prernadoc/shasnaAdesh/GO final/sale_certificate.pdf"
+							target='_blank' class="dropdown-item"> विक्रय प्रमाण पत्र सम्बंधी
+								आदेश</a></li>
+						<li><a
+							href="/prernadoc/shasnaAdesh/GO final/rebate_for_disable_persons.html"
+							target='_blank' class="dropdown-item"> दिव्यांगो हेतु स्टाम्प
+								ड्यूटी में छूट </a></li>
+						<li><a    href="/prernadoc/shasnaAdesh/GOfinal/newbandhak.html"
+							target='_blank' class="dropdown-item">बंधक पत्र/समाधान योजना</a></li>
+						<li><a    href="/prernadoc/shasnaAdesh/GO final/najool.html"
+							target='_blank' class="dropdown-item"> नजूल भूमि के अन्तरण/पटटा
+								विलेख पर स्टाम्प की छूट</a></li>
+						<li><a    href="/prernadoc/shasnaAdesh/GO final/mulyankan.html"
+							target='_blank' class="dropdown-item"> मूल्यांकन सम्बंधी आदेश</a></li>
+						<li><a    href="/prernadoc/shasnaAdesh/GOfinal/deed.html"
+							target='_blank' class="dropdown-item">मिथ्या अभिलेखों, साक्ष्यों
+								तथा छद्मवेश में पंजीकृत विलेखों से सम्बन्धित आदेश</a></li>
+
+						<li><a    href="/prernadoc/shasnaAdesh/GO final/4738.pdf"
+							target='_blank' class="dropdown-item">रुपये 500 के पुराने नोटों को
+								निबंधन शुल्क के रूप मे स्वीकार करने के सम्बन्ध</a></li>
+						<li><a    href="/prernadoc/shasnaAdesh/GO final/stampvaad.html"
+							target='_blank' class="dropdown-item"> स्टाम्पवाद</a></li>
+						<li><a    href="/prernadoc/shasnaAdesh/GO final/niyamawali.html"
+							target='_blank' class="dropdown-item"> अधिनियमों/नियमावलियों में
+								संशोधन एवं प्रावधानों का स्पस्टीकरण</a></li>
+						<li><a
+							href="/prernadoc/shasnaAdesh/GO final/mulyankansuchi.html"
+							target='_blank' class="dropdown-item"> निबन्धन कार्यालयों के
+								क्रिया-कलापों/ मूल्यांकन सूची के सम्बन्ध में </a></li>
+						<li><a    href="/prernadoc/shasnaAdesh/GO final/jilasrijan.html"
+							target='_blank' class="dropdown-item"> निबन्धन उप-जिला सृजन</a></li>
+						<li><a
+							href="/prernadoc/shasnaAdesh/GO final/nyaiknirnay.html"
+							target='_blank' class="dropdown-item"> न्यायिक निर्णय</a></li>
+							
+						<li><a    href="/prernadoc/shasnaAdesh/GO final/hindu.html"
+							target='_blank' class="dropdown-item"> हिंदु विवाह एवं पंजीकरण के
+								सम्बन्ध में</a></li>
+						<li><a
+							href="/prernadoc/shasnaAdesh/GO final/sevasambandhi.html"
+							target='_blank' class="dropdown-item"> अधिकारियों कर्मचारियों के
+								सेवासम्बन्धी प्रकरणों में दिशा निर्देश</a></li>
+						<li><a
+							href="/prernadoc/shasnaAdesh/GOfinal/newdeptCreation.html"
+							target='_blank' class="dropdown-item">विभागीय पदो के सृजन व
+								वेतनमान उच्चीकृत करने के सम्बन्ध में।</a></li>
+						<li><a
+							href="/prernadoc/shasnaAdesh/GOfinal/newSansodhan.html"
+							target='_blank' class="dropdown-item"> टी0ए0सी0 के कार्य एवं
+								दायित्व/ अधिनिर्णय/स्थल निरीक्षण</a></li>
+						<li><a
+							href="/prernadoc/shasnaAdesh/GOfinal/edistrictServices.pdf"
+							target='_blank' class="dropdown-item"> स्टाम्प एवं रजिस्ट्रेशन
+								विभाग की सेवाये ई-डिस्ट्रिक्ट के पोर्टल से</a></li>
+						<li><a    href="/prernadoc/shasnaAdesh/GOfinal/cyberSecurity.pdf" target='_blank' class="dropdown-item">साइबर सिक्योरिटी</a></li>
+					</ul></li>
+
+				<li class="dropdown"><a    data-bs-toggle="dropdown"
+					class="dropdown-toggle" href="#"  > अन्य प्रमुख अधिनियम/नियमावली<b
+						class="caret"></b></a>
+					<ul role="menu" class="dropdown-menu">
+						<li><a    href="PropertyAdhiniyam" class="dropdown-item"
+							target="_blank" rel="noopener noreferrer">संपत्ति अंतरण अधिनियम 1882</a></li>
+						<li><a    href="StateSanhitaAdhiniyamHindi" class="dropdown-item">राजस्व
+								संहिता 2006(हिन्दी)</a></li>
+						<li><a    href="StateSanhitaAdhiniyam" class="dropdown-item">राजस्व
+								संहिता 2006(अंग्रेज़ी)</a></li>
+						<li><a    href="RTI2005HindiFinal" class="dropdown-item"> सूचना
+								का अधिकार अधिनियम 2005(हिन्दी)</a></li>
+						<li><a    href="RTI2005English" class="dropdown-item">सूचना का
+								अधिकार अधिनियम 2005 (अंग्रेज़ी)</a></li>
+						<li><a    href="upRightsruleBook2015" class="dropdown-item">उत्तर
+								प्रदेश सूचना का अधिकार नियमावली 2015(हिन्दी)</a></li>
+					</ul></li>
+
+				<li class="dropdown"><a    href="Information"> प्रमुख जानकारी</a>
+				</li>
+				<li class="dropdown"><a    data-bs-toggle="dropdown"
+					class="dropdown-toggle" href="#">मॉडल लेखपत्र <b class="caret"></b></a>
+
+					<ul role="menu" class="dropdown-menu">
+
+<!--  						<li><a    href="/prernadoc/model/md_v1.docx" target='_blank'
+							class="dropdown-item">विक्रय पत्र (कृषि भूमि)</a></li>
+						<li><a    href="/prernadoc/model/md_v2.docx" target='_blank'
+							class="dropdown-item">विक्रय पत्र (आवासीय)</a></li>
+						<li><a    href="/prernadoc/model/md_v3.docx" target='_blank'
+							class="dropdown-item">विक्रय पत्र (औद्यिगिक)</a></li>
+						<li><a    href="/prernadoc/model/md_v4.docx" target='_blank'
+							class="dropdown-item">विक्रय पत्र (व्यवसायिक)</a></li>
+						<li><a    href="/prernadoc/model/md_v5.docx" target='_blank'
+							class="dropdown-item">दान विलेख</a></li>
+						<li><a    href="/prernadoc/model/md_v6.docx" target='_blank'
+							class="dropdown-item">पट्टा विलेख</a></li>
+						<li><a    href="/prernadoc/model/md_v7.docx" target='_blank'
+							class="dropdown-item">बंधक विलेख (कब्ज़ा )</a></li>
+						<li><a    href="/prernadoc/model/md_v8.docx" target='_blank'
+							class="dropdown-item">बंधक विलेख बिना कब्ज़ा</a></li> 
+ -->							
+							
+<!-- 						<li><a href="/prernadoc/model/md_v1.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">विक्रय पत्र- कृषि</a></li>
+						<li><a href="/prernadoc/model/md_v2.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">विक्रय	पत्र- आवासीय</a></li>
+						<li><a href="/prernadoc/model/md_v3.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">विक्रय	पत्र- व्यावसायिक</a></li>
+						<li><a href="/prernadoc/model/md_v4.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">विक्रय पत्र- औद्योगिक</a></li>
+						<li><a href="/prernadoc/model/md_v5.docx" target='_blank' class="dropdown-item" onclick="counterfunction(23);">विक्रय अनुबन्ध विलेख(बिना कब्ज़ा)</a></li>
+						<li><a href="/prernadoc/model/md_v6.docx" target='_blank' class="dropdown-item" onclick="counterfunction(22);">विक्रय अनुबन्ध विलेख(कब्ज़ा सहित)</a></li>
+						<li><a href="/prernadoc/model/md_v7.docx" target='_blank' class="dropdown-item" onclick="counterfunction(6);">दान पत्र(सामान्य)</a></li>
+						<li><a href="/prernadoc/model/md_v8.docx" target='_blank' class="dropdown-item" onclick="counterfunction(6);">दान पत्र(सम्बंधियो के पक्ष में)</a></li>
+
+						<li><a href="/prernadoc/model/md_v9.docx" target='_blank' class="dropdown-item" onclick="counterfunction(17);">पट्टा विलेख(30 वर्ष तक)</a></li>
+						<li><a href="/prernadoc/model/md_v10.docx" target='_blank' class="dropdown-item" onclick="counterfunction(18);">पट्टा विलेख(30 वर्ष से अधिक)</a></li>
+						<li><a href="/prernadoc/model/md_v11.docx" target='_blank' class="dropdown-item" onclick="counterfunction(20);">उप पट्टा विलेख</a></li>
+						<li><a href="/prernadoc/model/md_v12.docx" target='_blank' class="dropdown-item" onclick="counterfunction(36);">विभाजन का विलेख</a></li>
+						<li><a href="/prernadoc/model/md_v13.docx" target='_blank' class="dropdown-item" onclick="counterfunction(37);">व्यवसथापन का विलेख</a></li>
+						<li><a href="/prernadoc/model/md_v14.docx" target='_blank' class="dropdown-item" onclick="counterfunction(7);">वसीयतनामा</a></li>
+						<li><a href="/prernadoc/model/md_v15.docx" target='_blank' class="dropdown-item" onclick="counterfunction(9);">मुख्तारनामा</a></li>
+						<li><a href="/prernadoc/model/md_v16.docx" target='_blank' class="dropdown-item" onclick="counterfunction(6);">शासन के पक्ष में दान पत्र</a></li>
+						<li><a href="/prernadoc/model/md_v17.docx" target='_blank' class="dropdown-item" onclick="counterfunction(17);">शासन के पक्ष में पट्टा विलेख</a></li>
+						<li><a href="/prernadoc/model/md_v18.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">शासन के पक्ष में विक्रय पत्र</a></li>
+
+<!-- 	 //  add Changes On 26/09/2025       विभाजन पत्र  doc Added         //  by  S.S		 --%>
+
+					<li><a href="/prernadoc/model/md_v19.docx" target='_blank' class="dropdown-item" onclick="counterfunction(36);">विभाजन पत्र- दान  (पैत्रृक सम्पत्ति का तीन पीढ़ियों के मध्य)</a></li>	
+						<li><a href="/prernadoc/model/md_v20.docx" target='_blank' class="dropdown-item" onclick="counterfunction(36);">विभाजन  (पैत्रृक सम्पत्ति का तीन पीढ़ियों के मध्य) </a></li>
+<!-- 	 //  add Changes On 14/11/2025       विभाजन पत्र  doc Added         //  by  S.S		 --%>
+						
+						<li><a href="/prernadoc/model/md_v20 Partition-1.pdf" target='_blank' class="dropdown-item" onclick="counterfunction(36);">विभाजन (पैत्रृक सम्पत्ति का तीन पीढ़ियों के मध्य) भाग-1 </a></li>
+						<li><a href="/prernadoc/model/md_v20 (Partition and Gift)-2.pdf" target='_blank' class="dropdown-item" onclick="counterfunction(36);">विभाजन (पैत्रृक सम्पत्ति का तीन पीढ़ियों के मध्य) भाग-2 </a></li>
+						<li><a href="/prernadoc/model/md_v20 (Partition and Gift)-3.pdf" target='_blank' class="dropdown-item" onclick="counterfunction(36);">विभाजन (पैत्रृक सम्पत्ति का तीन पीढ़ियों के मध्य) भाग-3 </a></li>
+						<li><a href="/prernadoc/model/md_v20 Partition-4.pdf" target='_blank' class="dropdown-item" onclick="counterfunction(36);">विभाजन (पैत्रृक सम्पत्ति का तीन पीढ़ियों के मध्य) भाग-4 </a></li>
+						<li><a href="/prernadoc/model/md_v20 Partition-5.pdf" target='_blank' class="dropdown-item" onclick="counterfunction(36);">विभाजन (पैत्रृक सम्पत्ति का तीन पीढ़ियों के मध्य) भाग-5 </a></li> -->
+						
+		<!-- 	 //  add Changes On 31/12/2025         doc Added         //  by  S.S		 -->				
+												
+						<li><a href="/prernadoc/model/model_hn/101 (आवासीय).docx" target='_blank' class="dropdown-item" > 101 विक्रय पत्र (आवासीय)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/101 (औद्योगिक).docx" target='_blank' class="dropdown-item" > 101 विक्रय पत्र (औद्योगिक)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/101 (कृषि भूमि).docx" target='_blank' class="dropdown-item" > 101 विक्रय पत्र (कृषि भूमि)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/101 (वाणिज्यिक).docx" target='_blank' class="dropdown-item" > 101 विक्रय पत्र (वाणिज्यिक)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/101 विक्रय पत्र(राज्य सरकार के पक्ष में).pdf" target='_blank' class="dropdown-item" >101 विक्रय पत्र(राज्य सरकार के पक्ष में)</a></li>
+						<li><a href="/prernadoc/model/model_hn/106 अन्य दान.docx" target='_blank' class="dropdown-item" > 106 अन्य दान	</a></li>
+						<li><a href="/prernadoc/model/model_hn/106 दान पत्र (पारिवारिक सम्बन्धियों के पक्ष में-स्टाम्प छूट).docx" target='_blank' class="dropdown-item" >106 दान पत्र (पारिवारिक सम्बन्धियों के पक्ष में-स्टाम्प छूट)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/106 दान पत्र(राज्य सरकार के पक्ष में).pdf" target='_blank' class="dropdown-item" >106 दान पत्र(राज्य सरकार के पक्ष में) </a></li>
+						<li><a href="/prernadoc/model/model_hn/107 (विनिमय विलेख).docx" target='_blank' class="dropdown-item" >	107 (विनिमय विलेख)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/108 शुद्धि पत्रतित्तिमा विलेख.docx" target='_blank' class="dropdown-item" >108 शुद्धि पत्रतित्तिमा विलेख	</a></li>
+						<li><a href="/prernadoc/model/model_hn/109 पट्टा (30 वर्ष या कम अवधि का).docx" target='_blank' class="dropdown-item" >109 पट्टा (30 वर्ष या कम अवधि का)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/110 पट्टा (30 वर्ष से अधिक).docx" target='_blank' class="dropdown-item" >110 पट्टा (30 वर्ष से अधिक)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/109_110 पट्टा(राज्य सरकार के पक्ष में).pdf" target='_blank' class="dropdown-item" >109/110 पट्टा(राज्य सरकार के पक्ष में)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/112 उप पट्टा विलेख.docx" target='_blank' class="dropdown-item" >112 उप पट्टा विलेख	</a></li>
+						<li><a href="/prernadoc/model/model_hn/114 विक्रय का इकरार (कब्ज़ा सहित).docx" target='_blank' class="dropdown-item" >114 विक्रय का इकरार (कब्ज़ा सहित)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/115 अचल संपत्ति का विक्रय अनुबंध पत्र (बिना कब्जा).docx" target='_blank' class="dropdown-item" >115 अचल संपत्ति का विक्रय अनुबंध पत्र (बिना कब्जा)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/122 (पूरक विलेख).docx" target='_blank' class="dropdown-item" >122 (पूरक विलेख)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/125 विभाजन पत्र (सामान्य केवल सह-स्वामियों के मध्य).docx" target='_blank' class="dropdown-item" >125 विभाजन पत्र (सामान्य केवल सह-स्वामियों के मध्य)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/125-तीन पीढ़ियों के मध्य कृषिआवासीयवाणिज्यिक पैतृक अचल सम्पत्ति संपत्तियों के विभाजन पर अधिस.docx" target='_blank' class="dropdown-item" >125-तीन पीढ़ियों के मध्य कृषिआवासीयवाणिज्यिक पैतृक अचल सम्पत्ति संपत्तियों के विभाजन पर अधिस	</a></li>
+						<li><a href="/prernadoc/model/model_hn/126 व्यवस्थापन पत्र (Settlement).docx" target='_blank' class="dropdown-item" >126 व्यवस्थापन पत्र (Settlement)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/128 (विक्रय अनुबन्ध विलेख का निरस्तीकरण).docx" target='_blank' class="dropdown-item" >128 (विक्रय अनुबन्ध विलेख का निरस्तीकरण)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/136 (पट्टे का अभित्याग).docx" target='_blank' class="dropdown-item" >136 (पट्टे का अभित्याग)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/301 वसीयतनामा.docx" target='_blank' class="dropdown-item" >	 301 वसीयतनामा </a></li>
+						<li><a href="/prernadoc/model/model_hn/303-वसीयतनामा का निरस्तीकरण.docx" target='_blank' class="dropdown-item" >	303-वसीयतनामा का निरस्तीकरण</a></li>
+						<li><a href="/prernadoc/model/model_hn/402-मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार सम्बन्धी) (अन्य व्यक्तियों के पक्ष में).docx" target='_blank' class="dropdown-item" > 402-मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार सम्बन्धी) (अन्य व्यक्तियों के पक्ष में)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/402-मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार सम्बन्धी) (चिन्हित सम्बन्धियों के पक्ष).docx" target='_blank' class="dropdown-item" >402-मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार सम्बन्धी) (चिन्हित सम्बन्धियों के पक्ष)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/402-मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार नहीं).docx" target='_blank' class="dropdown-item" >402-मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार नहीं)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/403 (मुख्तारनामा का निरस्तीकरण).docx" target='_blank' class="dropdown-item" >403 (मुख्तारनामा का निरस्तीकरण)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/405 गोदनामा.docx" target='_blank' class="dropdown-item" >405 गोदनामा	</a></li>
+						<li><a href="/prernadoc/model/model_hn/601तस्दीकशुदा मुख्तारनामा.docx" target='_blank' class="dropdown-item" >601 तस्दीकशुदा मुख्तारनामा	</a></li>
+						
+						
+						<!-- 
+						<li><a href="/prernadoc/model/model_hn/101 (आवासीय).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);"> 101 (आवासीय)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/101 (औद्योगिक).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);"> 101 (औद्योगिक)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/101 (कृषि भूमि).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);"> 101 (कृषि भूमि)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/101 (वाणिज्यिक).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);"> 101 (वाणिज्यिक)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/106 अन्य दान.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);"> 106 अन्य दान	</a></li>
+						<li><a href="/prernadoc/model/model_hn/106 दान पत्र (पारिवारिक सम्बन्धियों के पक्ष में-स्टाम्प छूट).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">106 दान पत्र (पारिवारिक सम्बन्धियों के पक्ष में-स्टाम्प छूट)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/107 (विनिमय विलेख).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">	107 (विनिमय विलेख)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/108 शुद्धि पत्रतित्तिमा विलेख.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">108 शुद्धि पत्रतित्तिमा विलेख	</a></li>
+						<li><a href="/prernadoc/model/model_hn/109 पट्टा (30 वर्ष या कम अवधि का).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">109 पट्टा (30 वर्ष या कम अवधि का)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/110 पट्टा (30 वर्ष से अधिक).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">110 पट्टा (30 वर्ष से अधिक)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/112 उप पट्टा विलेख.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">112 उप पट्टा विलेख	</a></li>
+						<li><a href="/prernadoc/model/model_hn/114 विक्रय का इकरार (कब्ज़ा सहित).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">114 विक्रय का इकरार (कब्ज़ा सहित)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/115 अचल संपत्ति का विक्रय अनुबंध पत्र (बिना कब्जा).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">115 अचल संपत्ति का विक्रय अनुबंध पत्र (बिना कब्जा)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/122 (पूरक विलेख).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">122 (पूरक विलेख)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/125 विभाजन पत्र (सामान्य केवल सह-स्वामियों के मध्य).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">125 विभाजन पत्र (सामान्य केवल सह-स्वामियों के मध्य)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/125-तीन पीढ़ियों के मध्य कृषिआवासीयवाणिज्यिक पैतृक अचल सम्पत्ति संपत्तियों के विभाजन पर अधिस.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">125-तीन पीढ़ियों के मध्य कृषिआवासीयवाणिज्यिक पैतृक अचल सम्पत्ति संपत्तियों के विभाजन पर अधिस	</a></li>
+						<li><a href="/prernadoc/model/model_hn/126 व्यवस्थापन पत्र (Settlement).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">126 व्यवस्थापन पत्र (Settlement)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/128 (विक्रय अनुबन्ध विलेख का निरस्तीकरण).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">128 (विक्रय अनुबन्ध विलेख का निरस्तीकरण)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/136 (पट्टे का अभित्याग).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">136 (पट्टे का अभित्याग)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/301 वसीयतनामा.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">	 301 वसीयतनामा </a></li>
+						<li><a href="/prernadoc/model/model_hn/303-वसीयतनामा का निरस्तीकरण.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">	303-वसीयतनामा का निरस्तीकरण</a></li>
+						<li><a href="/prernadoc/model/model_hn/402-मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार सम्बन्धी) (अन्य व्यक्तियों के पक्ष में).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);"> 402-मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार सम्बन्धी) (अन्य व्यक्तियों के पक्ष में)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/402-मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार सम्बन्धी) (चिन्हित सम्बन्धियों के पक्ष).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">402-मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार सम्बन्धी) (चिन्हित सम्बन्धियों के पक्ष)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/403 (मुख्तारनामा का निरस्तीकरण).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">403 (मुख्तारनामा का निरस्तीकरण)	</a></li>
+						<li><a href="/prernadoc/model/model_hn/405 गोदनामा.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">405 गोदनामा	</a></li>
+						<li><a href="/prernadoc/model/model_hn/601तस्दीकशुदा मुख्तारनामा.docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">601तस्दीकशुदा मुख्तारनामा	</a></li>
+						<li><a href="/prernadoc/model/model_hn/मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार नहीं).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">मुख़्तारनामा (खण्डनीयअचल सम्पत्ति विक्रय के अधिकार नहीं)	</a></li>
+						 -->
+						
+						
+						
+						
+						
+						
+		
+					</ul>
+					
+					
+					</li>
+					
+	<!-- 	--------------------------------------------------------------- 	-->
+	<!-- 	 //  add Changes On 01/12/2025      मॉडल लेखपत्र [ENG]  doc Added         //  by  S.S		 -->					
+					<li class="dropdown">
+						<a data-bs-toggle="dropdown" class="dropdown-toggle" href="#">मॉडल लेखपत्र [ENG] <b class="caret"></b></a>
+							<ul role="menu" class="dropdown-menu">
+								<li><a href="/prernadoc/model/model_eng/101 Sale (Agricultural Land).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">101 Sale (Agricultural Land)</a></li>
+								<li><a href="/prernadoc/model/model_eng/101 Sale (Non AgricultureResidential Land).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">101 Sale (Non AgricultureResidential Land)</a></li>
+								<li><a href="/prernadoc/model/model_eng/101 Sale (Commercial).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">101 Sale (Commercial)</a></li>
+								<li><a href="/prernadoc/model/model_eng/101 Sale (Industrial).docx" target='_blank' class="dropdown-item" onclick="counterfunction(1);">101 Sale (Industrial)</a></li>
+								<li><a href="/prernadoc/model/model_eng/106 Gift Deed (Stamp Exemption).docx" target='_blank' class="dropdown-item" onclick="counterfunction(6);">106 Gift Deed (Stamp Exemption)</a></li>
+								<li><a href="/prernadoc/model/model_eng/106 Gift deed others.docx" target='_blank' class="dropdown-item" onclick="counterfunction(6);">106 Gift deed others</a></li>
+								<li><a href="/prernadoc/model/model_eng/107 Exchange Deed.docx" target='_blank' class="dropdown-item" onclick="counterfunction(15);">107 Exchange Deed </a></li>
+								<li><a href="/prernadoc/model/model_eng/108 CorrectionTittima Deed.docx" target='_blank' class="dropdown-item" onclick="counterfunction(16);">108 CorrectionTittima Deed </a></li>
+								<li><a href="/prernadoc/model/model_eng/109 Lease Deed (30 years or of less period).docx" target='_blank' class="dropdown-item" onclick="counterfunction(17);">109 Lease Deed (30 years or of less period)</a></li>
+								<li><a href="/prernadoc/model/model_eng/110 Lease Deed (Above 30 years).docx" target='_blank' class="dropdown-item" onclick="counterfunction(18);">110 Lease Deed (Above 30 years) </a></li>
+								<li><a href="/prernadoc/model/model_eng/112 Sub-Lease Deed.docx" target='_blank' class="dropdown-item" onclick="counterfunction(20);">112 Sub-Lease Deed </a></li>
+								<li><a href="/prernadoc/model/model_eng/114 Agreement to sell with Possession.docx" target='_blank' class="dropdown-item" onclick="counterfunction(22);">114 Agreement to sell with Possession </a></li>
+								<li><a href="/prernadoc/model/model_eng/115 Agreement to sell without Possession.docx" target='_blank' class="dropdown-item" onclick="counterfunction(23);">115 Agreement to sell without Possession </a></li>
+								<li><a href="/prernadoc/model/model_eng/122 Supplementary Deed.docx" target='_blank' class="dropdown-item" onclick="counterfunction(33);">122 Supplementary Deed </a></li>
+								<li><a href="/prernadoc/model/model_eng/125 Partition ( Among Co-owner).docx" target='_blank' class="dropdown-item" onclick="counterfunction(36);">125 Partition ( Among Co-owner) </a></li>
+								<li><a href="/prernadoc/model/model_eng/126 Settlement.docx" target='_blank' class="dropdown-item" onclick="counterfunction(37);">126 Settlement</a></li>
+								<li><a href="/prernadoc/model/model_eng/301 Will.docx" target='_blank' class="dropdown-item" onclick="counterfunction(7);">301 Will</a></li>
+								
+							</ul>
+						</li>
+		
+						
+	<!-- 	--------------------------------------------------------------- 	-->
+					
+					<!-- KNOW YOUR OFFICE LINK -->
+					
+					<li class="dropdown"><a    href="knowyourofficeentry">अपना कार्यालय जानें
+						</a></li>	
+				 	
+				 	<!-- KNOW YOUR OFFICE LINK -->
+
+				<li class="dropdown"><a    href="getUploadedRateList">मूल्यांकन
+						सूची</a></li>
+
+				<li class="dropdown"><a    href="getdistrictNameForCitizen">सुझाव/समस्या</a>
+				</li>
+				<li class="dropdown"><a    href="/igrsup/bannedPropertiesInitial.action">निषेधित संपत्तियाँ
+						</a></li>
+				<li class="dropdown"><a    href="contactUs" target="_blank" rel="noopener noreferrer">सम्पर्क
+						करें</a></li>
+
+
+
+
+
+		</ul>
+		
+
+      	<ul class="nav navbar-nav navbar-end" style="width:180px; font-size:12px padding-right:0px align:right" >
+        	<li class="active">
+        	<a     href=""  role="button" 
+        	tabindex="0" aria-label="Home">
+        	<span class="fa fa-home">
+        	</span>&nbsp;Main page</a></li>
+      	</ul>      	
+      	
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid --> 
+  
+</nav>
+
+
+			</div>
+	    
+	</div>
+	
+	<div class="row" style="margin:30px 5px;">
+		
+		<nav class="col-lg-12">
+		<!-- ################################################ Marquee enabled on 31/10/2022 ################################################### -->
+		
+		<!--  onMouseOver="this.setAttribute('scrollamount', 0);" onMouseOut="this.setAttribute('scrollamount', 6);  -->
+<!-- 		<marquee behavior='alternate' vspace=0px; scrolldelay="175"style="background-color: white;" onMouseOver="this.stop();" onMouseOut="this.start();"> -->
+			 
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- 
+			<img alt="" src="img/newThing.gif" class="img-circle " width="35px">
+				<font style="color:#000"><strong>
+					<a href="\prernadoc\ViewGOPDF_list_user.pdf" target="_blank"><span class="highlight text-light">"रु०10000/-  से रु०25000/- तक के भौतिक गैर - न्यायिक स्टाम्प पत्रों का दिनाँक 31.03.2025 तक विधिमान्यता के सम्बन्ध में"</span></a>
+ 					दिनांक 11 मार्च 2025 से पूर्व क्रय किए गए रु० 10000 से रु० 25000 तक मूल्य वर्ग के भौतिक गैर न्यायिक स्टाम्प पत्रों का प्रयोग तथा वापसी दिनांक 31 मार्च 2025 तक विधि मान्य होगा ।
+ 					
+				</strong></font>
+			<img alt="" src="img/newThing.gif" class="img-circle" width="35px">
+			 -->
+			
+			
+			<!-- Uncomment For Maintenance Marquee -->
+			
+
+
+
+
+
+<!-- 		<font style="color:#000; font-weight: 900; line-height: 30px;">1 अप्रैल 2026 से पंजीकरण हेतु अपॉइंटमेंट के लिए आवंटित समय केवल 1 घंटे तक ही मान्य होगा, तत्पश्चात सम्बंधित आवेदन विभागीय पोर्टल पर पंजीकरण हेतु उपलब्ध नहीं होगा । </font>	 -->
+		
+		<!-- 	</marquee>	 -->
+			<!-- ################################ -->
+			</nav>  
+	
+		
+		<nav class="col-lg-12">
+			  <div class="marquee-wrapper">
+			    <h4 class="marquee_header_row">महत्वपूर्ण सूचना </h4>
+			
+			    <div class="marquee-track">
+			      <div class="marquee-text">
+			      1 अप्रैल 2026 से पंजीकरण हेतु अपॉइंटमेंट के लिए आवंटित समय केवल 1 घंटे तक ही मान्य होगा, तत्पश्चात सम्बंधित आवेदन विभागीय पोर्टल पर पंजीकरण हेतु उपलब्ध नहीं होगा । &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			      1 अप्रैल 2026 से पंजीकरण हेतु अपॉइंटमेंट के लिए आवंटित समय केवल 1 घंटे तक ही मान्य होगा, तत्पश्चात सम्बंधित आवेदन विभागीय पोर्टल पर पंजीकरण हेतु उपलब्ध नहीं होगा । &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+			       1 अप्रैल 2026 से पंजीकरण हेतु अपॉइंटमेंट के लिए आवंटित समय केवल 1 घंटे तक ही मान्य होगा, तत्पश्चात सम्बंधित आवेदन विभागीय पोर्टल पर पंजीकरण हेतु उपलब्ध नहीं होगा । &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			      1 अप्रैल 2026 से पंजीकरण हेतु अपॉइंटमेंट के लिए आवंटित समय केवल 1 घंटे तक ही मान्य होगा, तत्पश्चात सम्बंधित आवेदन विभागीय पोर्टल पर पंजीकरण हेतु उपलब्ध नहीं होगा । 
+			
+		
+			      </div>
+			    </div>
+			  </div>
+			</nav>
+		<!-- ################################################################################################################################## -->
+		
+		  
+		<nav class="col-lg-4">
+			
+
+<!DOCTYPE html> 
+
+<style>
+.far.fa-hand-point-right {
+  color: rgb(20, 62, 74);
+}
+</style>
+
+<!-- ========================Vertical Menu=========================== -->
+
+
+	<div class="card card-primary" style="height: 810px;">
+		
+		<div class="card-header">
+			<h1 class="card-title">
+	         	<img alt="" src="img/customer.png" class="img-circle" width="20px">
+	 			<strong>नागरिक ऑनलाइन सेवाएं</strong>
+	        </h1>
+	        
+	    </div>    
+	 	
+	 	<div class="row-fluid" style="padding : 10px 5px 0px 0px">
+	 	
+	 		<div class="row-fluid card-warning" style="background:#FCF8E3; color:#FFE0B2;box-shadow: 3px 5px 7px #FFE0B2;padding : 5px 0px 5px 20px;border-color: 1px solid #FFE0B2;border-radius:15px 0 15px 0;"> 
+	 			<strong style="color:#660000;">सम्पत्ति पंजीकरण</strong>
+	 		</div>
+	 		
+		 	<div class="row-fluid" style="padding : 10px 0px 0px 0px">
+			 	<ul>
+			 	
+				 	<li style="list-style: none;"> 
+				 		<div class="zoom">   
+				 			<span class="far fa-hand-point-right"></span>
+				 			<a    href="newPropertyRegistration" style="font-size: 12pt;font-weight:bold;color:#003F87">आवेदन करें</a>				 			
+				 		</div>			 		
+				 	</li>
+				 	<li style="list-style: none;"> 
+				 		<div class="zoom">   
+				 			<span class="far fa-hand-point-right"></span>
+				 			<a    title="औद्योगिक सम्पत्ति पंजीकरण हेतु निवेश मित्र वेबसाइट के माध्यम से आवेदन करें" target="_blank" rel="noopener noreferrer" href="http://niveshmitra.up.nic.in" style="font-size: 12pt;font-weight:bold;color:#003F87">औद्योगिक सम्पत्ति पंजीकरण हेतु निवेश मित्र वेबसाइट के माध्यम से आवेदन करें</a>
+				 			</div>			 		
+				 	</li>
+				 	<li style="list-style: none;"> 
+				 		<div class="zoom">   
+				 			<span class="far fa-hand-point-right"></span>
+				 			
+				 				
+				 			<!-- Sampatti khoje in UServ 30-09-2022 -->
+				 			
+<!-- 				 			<a    href="prernaV2_UserLogIn" style="font-size: 12pt;font-weight:bold;color:#003F87">सम्पत्ति खोजें</a> -->
+								<a    href="userServicesHomeAction?request_locale=hi&rid=6" style="font-size: 12pt;font-weight:bold;color:#003F87">सम्पत्ति खोजें</a>
+								
+								<!-- Sampatti khoje in UServ 30-09-2022 -->
+							
+				 			
+				 			
+<!-- 				 			<a    href="prernaV2_UserLogIn" style="font-size: 12pt;font-weight:bold;color:#003F87">सम्पत्ति खोजें</a> -->
+				 			<!-- <a    href="searchByNames" style="font-size: 12pt;font-weight:bold;color:#003F87">सम्पत्ति खोजें</a> -->
+				 		</div>
+				 	</li>
+				 	<li style="list-style: none;"> 
+				 		<div class="zoom">   
+				 			<span class="far fa-hand-point-right"></span>
+<!-- 				 			<a    href="propertySearchLinks" style="font-size: 12pt;font-weight:bold;color:#003F87">सम्पत्ति विवरण</a> -->
+								<a    href="userServicesHomeAction?request_locale=hi&rid=8" style="font-size: 12pt;font-weight:bold;color:#003F87">सम्पत्ति विवरण</a>
+				 		</div>
+				 	</li>
+				 	<li style="list-style: none;"> 
+				 		<div class="zoom">   
+				 			<span class="far fa-hand-point-right"></span>
+				 			<!-- Updating the link to redirect to USER SERVICES Module || Implementing US Module 29/JUNE/2022 -->
+				 		<!--<a    href="stampRefundService?request_locale=hi" style="font-size: 12pt;font-weight:bold;color:#003F87">स्टाम्प वापसी हेतु आवेदन</a> -->
+				 			<a    href="userServicesHomeAction?request_locale=hi&rid=8" style="font-size: 12pt;font-weight:bold;color:#003F87">स्टाम्प वापसी हेतु आवेदन</a>
+<!-- 				 			<a    href="userServicesHomeAction?request_locale=hi&rid=4" style="font-size: 12pt;font-weight:bold;color:#003F87">स्टाम्प वापसी हेतु आवेदन</a>
+ -->				 			
+				 			<!-- <img alt="" src="img/newThing.gif" class="img-circle " width="35px"> -->
+				 		</div>	
+				 	</li>
+				 	
+				 	
+<!-- 				 	Rent_Agreement-11May_2023 -->
+				 	<!-- Uncomment For Rent Agreement (Commented for audit WAR Deployment 20/03/2025) <- Search for this comment to enable rent agreement (START)
+				 	<li style="list-style: none;"> 
+				 		<div class="zoom">   
+				 			<span class="far fa-hand-point-right"></span>
+				 			<a href="userServicesHomeAction?request_locale=hi&rid=9" style="font-size: 12pt;font-weight:bold;color:#003F87">12 माह तक के अवधि के अपंजीकृत किरायानामा</a>
+				 		</div>	
+				 	</li>
+				 	 Uncomment For Rent Agreement (Commented for audit WAR Deployment 20/03/2025) <- Search for this comment to enable rent agreement (END) -->
+<!-- 				 	Rent_Agreement-11May_2023 -->				 					 	
+				 	
+				 	
+			 	</ul>
+		 	</div>
+		 	
+	 	</div>
+	 	<div class="row-fluid" style="padding : 5px 5px 0px 0px">
+	  	
+		 	<div class="row-fluid card-warning" style="background:#FCF8E3; color:#FFE0B2;box-shadow: 3px 5px 5px #FFE0B2;padding : 5px 0px 0px 20px;border-color: 1px solid #FFE0B2;border-radius:15px 0 15px 0;"> 
+		 		<strong style="color:#660000;font-size: 15px;">पंजीकृत लेखपत्र का प्रमाणपत्र  </strong>
+		 	</div>
+		 	
+		 	<div class="row-fluid" style="padding : 5px 0px 0px 0px">
+			 	<ul>
+			 	
+			 		<li style="list-style: none;"> 
+			 			<div class="zoom">   
+			 				<span class="far fa-hand-point-right"></span>
+			 				<!-- Updating the link to redirect to USER SERVICES Module || Implementing US Module 29/JUNE/2022 
+				 			<a   href="registredDocCertificateService" style="font-size: 12pt;font-weight:bold;color:#003F87">पंजीकृत लेखपत्र प्रमाणपत्र  का आवेदन</a>-->
+  				 			<a   href="userServicesHomeAction?request_locale=hi&rid=3" style="font-size: 12pt;font-weight:bold;color:#003F87">पंजीकृत लेखपत्र प्रमाणपत्र का आवेदन</a>
+<!--				 			<a   href="userServicesHomeAction?request_locale=hi&rid=8" style="font-size: 12pt;font-weight:bold;color:#003F87">पंजीकृत लेखपत्र प्रमाणपत्र का आवेदन</a> -->   
+				 		</div> 
+			 	 
+			 		</li>
+			 			  	
+			 	</ul>
+			</div>
+		</div>
+	 	<div class="row-fluid" style="padding : 1px 5px 0px 0px">
+	 	
+		 	<div class="row-fluid card-warning" style="background:#FCF8E3; color:#FFE0B2;box-shadow: 3px 5px 7px #FFE0B2;padding : 5px 0px 5px 20px;border-color: 1px solid #FFE0B2;border-radius:15px 0 15px 0;"> 
+		 		<strong style="color:#660000;font-size: 15px;">विवाह पंजीकरण</strong>
+		 	</div>
+		 	
+		 	<div class="row-fluid" style="padding : 5px 0px 0px 0px">
+			 	<ul>
+			 	
+				 	<li style="list-style: none;"> 
+				 		<div class="zoom">   
+					 		<span class="far fa-hand-point-right"></span>
+					 		<a    href="userMarriageRegistration" style="font-size: 12pt;font-weight:bold;color:#003F87;">आवेदन करें</a> 	
+				 		</div>	
+				 	</li>
+				 	<li style="list-style: none;"> 
+				 		<div class="zoom">   
+					 		<span class="far fa-hand-point-right"></span>
+					 		<a    href="userMarriageRegistrationVerify" style="font-size: 12pt;font-weight:bold;color:#003F87;"> विवाह पंजीकरण सत्यापन</a> 	
+				 		</div>	
+				 	</li>
+			
+			 	</ul>
+		 	</div>
+	 	</div>
+	 	
+	 
+	  	<div class="row-fluid" >
+	  	
+		 	<div class="row-fluid card-warning" style="background:#FCF8E3; color:#FFE0B2;box-shadow: 3px 5px 7px #FFE0B2;padding : 5px 0px 5px 20px;border-color: 1px solid #FFE0B2;border-radius:15px 0 15px 0;"> 
+		 		<strong style="color:#660000;font-size: 15px;">भारमुक्त प्रमाणपत्र /बारह साला </strong>
+		 	</div>
+		 	
+		 	<div class="row-fluid" style="padding : 5px 0px 0px 0px">
+			 	<ul>
+			 	
+			 		<li style="list-style: none;"> 
+			 			<div class="zoom">   
+			 				<span class="far fa-hand-point-right"></span>	
+			 				<!-- Updating the link to redirect to USER SERVICES Module || Implementing US Module 29/JUNE/2022 			 			
+				 			<a href="necUserLogin" style="font-size: 12pt;font-weight:bold;color:#003F87;">आवेदन करें</a>	 			-->
+<!-- 				 			<a href="userServicesHomeAction?request_locale=hi&rid=1" style="font-size: 12pt;font-weight:bold;color:#003F87;">आवेदन करें</a>Disabled due to db split
+ -->				 			<a href="userServicesHomeAction?request_locale=hi&rid=8" style="font-size: 12pt;font-weight:bold;color:#003F87;">आवेदन करें</a>
+				 		</div> 
+			 	 
+			 		</li>
+			 		<li style="list-style: none;"> 
+				 		<div class="zoom">   
+					 		<span class="far fa-hand-point-right"></span>
+			 				<!-- Updating the link to redirect to USER SERVICES Module || Implementing US Module 29/JUNE/2022 
+					 		<a    href="userServicesHomeAction?request_locale=hi" style="font-size: 12pt;font-weight:bold;color:#003F87;">प्रमाण पत्र प्राप्ति/सत्यापन करें </a> 		-->		
+					 		<a    href="necCertificateForUser" style="font-size: 12pt;font-weight:bold;color:#003F87;">प्रमाण पत्र प्राप्ति/सत्यापन करें </a> 
+				 		</div>	
+				 	</li>
+			 			  	
+			 	</ul>
+			</div>
+		</div>
+	
+	 	<div class="row-fluid" >
+	  	
+		 	<div class="row-fluid card-warning" style="background:#FCF8E3; color:#FFE0B2;box-shadow: 3px 5px 7px #FFE0B2;padding : 5px 0px 5px 20px;border-color: 1px solid #FFE0B2;border-radius:15px 0 15px 0;"> 
+		 		<strong style="color:#660000;font-size: 15px;"> विलेखों की प्रमाणित प्रतिलिपि</strong>
+		 	</div>
+		 	
+		 	<div class="row-fluid" style="padding : 5px 0px 0px 0px">
+			 	<ul>
+			 	
+			 		<li style="list-style: none;"> 
+			 			<div class="zoom">   
+			 				<span class="far fa-hand-point-right"></span>
+			 				<!-- Updating the link to redirect to USER SERVICES Module || Implementing US Module 29/JUNE/2022 	
+				 			<a    href="copyOfDocumentLogin" style="font-size: 12pt;font-weight:bold;color:#003F87;">आवेदन करें</a> -->
+ 				 			<a    href="userServicesHomeAction?request_locale=hi&rid=2" style="font-size: 12pt;font-weight:bold;color:#003F87;">आवेदन करें</a>
+				 		</div> 
+			 	 
+			 		</li>
+			 			  	
+    		 	</ul>
+			</div>
+		</div>	
+		<div class="row-fluid" >
+	  	
+		 	<div class="row-fluid card-warning" style="background:#FCF8E3; color:#FFE0B2;box-shadow: 3px 5px 7px #FFE0B2;padding : 5px 0px 5px 20px;border-color: 1px solid #FFE0B2;border-radius:15px 0 15px 0;"> 
+		 		<strong style="color:#660000;font-size: 15px;"> बैंक गारंटी </strong>
+		 	</div>
+		 	
+		 	<div class="row-fluid" style="padding : 5px 0px 0px 0px">
+			 	<ul>
+			 		<!-- Bank guarantee status -->
+						<li style="list-style: none;"><span class="far fa-hand-point-right"></span>
+							  
+                            <a href="/igrsup/bgSearchAction.action" style="font-size: 12pt;font-weight:bold;color:#003F87;">बैंक गारंटी की स्थिति</a>
+							
+							
+							  <!--   <a    href="bgSearchAction"  target='_blank'  style="font-size: 12pt;font-weight:bold;color:#003F87;">बैंक गारंटी निस्तारण की स्थिति </a> 
+							   <img alt="" src="img/newThing.gif" class="img-circle" width="35px"> -->
+							
+						</li>	
+			 	</ul>
+			</div>
+		</div>			      
+			        
+   <!--  <div class="row-fluid" style="padding : 5px 5px 0px 0px">	  	
+		 	<div class="row-fluid card-warning" style="background:#FCF8E3; color:#FFE0B2;box-shadow: 3px 5px 7px #FFE0B2;padding : 5px 0px 5px 20px;border-color: 1px solid #FFE0B2;border-radius:15px 0 15px 0;"> 
+		 		<strong style="color:#660000;font-size: 15px;">अन्य सेवाएं</strong>
+		 	</div>
+		 	
+		 	<div class="row-fluid" style="padding : 5px 0px 0px 0px">
+			 	<ul>
+			 	
+			 		<li style="list-style: none;"> 
+			 			<div class="zoom">   
+			 				<span class="far fa-hand-point-right"></span>
+				 			<a href=" feeDetailsLink"  target='_blank' style="font-size: 11pt;font-weight:bold;color:#003F87;">शुल्क विवरण (लेखपत्र पर देय स्टाम्प शुल्क / दाखिल-खारिज / नाम परिवर्तन / नक्शा ) </a>
+				 			<img alt="" src="img/newThing.gif" class="img-circle" width="35px">
+				 		</div>
+			 		</li>
+			 		
+			 		<li style="list-style: none;"> 
+			 			<div class="zoom">   
+			 				<span class="far fa-hand-point-right"></span>			 				
+							<a href="/prernadoc/vender_list.pdf"  target='_blank'  style="font-size: 11pt;font-weight:bold;color:#003F87;">ई-स्टाम्प क्रय करने हेतु जनपदवार प्राधिकृत संग्रह केंद्र(ACC)की सूची </a>
+							<img alt="" src="img/newThing.gif" class="img-circle" width="35px">
+				 		</div> 
+			 		</li>
+			 		
+			 		<li style="list-style: none;"> 
+			 			<div class="zoom">   
+			 				<span class="far fa-hand-point-right"></span>			 				
+							<a href="https://www.shcilestamp.com/eStampIndia/VerifyCertificate.es?rDoAction=VerifyCert"  target='_blank'  style="font-size: 11pt;font-weight:bold;color:#003F87;">ई-स्टाम्प सत्यापन </a>
+							<img alt="" src="img/newThing.gif" class="img-circle" width="35px">
+				 		</div> 
+			 		</li>
+			 		<li style="list-style: none;"> 
+			 			<div class="zoom">   
+			 				<span class="far fa-hand-point-right"></span>			 				
+							<a href="http://upbhunaksha.gov.in/bhunaksha/09/index.html"  target='_blank' style="font-size: 11pt;font-weight:bold;color:#003F87;">भू-नक्शा (ग्रामीण क्षेत्र की संपत्ति/भूमि) </a>
+							<img alt="" src="img/newThing.gif" class="img-circle" width="35px">
+				 		</div> 
+			 		</li>
+			 		<li style="list-style: none;"> 
+			 			<div class="zoom">   
+			 				<span class="far fa-hand-point-right"></span>			 				
+							<a href="https://e-nagarsewaup.gov.in/ulbappsmain/propertySearch"  target='_blank' style="font-size: 11pt;font-weight:bold;color:#003F87;">जी.आई.एस. नक्शा (शहरी क्षेत्र की संपत्ति/भूमि) </a>
+							<img alt="" src="img/newThing.gif" class="img-circle" width="35px">
+				 		</div> 
+			 		</li>		 			  	
+			 	</ul>
+			</div>
+		</div> -->    
+    
+    </div>
+        
+      
+<!-- ========================Dashboard=========================== -->
+
+
+		</nav>
+		
+		<nav class="col-lg-4">
+			
+
+<!DOCTYPE html> 
+<head>
+<style type="text/css" >
+.blink_me {
+   animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+   50% { opacity: 0; }
+}
+
+.homepageReportPR_table tr{
+	transition: background-color 200ms, transform 300ms, font-weight 300ms;
+}
+.homepageReportPR_table tr:hover{
+	background-color:#a6d0fd;
+	transition: background-color 200ms;
+}
+.homepageReportPR_table tr:hover td:not(:first-child){
+	transform: scale(1.05);
+	font-weight: bold;
+	transition: transform 300ms;
+}
+.homepageReportPR_table .unstyled:hover{
+	background-color:#98d9ff;
+}
+
+.componentWrapper .header {
+  position: absolute;
+  margin-top: -30px;
+  margin-left: 15px;
+  border-radius: 10px;
+  padding: 2px 40px;
+}
+.componentWrapper {
+  border-radius: 12px;
+  padding: 15px 18px 10px;
+  width: 100%;
+}
+
+.surround-border {
+  border: solid #0a5f8c;
+}
+
+
+
+#infoGrid {
+    width: 100%;
+}
+
+#infoGridBody {
+    position: relative;
+    height: 40px; /* match row height */
+    overflow: hidden;
+    transition: height 0.35s ease;
+    
+}
+.info-row {
+    position: absolute;
+    width: 100%;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.info-row.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.info-row.exit {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.info-header {
+    background-color: #98d9ff;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 1px solid #59c2ff;
+}
+
+.info-container {
+    background-color: #d1eeff;
+    border: 1px solid #59c2ff;
+    box-shadow: 0rem 0rem 0.2rem #59c2ff;
+}
+
+.info-cell-left {
+    border-right: 1px solid #59c2ff;
+}
+
+#txt-1{
+	font-size: 14px;
+}
+#mainMidCard{
+	height: 810px;
+}
+
+#moreCard{
+	height: 272px;
+}
+
+.addRupeeSymbol::before{
+	content:"₹ ";
+	font-weight:500;
+	font-size:14px;
+} 
+/* ===== Responsive fixes without changing design ===== */
+
+/* Allow horizontal scroll for tables on mobile */
+@media (max-width: 768px) {
+    #infoTable {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    #mainMidCard{
+    	height: 1200px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    #infoGridBody {
+        height: 72px; /* allow 2-line stacked rows */
+    }
+
+    .info-row {
+        padding: 0.25rem 0;
+    }
+
+    .info-cell-left {
+        border-right: none;
+        border-bottom: 1px solid #59c2ff;
+    }
+    #moreCard{
+    	height: 370px;
+    }
+    #mainMidCard{
+    	height: 1200px;
+    }
+    
+}
+
+@media (max-width: 490px) {
+    .surround-border, #infoGrid, #txt-1{
+    	font-size: 8px;
+    }
+    #moreCard{
+    	height: 370px;
+    }
+    .componentWrapper .header{
+    	padding: 2px 10px;
+    }
+}
+
+
+
+
+</style>
+<link rel="stylesheet" type="text/css" href="/igrsup/css/cardBS5.css"></link>
+
+</head>
+<!-- ========================Vertical Menu=========================== -->
+
+	<div id="mainMidCard" class="card card-primary">
+		
+		<div class="card-header" style="height: 35px;">
+			<h1 class="card-title">	         	
+		         	<strong>फोटो गैलरी</strong>
+		        </h1>		        
+		    </div>    
+                
+	        <div class="card-body">
+	        
+		        <div class="row-fluid">		  
+					<div class="col-lg-12" style="width:100%; height:300px;">
+			         
+			        	 <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
+			        	
+				      		<div class="carousel-inner" >
+				
+						       <div class="item active">						       
+						          <img class="image-slide" src="img/photo_g.png" style="width:100%; height:300px;">						 
+						          <div class="container">
+						            <div class="carousel-caption">
+						            	
+						            </div>
+						          </div>						          
+						       </div>				
+				      		</div>				      
+					      	<a    class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+						        <span class="fa fa-chevron-left" aria-hidden="true"></span>
+						        <span class="sr-only">Previous</span>
+					      	</a>
+					      	
+					      	<a    class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+						        <span class="fa fa-chevron-right" aria-hidden="true"></span>
+						        <span class="visually-hidden-focusable">Next</span>
+					      	</a>
+					      	
+			    		</div> 
+		    
+		    		</div>
+					
+				</div>
+				
+			</div>
+			
+			
+						
+    		
+    		
+			<div class="card-header">
+				<h1 class="card-title">		         	
+		         	<!-- <img alt="" src="img/newThing.gif" class="img-circle" width="35px"> -->
+		         	&nbsp;&nbsp;<strong>Property Registration Dashboard</strong>&nbsp;&nbsp;
+		         <!-- 	<img alt="" src="img/newThing.gif" class="img-circle" width="35px"> -->
+		        </h1>		        
+		    </div>	    
+		    <div class="card-body homepageReport_PR_div pt-0" align="left">	        
+	        	<div class="row-fluid" style="margin-top: 0 px;">
+	        		
+	 				<div class="row">
+    <div class="col-12">
+
+        <div id="infoGrid" class="info-container">
+
+            <!-- Header -->
+            <div class="row info-header m-0">
+                <div class="col-12 col-md-9 py-2">
+                    Particulars
+                </div>
+                <div class="col-12 col-md-3 py-2">
+                    Details
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div id="infoGridBody">
+
+                <div class="row info-row m-0">
+                    <div id="txt-1" class="col-12 col-md-9 py-2 info-cell-left">
+                        Time limit prescribed as per the Public Service Guarantee Act
                     </div>
-            `;
-            
-            // Add body ads if any
-            if (adSettings.body && adSettings.body.trim() !== '') {
-                html += `<div class="ad-container"><div class="ad-label">Advertisement</div>${adSettings.body}</div>`;
-            }
-            
-            html += `<button onclick="displayPosts()" style="padding: 1rem 2rem; margin: 1rem 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 5px; cursor: pointer;">← Back to Home</button></div>`;
-            
-            mainContent.innerHTML = html;
-            
-            // Update URL without reload
-            history.pushState({}, '', `?post=${postId}`);
+                    <div class="col-12 col-md-3 py-2 text-md-end pe-md-2">
+                        01 Day
+                    </div>
+                </div>
+
+                <div class="row info-row m-0">
+                    <div class="col-12 col-md-9 py-2 info-cell-left">
+                        Average time taken to obtain registered deed
+                    </div>
+                    <div class="col-12 col-md-3 py-2 text-md-end pe-md-2">
+                        01 Day
+                    </div>
+                </div>
+
+                <div class="row info-row m-0">
+                    <div class="col-12 col-md-9 py-2 info-cell-left">
+                        Median time taken to obtain registered deed
+                    </div>
+                    <div class="col-12 col-md-3 py-2 text-md-end pe-md-2">
+                        01 Day
+                    </div>
+                </div>
+
+                <div class="row info-row m-0">
+                    <div class="col-12 col-md-9 py-2 info-cell-left">
+                        Minimum time taken to obtain registered deed
+                    </div>
+                    <div class="col-12 col-md-3 py-2 text-md-end pe-md-2">
+                        01 Day
+                    </div>
+                </div>
+
+                <div class="row info-row m-0">
+                    <div class="col-12 col-md-9 py-2 info-cell-left">
+                        Maximum time taken to obtain registered deed
+                    </div>
+                    <div class="col-12 col-md-3 py-2 text-md-end pe-md-2">
+                        01 Day
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        
+        
+        
+
+    </div>
+</div>
+					<div id="moreCard" class="card">
+
+    <div class="card-header" style="background:#98d9ff; height: 23px; padding: 0px;">
+        <strong>Detailed Property Registration Data Statistics</strong><br>
+    
+ </div>
+
+ <div class="card-body"> 
+<!--commented on 4 feb uncommnet when revnue data will provied n save in db  -->
+
+    	 <div class="row" style="color: black; font-size: 14px;">
+    	<div class="col-sm-12">
+    		
+    		
+    		<div class="componentWrapper surround-border">
+	    		
+	    		
+ 	    		<div class="header surround-border" style="color: white;background-color: #0a5f8c;border-radius: 14px;">
+ 	    		Financial Year &nbsp; 2025-2026&nbsp;(Till &nbsp;FEBRUARY  )
+	    		</div>
+	    	
+	    		
+	    		<div class="row mt-2">
+	    			<div class="col-sm-5">Total Revenue Collected</div>
+	    			<div class="col-sm-7"><span class="addRupeeSymbol addCommas">29869.75</span><span style="margin-left: 10px;">Cr</span></div> 
+	    		</div>
+	    		
+    		</div>
+    		
+    	</div>
+    	
+    	
+    	</div> 
+    	
+    	   
+    <div class="row mt-2" style="color: black; font-size: 12px;">
+    	
+    	<div class="col-sm-12">
+    		
+    		<div class="componentWrapper surround-border">
+	    			<div class="header surround-border" style="color: white;background-color: #0a5f8c;border-radius: 14px;">Current Month</div>
+	    		<div class="row">
+	    			<div class="col-sm-5">Total Document Registered</div>
+	    			<div class="col-sm-7">111630</div>
+	    		</div>
+	    		<div class="row">
+	    			<div class="col-sm-5">Total Revenue Collected</div>
+	    			<div class="col-sm-7 addRupeeSymbol addCommas">6792928536</div>
+	    		</div>
+	    	
+    		</div>
+    		
+    	</div>
+    	</div>
+    	
+     <div class="row mt-2" style="color: black; font-size: 12px;">	
+    	<div class="col-sm-12">
+    		
+    		<div class="componentWrapper surround-border">    	
+	    		<div class="header surround-border" style="color: white;background-color: #0a5f8c;border-radius: 14px;">Previous Working Day&nbsp;
+	    		
+	    		</div>
+	    		<div class="row">
+	    			<div class="col-sm-5">Total Document Registered</div>
+	    			<div class="col-sm-7"> 18045</div>
+	    		</div>
+	    		<div class="row">
+	    			<div class="col-sm-5">Total Revenue Collected</div>
+	    			<div class="col-sm-7 addRupeeSymbol addCommas">1388390856</div>
+	    		</div>
+	    	
+    		</div>
+    		
+    	</div>
+    </div> 
+    	
+    	<!--  -->
+    	
+    </div>
+    
+   
+    
+    
+        
+
+</div>
+	 				
+	 				<!-- end -->
+	 				<!--
+	 				<div>
+				 		<div class="card-body homepageReport_PR_div pt-0" align="left">
+				 		<span class="far fa-hand-point-right"></span>
+				 		 <a href="genderWisePR_MainPage" style="font-size: 12pt;font-weight:bold;color:#003F87">StateWise Property Registration Details</a>
+				 		</div>	
+	 				
+	 				</div>
+	 				 -->	<!-- 12/11/2025 -->
+	 				
+				</div>
+	        </div>
+
+    		
+    </div>
+        
+      
+<!-- ========================Dashboard=========================== -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.getElementById("infoGridWrapper");
+    const container = document.getElementById("infoGridBody");
+    const rows = container.querySelectorAll(".info-row");
+
+    let currentIndex = 0;
+    let prevIndex = null;
+    let intervalId = null;
+    const INTERVAL_TIME = 2000;
+
+    function setContainerHeight(row) {
+        if (!row) return;
+
+        // Temporarily make it visible to measure
+        row.style.visibility = "hidden";
+        row.style.position = "relative";
+
+        const height = row.offsetHeight;
+
+        row.style.visibility = "";
+        row.style.position = "";
+
+        container.style.height = height + "px";
+    }
+
+    function showNextRow() {
+        if (prevIndex !== null) {
+            rows[prevIndex].classList.remove("active");
+            rows[prevIndex].classList.add("exit");
         }
 
-        function openAdminPanel() {
-            document.getElementById('admin-panel').classList.add('active');
-        }
+        const currentRow = rows[currentIndex];
+        currentRow.classList.remove("exit");
+        currentRow.classList.add("active");
 
-        function closeAdminPanel() {
-            document.getElementById('admin-panel').classList.remove('active');
-            document.getElementById('login-form').style.display = 'block';
-            document.getElementById('admin-dashboard').classList.remove('active');
-            document.getElementById('password').value = ''; // Clear password field
-        }
+        setContainerHeight(currentRow);
 
-        function checkPassword() {
-            const password = document.getElementById('password').value;
-            
-            // Use the secure verification method
-            if (verifyPassword(password)) {
-                document.getElementById('login-form').style.display = 'none';
-                document.getElementById('admin-dashboard').classList.add('active');
-                updatePostList();
-                // Load ad settings
-                document.getElementById('head-code').value = adSettings.head || '';
-                document.getElementById('body-code').value = adSettings.body || '';
-            } else {
-                alert('❌ Wrong password! Please try again.');
-                document.getElementById('password').value = ''; // Clear password field
-            }
-        }
+        prevIndex = currentIndex;
+        currentIndex = (currentIndex + 1) % rows.length;
+    }
 
-        function createPost() {
-            const title = document.getElementById('post-title').value;
-            const description = document.getElementById('post-description').value;
-            const image = document.getElementById('post-image').value || 'https://picsum.photos/400/300?random=' + Date.now();
-            
-            if (title && description) {
-                if (description.split(' ').length < 20) {
-                    if (!confirm('Description is quite short. Are you sure you want to continue?')) {
-                        return;
-                    }
-                }
-                
-                const newPost = {
-                    id: Date.now(),
-                    title: title,
-                    description: description,
-                    image: image,
-                    date: new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
-                };
-                
-                posts.unshift(newPost);
-                localStorage.setItem('posts', JSON.stringify(posts));
-                
-                // Clear form
-                document.getElementById('post-title').value = '';
-                document.getElementById('post-description').value = '';
-                document.getElementById('post-image').value = '';
-                
-                updatePostList();
-                displayPosts();
-                alert('✅ Post created successfully!');
-            } else {
-                alert('❌ Please fill in both title and description!');
-            }
+    function startRotation() {
+        if (!intervalId) {
+            intervalId = setInterval(showNextRow, INTERVAL_TIME);
         }
+    }
 
-        function deletePost(id) {
-            if (confirm('Are you sure you want to delete this post?')) {
-                posts = posts.filter(post => post.id !== id);
-                localStorage.setItem('posts', JSON.stringify(posts));
-                updatePostList();
-                displayPosts();
-                alert('✅ Post deleted successfully!');
-            }
-        }
+    function stopRotation() {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
 
-        function updatePostList() {
-            const postList = document.getElementById('post-list');
-            let html = '<h3>Existing Posts</h3>';
-            
-            if (posts.length === 0) {
-                html += '<p>No posts yet. Create your first post!</p>';
-            } else {
-                posts.forEach(post => {
-                    html += `
-                        <div class="post-item">
-                            <span><strong>${post.title}</strong> <small>(${post.date})</small></span>
-                            <button onclick="deletePost(${post.id})">🗑️ Delete</button>
-                        </div>
-                    `;
-                });
-            }
-            
-            postList.innerHTML = html;
-        }
+    // Init
+    showNextRow();
+    startRotation();
 
-        function saveAdSettings() {
-            const headCode = document.getElementById('head-code').value;
-            const bodyCode = document.getElementById('body-code').value;
-            
-            adSettings = {
-                head: headCode,
-                body: bodyCode
-            };
-            
-            localStorage.setItem('adSettings', JSON.stringify(adSettings));
-            
-            // Apply head code immediately
-            injectHeadCode(headCode);
-            
-            // Update preview
-            document.getElementById('ad-preview').innerHTML = '<strong>Preview:</strong> ' + (bodyCode ? 'Ad code saved: ' + bodyCode.substring(0, 50) + '...' : 'No ad code yet');
-            
-            alert('✅ Ad settings saved successfully! Refresh the page to see all changes.');
-        }
+    // Pause on hover
+    wrapper.addEventListener("mouseenter", stopRotation);
+    wrapper.addEventListener("mouseleave", startRotation);
 
-        function testAdCode() {
-            const headCode = document.getElementById('head-code').value;
-            const bodyCode = document.getElementById('body-code').value;
-            
-            alert('Testing ad code... Check console for any errors.');
-            console.log('=== Head Code Test ===');
-            console.log(headCode || 'No head code');
-            console.log('=== Body Code Test ===');
-            console.log(bodyCode || 'No body code');
-            
-            if (bodyCode) {
-                const testContainer = document.createElement('div');
-                testContainer.style.position = 'fixed';
-                testContainer.style.bottom = '10px';
-                testContainer.style.left = '10px';
-                testContainer.style.background = 'white';
-                testContainer.style.padding = '10px';
-                testContainer.style.border = '2px solid red';
-                testContainer.style.zIndex = '9999';
-                testContainer.innerHTML = '<strong>Test Ad:</strong><br>' + bodyCode;
-                document.body.appendChild(testContainer);
-                
-                setTimeout(() => {
-                    testContainer.remove();
-                }, 5000);
-            }
-        }
+    // Recalculate on resize
+    window.addEventListener("resize", () => {
+        const activeRow = container.querySelector(".info-row.active");
+        setContainerHeight(activeRow);
+    });
+});
+    
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            displayPosts();
-            
-            // Check if viewing a specific post
-            const urlParams = new URLSearchParams(window.location.search);
-            const postId = urlParams.get('post');
-            if (postId) {
-                viewPost(parseInt(postId));
-            }
-            
-            // Create body ads container
-            const bodyAdsContainer = document.createElement('div');
-            bodyAdsContainer.id = 'body-ads-container';
-            document.body.insertBefore(bodyAdsContainer, document.querySelector('footer'));
-            
-            // Apply body code
-            if (adSettings.body && adSettings.body.trim() !== '') {
-                bodyAdsContainer.innerHTML = adSettings.body;
-            }
+	
+    $('.addCommas').each(function () {
+        var num = Number($(this).text().trim());
+        var x = num.toLocaleString('hi-IN', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
         });
-    </script>
+        $(this).text(x);
+    });
+
+
+
+</script>
+
+		</nav>
+		
+		<nav class="col-lg-4">
+			
+
+<!DOCTYPE html>
+
+<style>
+
+.animate-charcter
+{
+  text-decoration: none;
+  text-transform: uppercase;
+  background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+/*   background-size: auto auto;
+  background-clip: border-box; */
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+  font-size: 16px;
+/*   padding-top: 10px;
+  font-weight: bold; */
+  
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+</style>
+
+
+
+
+
+<!-- ========================Vertical Menu=========================== -->
+
+	<div class="card card-primary" style="height: 810px;">
+		
+		<div class="card-header">
+			<h1 class="card-title">
+          	<img alt="" src="img/login_icon.png" class="img-circle" width="20px">
+         	<strong>विभागीय सेवाएं</strong>
+         	
+        </h1>
+        
+    </div>
+
+    <div class="card-body" >
+
+    	
+   
+	     	
+	 	 	<div class="row-fluid card-warning" style="background:#FCF8E3; color:#FFE0B2;box-shadow: 3px 5px 7px #FFE0B2;padding : 5px 0px 5px 20px;border-color: 1px solid #FFE0B2;border-radius:15px 0 15px 0;"> 
+	 	 	<strong style="color:#660000;">विभागीय लिंक</strong>
+	 	 	</div>
+	 	 	
+	 		<div class="row-fluid" style="padding : 10px 0px 0px 10px">
+	 		
+	 			<ul>
+	 				<li style="list-style: none;"> 
+	 					<div class="zoom">   
+	 						<span class="far fa-hand-point-right" style="color:rgb(20, 62, 74);"></span>
+	 						<a    href="karyalayaLoginDefault" style="font-size: 12pt;font-weight:bold;color:#003F87">विभागीय लिंक</a>
+	 					</div>	
+	 				</li> 	
+	 				<li style="list-style: none;"> 
+	 					<div class="zoom">   
+	 						<span class="far fa-hand-point-right" style="color:rgb(20, 62, 74);"></span>
+	 						<a href="otherKaryalayaLoginDefault" style="font-size: 12pt;font-weight:bold;color:#003F87">अन्य विभागीय लिंक</a>
+	 					</div>	
+	 				</li> 
+	 			</ul>
+	 		</div>
+	 		
+	 		<div class="row-fluid card-warning" style="background:#FCF8E3; color:#FFE0B2;box-shadow: 3px 5px 7px #FFE0B2;padding : 5px 0px 5px 20px;border-color: 1px solid #FFE0B2;border-radius:15px 0 15px 0;"> 
+	 		<strong style="color:#660000;">नागरिक सुविधा अधिकार</strong>
+	 	 	</div>
+	 	 	
+	 		<div class="row-fluid" style="padding : 10px 0px 0px 10px">
+	 		
+	 			<ul>
+	 				<li style="list-style: none;"> 
+	 					<div class="zoom">   
+	 						<span class="far fa-hand-point-right" style="color:rgb(20, 62, 74);"></span>
+					 		<a    href="/prernadoc/NewCitizinC/NewCitizinChartor.pdf"  target="_blank" rel="noopener noreferrer" style="font-size: 12pt;font-weight:bold;color:#003F87">नागरिक सेवायें एवं सेवाओं की समयावधि</a> 	
+	 					</div>	
+	 				</li> 	
+	 				<li style="list-style: none;"> 
+	 					<div class="zoom">   
+	 						<span class="fas fa-phone" style="color:rgb(20, 62, 74);"></span>
+					 		<span style="font-size: 12pt;font-weight:bold;color:#003F87">हेल्प लाइन न०:
+					 			<span style="background-color: #d1eeff;padding: 5px 6px;border-radius: 9px;box-shadow: 0px 1px 4px 1px burlywood;">1800 180 1476</span> </span> 	
+					 		<span style="font-size: 12pt;font-weight:bold;color:#003F87">Whatsapp No. 
+					 		<span style="background-color: #d1eeff;padding: 5px 6px;border-radius: 9px;box-shadow: 0px 1px 4px 1px burlywood;">9235930505</span></span> 
+	 					</div>	
+	 				</li> 	
+	 			</ul>
+	 	
+	 		</div>
+		
+	 		<div class="row-fluid card-warning" style="background:#FCF8E3; color:#FFE0B2;box-shadow: 3px 5px 7px #FFE0B2;padding : 5px 0px 5px 20px;border-color: 1px solid #FFE0B2;border-radius:15px 0 15px 0;"> 
+	 		<strong style="color:#660000;">अन्य सेवाएं</strong>
+	 	 	</div>
+	 	 	
+	 		<div class="row-fluid" style="padding : 10px 0px 0px 10px">
+<!--  	 		<img src="img/GIS_2023.jpg" width="555" height="205" alt="Global Investors Summit 2023" usemap="#planetmap">
+  					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://invest.up.gov.in/upgis2023/" target='_blank'><img src="img/GIS_2023_btnDetails.jpg" width="310" height="35" alt="Click here for more details"/></a>
+ 					<a href="https://invest.up.gov.in/investorcrm/event/event_registration" target='_blank'><img src="img/GIS_2023_btn_singup.jpg" width="205" height="35" alt="Register Now"/></a>
+ 				 -->		 		
+ 	 			<ul style="color:#000000;font-weight: bold; list-style:  upper-roman;">
+		 				<li style="list-style: none;"><span class="far fa-hand-point-right"></span>		
+							 <a    href=" feeDetailsLink"  target='_blank'  style="color:#003F87">  शुल्क विवरण ( लेखपत्र पर देय स्टाम्प शुल्क / दाखिल-खारिज / नाम परिवर्तन / नक्शा ) </a>
+							<!--  <img alt="" src="img/newThing.gif" class="img-circle" width="35px"> 	 -->															
+						</li>						
+		 				<li style="list-style: none;"><span class="far fa-hand-point-right"></span>				
+							 <a    href="/prernadoc/vender_list.pdf"  target='_blank'  style="color:#003F87">  ई-स्टाम्प क्रय करने हेतु जनपदवार प्राधिकृत संग्रह केंद्र(ACC)की सूची </a>
+							<!--  <img alt="" src="img/newThing.gif" class="img-circle" width="35px">  -->
+													
+					    </li>
+						<li style="list-style: none;"><span class="far fa-hand-point-right"></span>
+							 <a    href="https://www.shcilestamp.com/eStampIndia/VerifyCertificate.es?rDoAction=VerifyCert"  target='_blank' rel="noopener noreferrer" style="color:#003F87">  ई-स्टाम्प सत्यापन </a>
+							<!--  <img alt="" src="img/newThing.gif" class="img-circle" width="35px"> -->
+							
+						</li>
+						<li style="list-style: none;"><span class="far fa-hand-point-right"></span>
+							 <a    href="https://www.shcilestamp.com/OnlineStamping/OlnEsi"  target='_blank' rel="noopener noreferrer" style="color:#003F87">स्वमुद्रित ई-स्टाम्प (Self Printing of E-Stamp)</a>
+							 <img alt="" src="img/newThing.gif" class="img-circle" width="35px"> 
+							
+						</li>
+						<li style="list-style: none;"><span class="far fa-hand-point-right"></span>
+							 <a    href="https://upbhunaksha.gov.in/"  target='_blank' rel="noopener noreferrer"  style="color:#003F87"> भू-नक्शा (ग्रामीण क्षेत्र की संपत्ति/भूमि) </a>
+							 <!--  <img alt="" src="img/newThing.gif" class="img-circle" width="35px"> -->
+							
+						</li>
+						<li style="list-style: none;"><span class="far fa-hand-point-right"></span>
+							 <a    href="https://e-nagarsewaup.gov.in/ulbappsmain/propertySearch"  target='_blank' rel="noopener noreferrer" style="color:#003F87"> जी.आई.एस. नक्शा (शहरी क्षेत्र की संपत्ति/भूमि) </a>
+							<!--  <img alt="" src="img/newThing.gif" class="img-circle" width="35px"> -->
+							
+						</li>
+						<!-- ###########**********____________Stamp_Fees_Calculator_________Start___02/01/2024__________****************############ -->
+						
+						<li style="list-style: none;"><span class="far fa-hand-point-right"></span>
+						    
+                            <a href="/igrsup/stampFeesCalculator.action" class="animate-charcter">स्टाम्प-निबन्धन शुल्क कैलकुलेटर</a>
+							<!--  <img alt="" src="img/newThing.gif" class="img-circle" width="35px"> -->
+							
+						</li>
+						
+						<!-- ###########**********___________Stamp_Fees_Calculator________END__________****************############ -->
+						
+						
+						<!-- ************************************  Banned Properties START **********************************  -->
+						
+						
+
+						
+						<!-- ************************************  Banned Properties END **********************************  -->
+	
+	 			</ul>
+	 	
+	 		</div>
+		
+			 	
+		 	<div class="row" style="border-top: 3px solid #DD7500; line-height:5px;">
+				<br>
+		 	</div>
+		 	
+			<div class="row ps-4" style="overflow-y: auto;overflow-x: hidden;height: 220px;">
+			<div class="row text-center">
+					<img src="img/GauravDiwasBanner.png"  />
+			</div>
+			<div class="row text-center">
+					<div class="col-sm-6">
+					<img src="img/LOGO_काकोरी.jpeg" width="60%" height="130px" />
+						<!-- <a    href="https://rashtragaan.in" target="_blank">
+							<img src="img/azadimahotsav.jpg" width="100%" height="110px"/>
+						 <a    href="https://amritmahotsav.nic.in/" target="_blank" rel="noopener noreferrer">
+							<img src="img/sabkasaath.jpg" width="100%" height="110px"/>
+						</a>-->					
+				</div>
+									<div class="col-sm-6">
+					<img src="img/ITUWSTA_PNG_LOGO.png" width="60%" height="130px" />
+						<!-- <a    href="https://rashtragaan.in" target="_blank">
+							<img src="img/azadimahotsav.jpg" width="100%" height="110px"/>
+						 <a    href="https://amritmahotsav.nic.in/" target="_blank" rel="noopener noreferrer">
+							<img src="img/sabkasaath.jpg" width="100%" height="110px"/>
+						</a>-->					
+				</div>
+				</div> 
+
+				<div class="row text-center" style="line-height:80%;">
+					<div class="col-sm-12">
+						<br>						
+					</div>
+				</div>
+				
+				<div class="row text-center">
+					<div class="col-sm-4">
+						<a    href="http://india.gov.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/logo_1.png" width="100%" height="40px"/>
+						</a>
+					</div>
+					<div class="col-sm-4">
+						<a    href="https://www.mygov.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/mygov.in.png" width="100%" height="40px" />
+						</a>
+					</div>
+					<div class="col-sm-4">
+						<a    href="https://egazette.gov.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/logo_9.png" width="100%" height="40px" />
+						</a>
+					</div>
+				</div>
+				<div class="row text-center">
+					<div class="col-sm-12">
+						<br>						
+					</div>
+				</div>
+				<div class="row text-center">
+					<div class="col-sm-6">
+						<a    href="https://data.gov.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/data.gov.in.png" width="100%" height="40px" />
+						</a>
+					</div>
+					
+					<div class="col-sm-6">
+						<a    href="http:///upbhulekh.gov.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/logo_4.png" width="100%" height="40px" />
+						</a>
+					</div>
+				</div>
+				<div class="row text-center">
+					<div class="col-sm-12">
+						<br>						
+					</div>
+				</div>
+				<div class="row text-center">
+				    <div class="col-sm-6">
+						<a    href="http://koshvani.up.nic.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/logo_2.png" width="100%" height="40px" />
+						</a>
+					</div>
+					<div class="col-sm-6">
+						<a    href="https://rajkosh.up.nic.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/logo_3.png" width="100%" height="40px"/>
+						</a>
+					</div>
+					 
+				</div>
+				
+				<div class="row text-center">
+					<div class="col-sm-12">
+						<br>						
+					</div>
+				</div>
+				
+				<div class="row text-center">
+					<div class="col-sm-4">
+						<a    href="http://jansunwai.up.nic.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/logo_5.png" width="100%" height="40px"/>
+						</a>
+					</div>
+					<div class="col-sm-4">
+						<a    href="https://niveshmitra.up.nic.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/logo_6.png" width="100%" height="40px" />
+						</a>
+					</div>
+					<div class="col-sm-4">
+						<a    href="https://www.up-rera.in/index" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/rera_logo.png" width="100%" height="40px" />
+						</a>
+					</div>
+				</div>
+				
+				<div class="row text-center">
+					<div class="col-sm-12">
+						<br>						
+					</div>
+				</div>
+				
+				
+				<div class="row text-center">
+					<div class="col-sm-6">
+						<a    href="http://upic.gov.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/logo_7.png" width="100%" height="40px"/>
+						</a>
+					</div>
+					<div class="col-sm-6">
+						<a    href="https://edistrict.up.gov.in/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/logo_8.png" width="100%" height="40px" />
+						</a>
+					</div>
+				</div>
+				<div class="row text-center">
+					<div class="col-sm-12">
+						<br>
+					</div>											
+				</div>				
+				
+				<div class="row text-center">
+					<div class="col-sm-12">
+						<a    href="https://www.shcilestamp.com/" target="_blank" rel="noopener noreferrer"> 
+							<img src="img/shcil_logo.png" width="100%" height="40px"/>
+						</a>					
+				</div>
+<!-- ============================================================================================= -->				
+
+				
+
+</div></div>
+
+
+		</div>
+	     	
+	</div>
+	    
+	
+</div>
+<!-- ========================Dashboard=========================== -->
+
+
+		</nav>	 
+	</div>
+
+ 
+	<div class="col-lg-12 " style="background-image: linear-gradient(to bottom right,#931f1f,#050568);"> 
+		<footer class="container text-center">
+		
+		  <a    href="#igrsupHome" title="To Top">
+		    <span class="fa fa-chevron-up"></span>
+		  </a>
+		  
+		  <div class="footer__base__wrapper">
+			
+
+
+<div class="card-body">	 
+<!-- 
+Last Updated on:शुक्रवार मार्च 13, 2026, 11:39:15 am IST                	
+         <p>&copy; <span>This site is viewed using Mozilla Firefox 68.0.2 (32-bit) or Google Chrome 80.0.3987.122 (64-bit) at screen resolutions of 1600 x 900 or higher.  </span></p>
+ -->         
+         
+अंतिम अद्यतन : शुक्रवार मार्च 13, 2026, 11:39:15 am IST                	
+
+         
+         <p>
+         	&copy; 
+         	<span>
+         		यह साइट मोज़िला फ़ायरफ़ॉक्स 68.0.2 (32-bit) या गूगल क्रोम 80.0.3987.122 (64-bit) का उपयोग 1600 x 900 या उच्चतर के स्क्रीन रिज़ॉल्यूशन पर देखी जाती है। A  <input type="hidden" name="" value="130.18"/> 
+         	</span>
+         </p>
+         <p>
+         	<span>
+         	    अस्वीकरण: इस वेबसाइट पर सामग्री स्टाम्प और पंजीकरण विभाग, उत्तर प्रदेश सरकार के स्वामित्व में है। इस वेब साइट पर डेटा की सटीकता सुनिश्चित करने के लिए हर संभव प्रयास किया गया है। हालाँकि, इन्हें संबंधित अधिकारियों द्वारा अंतत: जारी किए गए दस्तावेजों के साथ सत्यापित और पूरक होना चाहिए। एनआईसी किसी भी निर्णय या दावे के लिए जिम्मेदार नहीं होगा जो प्रदर्शित आंकड़ों के आधार पर है। यह अस्वीकरण इस वेबसाइट के सभी पृष्ठों पर लागू होता है।
+         	</span>
+         </p>
+         
+         
+         
+         
+</div>
+	
+		  </div>
+		</footer>	
+	</div>
+
+<script>
+
+$('.close_modal').click(function(){
+	hideModal();
+});
+
+function showModal(){
+	$('.modal').addClass("show-modal");
+	//$('.modal').show();
+}
+
+function hideModal(){
+	$('.modal').removeClass("show-modal");
+	//$('.modal').hide();
+}
+
+$(window).click(function(e) {
+	var modal = document.querySelector('.modal');
+    if (e.target === modal) {
+        hideModal();
+    }
+});
+
+$('.close_ribbon').click(function(){
+	//hideRibbon();
+	//enterSite();
+	$(".modal-wrap").addClass("show-modal").delay(7600).queue(function(next){
+	    $(this).removeClass("show-modal");
+	    next();
+	}); 
+});
+
+function showRibbon(){
+	$('.modal-wrap').addClass("show-modal");
+	$('.modal').show();
+}
+
+function hideRibbon(){
+	window.location = "http://igrsup.gov.in/igrsup/defaultAction";
+	//$('.modal1').addClass("hide-modal");
+	//$('.modal1').hide();
+}
+
+</script>
+
 </body>
 </html>
